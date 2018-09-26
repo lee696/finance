@@ -1,0 +1,409 @@
+<style type="text/css">
+	tbody tr td:before{
+		height: 38px;
+	}
+	.btn-group:first-child {
+		width: 100%;
+	}
+	.cur {
+		text-align: center;
+	}
+</style>
+<div class=" widget-main">
+	<div class="row">
+		<div class="col-lg-12">
+			<!--                 <h3 class="header smaller lighter blue">审批管理</h3> -->
+			<div class="row" style="margin-top: 20px;">
+				<!--<h3 class="header smaller lighter blue">送单</h3>-->
+				<div class="col-sx-4" style=" float: left; margin-right: 5px;">
+                    <input type="text" pts=0 sear="spm_manage.name" id="form-field-1" placeholder="审批项目"  />
+				</div>
+				<div class="col-sx-4" style=" float: left; margin-right: 5px;">
+                    <button type="button" id="search" class="btn btn-info btn-sm">
+                        <i class="fa fa-search"></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" style=" float: left; margin-right: 5px;">
+                    <button id="flush" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+	                    <i class="fa fa-refresh"></i>
+	                </button>
+				</div>
+				<!-- <div class="col-sx-4" contentAuthority="230" style=" float: left; margin-right: 5px;">
+                	<button type="button" id="addItem" class="btn btn-info btn-sm">
+                        <i class="fa fa-plus"></i>
+                        添加
+                    </button>
+				</div>   -->
+			</div>
+			<div class="custom_table">
+				<table id="dynamic-table" style="margin-bottom:0px;">
+					<thead>
+						<th class="center thColor">操作</th>
+						<th class="center thColor">审批项目</th>
+						<th class="center thColor">是否启用审批</th>
+						<th class="center thColor">审批人</th>
+
+						</tr>
+					</thead>
+
+					<tbody id="dataList">
+						
+
+					</tbody>
+
+				</table>
+				
+			</div>
+			<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+					<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+					<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+					<div id="pageBar" class="pagination"></div>
+					<div align="right" style="float: right;  width: 10%;">
+						<select style="width: 100px;" id="changePageNum">
+							<option value="10">每页10条</option>
+							<option value="20">每页20条</option>
+							<option value="50">每页50条</option>
+							<option value="100">每页100条</option>
+							<option value="200">每页200条</option>
+						</select>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="row" id="template1" style="display: none">	
+
+			<div class="row">
+				<div>
+						<div>
+							<label style="width:72px;"> 审批项目： </label>
+							<select id="spDemo">
+								<option>收单</option>
+								<option>整单</option>
+								<option>记账</option>
+								<option>客服</option>
+								<option>报税</option>
+								<option>送单</option>
+								<option>仓位</option>
+								<option>开票</option>
+								<option>订单</option>
+								<option>出库</option>
+								<option>入库</option>
+								<option>退单</option>
+								<option>盘点</option>
+								<option>支出</option>
+								<option>借贷</option>
+								<option>投诉</option>
+								<option>所有任务</option>
+							</select>
+						</div>
+						<div style="margin-top:15px;">
+							<label style="width:72px;"> 审批负责人： </label>
+							<select multiple="" id="state1" name="state" addfield="zd" class=" state select2 select2-hidden-accessible" data-placeholder="选择整单负责人" style="width: 400px;" tabindex="-1" aria-hidden="true">
+							</select>
+						</div>
+				</div>
+				<div class=" padding-4 clearfix" style="margin-top:15px;">
+					<div class="btn-group pull-right">
+					<div class="cur">
+						<button class="btn btn-info">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                保存
+                            </button>
+                            </div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<div class="row" id="template2" style="display: none">
+		<div class="widget-box">				
+			<div class="row">
+				<div>
+						<label style="width:48px;"> 审批人： </label>
+						<select multiple="" id="state1" name="state" addfield="zd" class=" state select2 select2-hidden-accessible" data-placeholder="选择整单负责人" style="width:400px;" tabindex="-1" aria-hidden="true">
+						</select>
+				</div>
+				<div class=" padding-4 clearfix" style="margin-top:15px;">
+					<div class="btn-group pull-right">
+						<div class="cur">
+						<button class="btn btn-info">
+	                        <i class="fa fa-check" aria-hidden="true"></i>
+	                        保存
+	                    </button>
+	                    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script>
+	jQuery(function($) {
+		cs.getNodes([230]);
+		var page_size = 10;
+		getPageList();
+		
+		doSearch();
+		function doSearch() {
+			ykp.setCookie("filter", "");
+			ykp.setCookie("where", "");
+			var data = {
+				url: '/api/api_manage/index',
+				methods: 'post',
+				data: {
+					limit: page_size,
+				}
+			}
+			cs.doSearch('#search', data, 'filter', false, function(res) {
+				if(res.data.items == "") {
+					setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+					$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center" class="page">暂无数据</div></td></tr>');
+					return false;
+				} else {
+					handleData(res);
+				}
+			})
+		}
+		
+		$('#flush').click(function(){
+			$('[sear="spm_manage.name"]').val('');
+			ykp.setCookie("filter", "");
+			ykp.setCookie("where", "");
+			getPageList();
+		})
+		
+		$('#changePageNum').change(function() {
+            page_size = $(this).val();
+            ykp.setCookie('page_size',page_size);
+            getPageList();
+        })
+		function getPageList() {
+			ykp.list({
+				url: '/api/api_manage/index',
+				method: 'post',
+				data: {
+					limit: page_size,
+					
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+						$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center" class="page">暂无数据</div></td></tr>');
+					} else {
+						handleData(res);
+					}
+				}
+			})
+		}
+
+		function handleData(res) {
+			var data = res.data.items;
+			if (data == '') {
+				setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+				return
+			}
+			var content = '';
+			var dataArr = [];
+			for(var i in data) {
+				content += `<tr data-name="${data[i][0]['spm_manage.name']}">
+							<td class="center">
+								<label class="pos-rel">
+                                    <a class="edit btBlue" contentAuthority="231" title="编辑"><i class="fa fa-pencil-square-o"></i></a>
+                                </label>
+							</td>
+							<td class="center">${data[i][0]['spm_manage.name']}</td>
+							<td class="center" >
+							<span contentAuthority="232" class="pos-rel">
+								<label class="pull-center inline">
+                                <input  data-status="${data[i][0]['spm_manage.status']}"   ${data[i][0]['spm_manage.status']  == 1 ? "checked" : ""}  type="checkbox" class="ace ace-switch ace-switch-5">
+	                            <span class="lbl middle"></span>
+							</span>
+								
+                        </label>
+					</td>
+					<td class="center">
+						${data[i]['user'].join(',')}
+					</td>
+				</tr>`
+			}
+			$('#dataList').html(content);
+
+			cs.getNodes([231,232]);
+
+//			$('#dataList').find('input[type=checkbox]').each(function() {
+//				if(parseInt($(this).attr('data-status')) == 1) {
+//					$(this).prop('checked', true);
+//				}
+//			})
+
+			//改变审批状态
+			$('#dataList').find('input[type=checkbox]').unbind('change').change(function() {
+				var status = $(this).attr('data-status');
+				var name = $(this).parents('tr').attr('data-name');
+				var index = $(this).parents('tr').index();
+				status = status == 1 ? 0 : 1;
+				var This = $(this);
+				ykp.doAjax({
+					url: '/api/api_manage/changeStatus',
+					method: 'post',
+					data: {
+						name: name,
+						status: status
+					},
+					success: function(res) {
+						if(!res.data) {
+							ykp.prompt('编辑成功');
+							getPageList();
+							var approve_status = JSON.parse(ykp.getCookie('spList'));
+							approve_status[name]['status'] = status;
+							ykp.setCookie('spList',JSON.stringify(approve_status));
+						}else {
+							ykp.prompt(res.data);
+							getPageList();
+						}
+						
+					}
+				})
+			})
+				
+			//编辑
+			$('.edit').click(function() {
+				var name = $(this).parents('tr').attr('data-name');
+				showMark('#template2');
+				$('#showBox .title').text('编辑'+ name +'审批');
+				ykp.doAjax({
+					url:'/api/api_manage/info',
+					method:'post',
+					data:{
+						name:name
+					},
+					success:function(res) {
+						setPeople(res.data.join(','),name);
+					}
+				})
+			})
+		}
+		pageinfo();
+
+		function pageinfo() {
+			$('#addItem').click(function() {
+				showMark('#template1');
+				$('#showBox .title').text('添加审批项');
+				setPeople();
+			})
+
+		}
+
+		function setPeople(arr,name) {
+			ykp.doAjax({
+				url: '/api/api_employees/f7',
+				method: 'post',
+				data: {},
+				success: function(res) {
+					var data = res.data;
+					select2();
+					for(var i in data) {
+						if(data[i]['bmm_employees.name']) {
+						$('#templateCon .state').append(new Option(data[i]['bmm_employees.name'], data[i]['bmm_employees.id']));
+					}
+				}
+					if(arr) {
+						$("#templateCon #state1").val(arr.split(",")).trigger('change');
+					}
+				}
+			});
+
+			$('#templateBox .btn').click(function() {
+				if(!arr){
+					name = $('#templateCon #spDemo').val();
+				}
+				var peopel = $('#templateCon .state').select2('data');
+				var url = "/api/api_manage/add";
+				var msg = '添加成功';
+				var user = [];
+				for(var j in peopel) {
+					user.push(peopel[j].id);
+				}
+				if(user.length == 0) {
+					ykp.prompt('请选择负责人！');
+					return;
+				}
+				if(arr) {
+					url = "/api/api_manage/edit";
+				}
+
+				var _user = user.join(',');
+				ykp.doAjax({
+					url: url,
+					method: 'post',
+					data: {
+						name:name,
+						user: _user
+					},
+					success: function(res) {
+						if(arr) {
+							msg = '编辑成功';
+						}else{
+						}
+						ykp.prompt(msg);
+
+						var spList = JSON.parse(ykp.getCookie('spList'));
+						// console.log(spList[name]['status']);
+						spList[name] = {user:_user,status:spList[name] ? spList[name]['status'] : 1};
+						// console.log(spList[name]);
+						console.log(spList)
+						ykp.setCookie('spList',JSON.stringify(spList));
+
+						cs.close();
+						getPageList();
+					}
+				})
+			})
+		}
+
+		function select2() {
+			//参与人员
+			$('#templateCon .select2').select2({
+				allowClear: true
+			})
+			$('#select2-multiple-style .btn').on('click', function(e) {
+				var target = $(this).find('input[type=radio]');
+				var which = parseInt(target.val());
+				if(which == 2)
+					$('.select2').addClass('tag-input-style');
+				else
+					$('.select2').removeClass('tag-input-style');
+			});
+		}
+
+		function checkAll(status) {
+			$("tbody input[name='check']").each(function(i, n) {
+				n.checked = status;
+			});
+		}
+
+		function submit() {
+			var val = $('#templateCon #cnumber').val()
+			//console.log(val)
+		}
+
+		function add() {
+			var val = $('#templateCon #cnumber1').val()
+			//console.log(val)
+		}
+
+	});
+</script>

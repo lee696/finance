@@ -1,0 +1,578 @@
+<style>
+.btn-group:first-child {
+		width: 100%;
+	}
+	.cur {
+		text-align: center;
+	}
+</style>
+<div class="widget-main">
+	<div class="row">
+		<div class="col-lg-12">
+			<!-- <h3 class="header smaller lighter blue">行政区域</h3> -->
+			<div class="row" style="margin-top: 20px;" id="topTool">
+				<!--<h3 class="header smaller lighter blue">送单</h3>-->
+				<div class="col-sx-4" style=" float: left;margin-right:5px;">
+					<input type="text" pts="1" area="0" id="form-field-1" placeholder="区域名称"/>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right:5px;">
+					<button type="button" id="search" class="btn btn-info btn-sm">
+                        <i class="fa fa-search"></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right:5px;">
+					<button id="heightsearch" type="button" class="btn btn-info btn-sm" style="background-color: #00c0ef !important;">
+                        <i class="fa fa-filter"></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right:5px;">
+					<button id="flush" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+	                    <i class="fa fa-refresh"></i>
+	                </button>
+				</div>
+				<div class="col-sx-4" contentAuthority="215" style=" float: left;margin-right:5px;">
+                	<button type="button" id="add" class="btn btn-info btn-sm">
+					<i class="fa fa-plus"></i>
+                        添加
+                    </button>
+				</div>
+				
+				<div id="heightsearch1" class="col-sx-12" style="margin-top:30px;position: absolute; background: #fff; z-index: 1041;overflow: auto; padding: 10px 0px; display: none;">	
+					<div class="row">
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>区域编号</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=0 sear="ckm_administration.id" />
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>区域名称</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=7 marketing-id="2" />
+						</div>
+						
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>国税网站</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=0 sear="ckm_administration.state_tax">
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>地税网站</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=0 id="" sear="ckm_administration.local_tax">
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>工商网站</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=0 sear="ckm_administration.gs_web">
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>级别</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select style="width:180px" gjs=0 sear="ckm_administration.type">
+								<option value="">请选择</option>
+								<option value="1">省级</option>
+								<option value="2">市级</option>
+							</select>
+						</div>
+						<div style="text-align:center;clear:both;padding-top:10px; ">
+							<button type="button" id="search1" class="search1 btn btn-info btn-sm" style="width:180px;">
+		                        查询
+		                    </button>
+		                     <button type="button" id="rest" class=" btn btn-info btn-sm" style="width:180px;">
+								                       重置
+								                    </button>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+			
+			<div class="custom_table">
+				<table id="dynamic-table" style="margin-bottom:0px;">
+					<thead>
+						<tr class="thColor">
+							<th class="hidden-480 center">操作</th>
+							<th class="center" data-num="1">区域编号</th>
+							<th class="center thColor" data-num="2">区域名称</th>
+							<th class="center thColor" data-num="3">级别</th>
+							<!--<th class="center thColor" data-num="4">仓位</th>-->
+							<th class="hidden-480 center" data-num="5">国税网站</th>
+							<th class="hidden-480 center " data-num="6">地税网站</th>
+							<th class="hidden-480 center " data-num="7">工商网站</th>
+							<th class="hidden-480 center " data-num="8">客户数量</th>
+							<th class="hidden-480 center " data-num="9">仓位数量</th>
+						</tr>
+					</thead>
+
+					<tbody id="dataList">
+
+					</tbody>
+
+				</table>
+				<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+					<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+					<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+					<div id="pageBar" class="pagination"></div>
+					<div align="right" style="float: right;  width: 10%;">
+						<select style="width: 100px;" id="changePageNum">
+							<option value="10">每页10条</option>
+							<option value="20">每页20条</option>
+							<option value="50">每页50条</option>
+							<option value="100">每页100条</option>
+							<option value="200">每页200条</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" id="template" style="display:none;">
+
+		<div class="col-sm-12">
+
+			<div class="widget-box">				
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- PAGE CONTENT BEGINS -->
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 级别： </label>
+									<select class="edit1" add="type">
+										<option value="1">省级</option>
+										<option value="2">市级</option>
+									</select>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 省市： </label>
+								<span id="city" title_="area">
+			                        <select class="prov"></select>   
+			                        <select class="city" style="display:none;"></select>  
+			                    </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 国税网站： </label
+									<span class="input-icon">
+                                            <input type="text" add="state_tax" class="edit2" id="form-field-icon-1">
+                                        </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 地税网站： </label>
+									<span class="input-icon">
+                                            <input type="text" add="local_tax" class="edit3" id="form-field-icon-1">
+                                        </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 工商网站： </label>
+									<span class="input-icon">
+                                            <input type="text" add="gs_web" class="edit4" id="form-field-icon-1">
+                                        </span>
+							</div>
+						</form>
+					</div>
+					<!-- /.col -->
+					<!--保存按钮-->
+					<div class=" padding-4 clearfix">
+						<div class="btn-group pull-right">
+								<div class="cur">
+							<button class="btn btn-info" id="add">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    保存
+                                </button>
+                                </div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row" id="template1" style="display:none;">
+
+		<div class="col-sm-12">
+			<div class="space-12"></div>
+
+			<div class="widget-box">				
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- PAGE CONTENT BEGINS -->
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 级别： </label>
+									<select class="edit1" add="type">
+										<option value="1">省级</option>
+										<option value="2">市级</option>
+									</select>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 省市： </label>
+								<span id="city" title_="area">
+			                        <select class="prov"></select>   
+			                        <select class="city" disabled="disabled"></select>  
+			                    </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 国税网站： </label>
+									<span class="input-icon">
+                                            <input type="text" add="state_tax" class="edit2" id="form-field-icon-1" validate="url" msg="请输入正确的网址">
+                                        </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 地税网站： </label>
+									<span class="input-icon">
+                                            <input type="text" add="local_tax" class="edit3" id="form-field-icon-1" validate="url" msg="请输入正确的网址">
+                                        </span>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-12  col-sm-3 no-padding-left "> 工商网站： </label>
+									<span class="input-icon">
+                                            <input type="text" add="gs_web" class="edit4" id="form-field-icon-1" validate="url" msg="请输入正确的网址">
+                                        </span>
+							</div>
+						</form>
+					</div>
+					<!-- /.col -->
+					<!--保存按钮-->
+					<div class=" padding-4 clearfix">
+						<div class="btn-group pull-right">
+							<div class="cur">
+							<button class="btn btn-info" id="add">
+                                    <i class="ace-icon fa fa-times bigger-125"  ></i>
+                                    保存
+                                </button>
+                                </div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script src="/resource/adimin/assets/js/src/jquery.cityselect.js"></script>
+<script>
+	jQuery(function($) {
+		cs.getNodes([215]);
+		var page_size = 10;
+		var order ='ckm_administration.id desc';
+		$('#changePageNum').change(function() {
+			page_size = $(this).val();
+			getList(1);
+		})
+		var resData = '';
+		search();
+
+		$('#flush').click(function(){
+			getList();
+		})
+
+		function search() {
+			var data = {
+				url: '/api/api_accountancies/list_administration',
+				method: 'post',
+				data: {
+					limit: page_size,
+					filter: 'ckm_administration.is_del = 0',
+					order:order
+				}
+			}
+			cs.doSearch('#search', data, 'filter', false, function(res) {
+				if(res.data.items == "") {
+					setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+					$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="color:#7d7d7d !important;text-align:center !important;" class="page">暂无数据</div></td></tr>');
+					return false;
+				} else {
+					addList(res);
+				}
+			})
+		}
+		dohSearch();
+		function dohSearch() {
+				var data = {
+					url: '/api/api_accountancies/list_administration',
+					methods: 'post',
+					data: {
+						limit:page_size,
+						order:order
+					}
+				}
+				cs.hSearch('.search1', data, 'filter', false, function(res,_filter) {
+					filter = _filter;
+					$('.in').removeClass('modal-backdrop');
+					$("#heightsearch1").slideUp();
+					$("#heightsearch").removeClass('active').css('z-index','');
+					if(res.data.items == "") {
+						setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+						$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="color:#7d7d7d !important;text-align:center !important;" class="page">暂无数据</div></td></tr>');
+						return false;
+					}
+						addList(res);
+				})
+			}
+
+		getList(1)
+
+		function getList(cuuent) {
+			ykp.list({
+				url: '/api/api_accountancies/list_administration',
+				method: 'post',
+				data: {
+					limit: page_size,
+					filter: 'ckm_administration.is_del = 0',
+					order:order
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+						$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="color:#7d7d7d !important;text-align:center !important;" class="page">暂无数据</div></td></tr>');
+						return false;
+					}
+					resData = res.data.items;
+					addList(res);
+				}
+			});
+		}
+
+		function addList(res) {
+			var data = res.data.items;
+			var html = '';
+			var type = ['省级', '市级'];
+			var styles = [];
+            $('#dynamic-table th').each(function(i,e){
+                styles.push($(this).css('display'));
+            });
+
+			for(var i in data) {
+				html += `<tr data-id=${data[i]['ckm_administration.id']}>
+	                            <td class="center">
+	                                <label class="pos-rel">
+	                                    <a href="#" id="edit${i}" class="edit" contentAuthority="216"> <span class="lbl btnBlue">编辑</span></a>
+	                                    <a href="#"id="del${i}"  class="del" contentAuthority="217"> <span class="lbl btnRed">删除</span></a>
+	                                </label>
+	                            </td>
+	                            <td class="center" style="display:${styles[1]}" data-num="1">
+	                                <span class="lbl edit4">${data[i]['ckm_administration.id']}</span>
+	                            </td>
+	                            <td class="center" style="display:${styles[2]}" data-num="2">
+	                                <span class="lbl edit4">${data[i]['ckm_administration.type'] == '1' ? data[i]['ckm_administration.province'] :data[i]['ckm_administration.city']}</span>
+	                            </td>
+	                            <td class="center" style="display:${styles[3]}" data-num="3">
+	                                <span class="lbl edit4" data-type="${data[i]['ckm_administration.type']}">${type[parseInt(data[i]['ckm_administration.type'])-1]}</span>
+	                            </td>
+	                            <td class="center" style="display:${styles[4]}" data-num="5">
+	                                <span class="lbl edit4">${data[i]['ckm_administration.state_tax']}</span>
+	                            </td>
+	                            <td class="center" style="display:${styles[5]}" data-num="6">
+	                                <span class="lbl edit4">${data[i]['ckm_administration.local_tax']}</span>
+	                            </td>
+	                             <td class="center" style="display:${styles[6]}" data-num="7">
+	                                <span class="lbl edit4">${data[i]['ckm_administration.local_tax']}</span>
+	                            </td>
+	                             <td class="center" style="display:${styles[7]}" data-num="8">
+	                                <span class="lbl edit4">${data[i]['kh_num']}</span>
+	                            </td>
+	                             <td class="center" style="display:${styles[8]}" data-num="9">
+	                                <span class="lbl edit4">${data[i]['ck_num']}</span>
+	                            </td>
+	                            
+	                        </tr>`;
+			}
+			$('#dataList').html(html);
+
+			cs.getNodes([216,217]);
+
+			$('#dynamic-table tbody tr').find('.edit').click(function() {
+				//id
+				var id = $(this).parents('tr').attr('data-id');
+				var index = $(this).parents('tr').index();
+				showMark("#template1")
+				$('#showBox .title').text('编辑');
+
+				resData[index]['ckm_administration.city'] ? $("#templateCon .city").show() : $("#templateCon .city").hide();
+
+				$("#templateCon #city").citySelect({
+					prov: resData[index]['ckm_administration.province'] ? resData[index]['ckm_administration.province'] : '广东', //省份 
+					city: resData[index]['ckm_administration.city'] ? resData[index]['ckm_administration.city'] : 'none', //月份
+					second:resData[index]['ckm_administration.city'] ? false:true
+				});
+
+				$('#templateCon .edit1').change(function(){
+					if($(this).val() == 1){
+						$('#templateCon .city').hide();
+						$("#templateCon #city").citySelect({
+							prov: $("#templateCon .prov").val(), //省份 
+							second:true//是否不显示市级select true为不显示
+						});
+					}
+					if($(this).val() == 2){
+						$('#templateCon .city').show();
+						$("#templateCon #city").citySelect({
+							prov: $("#templateCon .prov").val(), //省份 
+							second:false//是否不显示市级select true为不显示
+						});
+					}
+				});
+
+				$(this).parents('tr').find('td>span').each(function(i, n) {
+					if(i > 0) {
+						$('#templateCon .edit' + (i - 1)).val($(this).text());
+					}
+					if(i == 2) {
+						$('#templateCon .edit' + (i - 1)).val($(this).attr('data-type'));
+					}
+				})
+
+				$('#templateCon #add').click(function() {
+					//编辑
+					var conText = {};
+					var name = $('#templateCon').find('input,select').each(function() {
+						conText[$(this).attr('add')] = $(this).val();
+					});
+					conText.id = id;
+					var result = ykp.getFormData('#templateCon', true);
+					conText.province = $('#templateCon .prov').val();
+					conText.city = $('#templateCon .city').val();
+					if (result.status) {						
+					ykp.doAjax({
+						url: '/api/api_accountancies/add_administration',
+						method: 'post',
+						data: conText,
+						success: function(res) {
+							ykp.prompt('编辑成功');
+							cs.close();
+							getList(1);
+						}
+					})
+					}
+				})
+			})
+
+			$('#dataList .del').click(function() {
+				var id = $(this).parents('tr').attr('data-id');
+				ykp.doAjax({
+					url: '/api/api_accountancies/del_administration',
+					method: 'post',
+					data: {
+						id: id
+					},
+					success: function(res) {
+						ykp.prompt('删除成功!');
+						getList(1);
+					}
+				})
+			})
+			$('#dynamic-table tbody tr').find('.del').click(function() {
+				//id
+				var id = $(this).parents('tr').attr('data-id')
+			})
+		}
+
+		//高级搜索按钮
+		//高级搜索显示 & 隐藏
+		cs.showHeightSearch('#heightsearch','#heightsearch1');
+
+		cs.custorm_check('#dynamic-table', '#dataList', true);
+
+		//全选
+		checkAll();
+
+		pageinfo();
+
+		function pageinfo() {
+			//添加
+			$('#add').click(function() {
+				showMark('#template');
+				$('#showBox .title').text('添加');
+
+				$("#templateCon #city").citySelect({
+					prov: '北京', //省份 
+					second:true//是否不显示市级select true为不显示
+				});
+
+				$('#templateCon .edit1').change(function(){
+					if($(this).val() == 1){
+						$('#templateCon .city').hide();
+						$("#templateCon #city").citySelect({
+							prov: $("#templateCon .prov").val(), //省份 
+							second:true//是否不显示市级select true为不显示
+						});
+					}
+					if($(this).val() == 2){
+						$('#templateCon .city').show();
+						$("#templateCon #city").citySelect({
+							prov: $("#templateCon .prov").val(), //省份 
+							second:false//是否不显示市级select true为不显示
+						});
+					}
+				});
+
+				$('#templateCon #add').click(function() {
+					//编辑
+					var conText = {};
+					var name = $('#templateCon').find('input,select').not(':hidden').each(function() {
+						if($(this).attr('add')) {
+							conText[$(this).attr('add')] = $(this).val();
+						}
+					});
+					conText.province = $('#templateCon .prov').val();
+					conText.city = $('#templateCon .city').val();
+					ykp.doAjax({
+						url: '/api/api_accountancies/add_administration',
+						method: 'post',
+						data: conText,
+						success: function(res) {
+							ykp.prompt('添加成功');
+							cs.close();
+							getList(1);
+						}
+					})
+				})
+			})
+
+		}
+
+	});
+
+	function checkAll(status) {
+		$("tbody input[name='check']").each(function(i, n) {
+			n.checked = status;
+		});
+	}
+
+	function submit() {
+		var val = $('#templateCon #cnumber').val()
+		//console.log(val)
+	}
+
+	function add() {
+		var val = $('#templateCon #cnumber1').val()
+		//console.log(val)
+	}
+</script>

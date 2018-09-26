@@ -1,0 +1,144 @@
+._label{
+	margin-left:10px;
+	line-height: 52px;
+	height:52px;
+	border-bottom:1px solid #ddd;
+}
+.kind{
+	height:40px;
+	border-bottom: 1px #d5e3ef solid;
+}
+.kind li{
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	line-height: 40px;
+	width:120px;
+	height:40px;
+	margin-right: 10px;
+	list-style-type: none;
+}
+.kind .now{
+	border-top:2px solid #5fa6d3;
+	border-left:1px solid #d5e3ef;
+	border-right:1px solid #d5e3ef;
+	border-bottom:1px solid #fff ;
+}
+.search_item{
+	margin: 10px;
+}
+table{
+	/*border-collapse: collapse;
+	border:1px solid #eee;*/
+	width:100%;
+}
+._details thead th{
+	text-align: center;
+	height:34px;
+	background-color: #ccecff;
+}
+._details td{
+	border-left: 1px solid #eee;
+	height: 34px; 	
+	text-align: center;
+}
+.search_item input{
+	margin-left:10px;
+}
+.btn.active:after{
+	content: none ;
+}
+.portlet{
+	display: inline-block;
+}
+.actions{
+	font-family: 'Microsoft YaHei';
+	font-size: 14px;
+	text-align: left;
+}
+.platform-data table thead tr{
+	background-color: #ccecff;
+	height:42px;
+}
+.record-num{
+	font-size: 12px;
+	text-align:left;
+}
+.record{
+	padding-top:20px;
+}
+.record div{
+	display: inline-block;
+}
+._paging{
+	text-align: right;
+}
+.platform-data td{
+	padding:4px;
+	border-top:1px solid #ddd;
+	font-size: 12px;
+	/*background-color: #fff;*/
+	height:34px;
+}
+.pull-left{
+	line-height: 34px;
+	font-size: 12px;
+}
+/*templateBox .input-group{
+	display: inline-table;
+	width:86%;
+}*/
+#templateBox .input-addon{
+	margin-left:0 !important;
+	padding: 7.5px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555555;
+    text-align: center;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+}
+#templateBox .months{
+	width:90.5%;
+}
+#templateBox{
+	overflow-y:visible; 
+}
+._details .success{
+	background-color: #5cb85c;
+}
+._details .fail{
+	background-color:#f0ad4e;
+}
+._details .operation{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/*弹出层*/
+#showBox{
+	background-color: #e6ecf2;
+}
+.item_form .form_data{
+	height:50px;
+}
+.item_form select{
+	width:180px;
+}
+.item_form .receipt_remarks{
+	position:relative;
+	bottom:40px;
+}
+.item_form textarea{
+	width: 86.6%;
+	resize:none;
+	overflow: auto;
+}
+.separate{
+	margin-left: 27px;
+	margin-right:27px;
+}
+.label_area tr td:before{
+	content: none !important;
+}

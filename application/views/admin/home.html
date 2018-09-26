@@ -1,0 +1,1732 @@
+<style type="text/css">
+	th,
+	td {
+		text-align: center;
+		padding: 5px;
+	}
+	
+	th {
+		height: 40px;
+		background: #ccecff;
+	}
+	
+	td {
+		height: 36px;
+	}
+	
+	.odd {
+		background: #e5f6ff;
+	}
+	
+	.even {
+		background: #fff;
+	}
+	
+	.tab-content {
+		padding: 16px 0;
+	}
+	
+	.helpers .active {
+		border-bottom: 1px solid #fff;
+		border-top: 2px solid #49ade6;
+	}
+	
+	.helpers li {
+		height: 30px;
+		width: 86px;
+		line-height: 30px;
+		text-align: center;
+		border: 1px solid #f5f5f5;
+	}
+	
+	.main-content-inner {
+		background: #fff !important;
+		box-shadow: none !important;
+	}
+	
+	.indexContent .current {
+		background-color: rgba(157, 194, 254, 0.8);
+	}
+	
+	.charts .active {
+		color: #00a0ff !important;
+	}
+	
+	#right .row {
+		margin: 0px 0 !important;
+	}
+	
+	#right .businessCon {
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		flex-direction: row;
+		justify-content: space-around;
+		margin-bottom: 0px !important;
+		padding-top: 0px;
+		margin-top: 38px !important;
+		margin-left: -10px;
+	}
+	
+	.circular {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		font-size: 40px;
+		line-height: 80px;
+		color: #fff;
+		margin-bottom: 5px;
+	}
+	
+	.noticeCon li:nth-child(odd) {
+		background: #e5f6ff;
+	}
+	
+	.main-content-inner {
+		background: transparent !important;
+		padding-bottom: 0px !important;
+	}
+	
+	a:hover,
+	a.close_label:hover {
+		color: inherit;
+	}
+	
+	.goals input {
+		padding: 4px;
+		margin-left: 8px;
+		border: none;
+		width: 100px;
+		height: 20px;
+		opacity: 0.4;
+		background-color: #e5f6ff;
+	}
+	
+	.goals label {
+		width: 48px;
+		text-align: right;
+		font-family: MicrosoftYaHei;
+		font-size: 12px;
+		color: #666;
+	}
+	
+	.goals {
+		position: absolute;
+		/*right:0;*/
+		/*left: 0;*/
+		top: 36px;
+		padding: 20px;
+		box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.2);
+		background: #fff;
+		width: 200px;
+		z-index: 2;
+	}
+	
+	._goals label {
+		width: 24px;
+	}
+	
+	._goals {
+		width: 176px;
+	}
+	
+	select2-container select2-container--default select2-container--open {
+		position: absolute !important;
+		left: 494.438px!important;
+		top: 41px!important;
+	}
+	
+	.businessCon li {
+		list-style: none;
+		width: 165px;
+		height: 70px;
+		margin-top: -24px;
+		/*  */
+	}
+	
+	.titleMouse {
+		cursor: pointer;
+		border: 1px #E6E6E6 solid;
+		box-shadow: 2px 2px 8px 0 rgba(00, 00, 00, 0.1);
+	}
+	
+	.businessCon li>div:first-child {
+		line-height: 35px;
+		font-size: 14px;
+		height: 40px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	
+	.businessCon li>div:last-child {
+		font-size: 18px;
+		height: 30px;
+		color: #55AA99
+	}
+
+	/* .select2-container{
+		position: relative !important;
+		top:50px !important;
+	} */
+</style>
+<div class="widget-main" style="overflow:auto;padding:0;">
+	<div style="background:#e6ecf2; margin-top: -20px;">
+		<div style="display:none;position:fixed;z-index:1041;width:80%;background: #fff;padding: 20px;    top: 35%; left: 17%;" class="sendList custom_table">
+			<table>
+				<thead>
+					<tr class="thColor" data-id='1'>
+						<th class="hidden-480">月份</th>
+						<th>负责人</th>
+						<th class="hidden-480">任务</th>
+						<th class="hidden-480">整单</th>
+						<th class="hidden-480">记账</th>
+						<th class="hidden-480">客服</th>
+						<th class="hidden-480">报税</th>
+						<th class="hidden-480">送单</th>
+						<th class="hidden-480">收单</th>
+						<th>公海</th>
+						<th>联系人</th>
+						<th class="hidden-480">商机</th>
+						<th class="hidden-480">拜访客户</th>
+						<th class="hidden-480">线索</th>
+						<th class="hidden-480">合同数</th>
+						<th class="hidden-480">合同金额</th>
+						<th class="hidden-480">收款</th>
+
+					</tr>
+				</thead>
+				<tbody id="sendListList">
+
+				</tbody>
+			</table>
+		</div>
+		<div style="background:#e6ecf2;">
+			<div class="row" style="position: relative;">
+				<div style="background: #fff; margin-bottom: 0px; height: 194px; padding-top: 10px; padding-left:0px; box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.1);" class="col-sm-6">
+					<ul class="row businessCon">
+						<li url='?url=alltask&i=0-2-1&type=1' kind='10'>
+							<div>新增任务</div>
+							<div></div>
+						</li>
+						<li url='?url=alltask&i=0-2-1&type=1' kind='1'>
+							<div>待办任务</div>
+							<div></div>
+						</li>
+						<li url='?url=contracts&i=0-3-0&type=1' kind='2'>
+							<div>续签合同</div>
+							<div></div>
+						</li>
+						<li url='?url=lackOfrecord&i=0-5-0&type=1' kind='3'>
+							<div>欠款合同</div>
+							<div></div>
+						</li>
+						<li url='?url=lackOfrecord&i=0-5-0&type=1' kind='3'>
+							<!--//?url=collectionRecord&i=0-5-1&type=1-->
+							<div>欠款金额</div>
+							<div></div>
+						</li>
+					</ul>
+					<ul class="row businessCon">
+						<li url='?url=schedule&i=0-2-7&type=1' kind='5'>
+							<div>待办日程</div>
+							<div></div>
+						</li>
+						<li url='?url=schedule&i=0-2-7&type=1' kind='6'>
+							<div>逾期日程</div>
+							<div></div>
+						</li>
+						<li url='?url=contacts&i=0-2-5&type=1' kind='7'>
+							<div>待补资料</div>
+							<div></div>
+						</li>
+						<li url='?url=accountSales&i=0-2-3&type=1' kind='8'>
+							<div>待办线索</div>
+							<div></div>
+						</li>
+						<li url='?url=accountSales&i=0-2-3&type=1' kind='9'>
+							<div>逾期线索</div>
+							<div></div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6" style="padding-right:0; padding-top: -20px; padding-left: 2px;">
+					<div style="width:100%;height:194px;padding:15px 15px;  background:#fff; ">
+						<div style="font-size:16px;height: 52px; line-height: 52px;">
+							最新公告
+							<a href="javascript:;" title="查看更多" id="showMore" style="float:right;font-size:20px;color:#999;margin-bottom: 10px; "><span class="fa fa-bars"></span</a>
+							<a href="javascript:;" title="添加公告"  id="addBtn" style="float:right;font-size:20px;color:#999; margin-right: 20px;"><span contentAuthority="87" class="fa fa-plus"></span></a>
+						</div>
+
+						<div style="height:140px;text-align:left;">
+							<ul style="list-style: none; width: 100%;" class="noticeCon">
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="position: relative;" id="bottom">
+				<!--个人助手 -->
+				<div style="padding:10px 20px 20px 20px;background:#fff; height: 100%; border-top:1px solid #e4ebf3; float: left;  width: 50%;" class="">
+					<div>
+						<ul class="helpers _line" style="list-style-type:none; margin-left:0;border-bottom:1px solid #f5f5f5;height:30px;">
+							<li class="active" style="float:left;">
+								<a style="text-decoration:none;" href="#saleHelper">
+									销售助手
+								</a>
+							</li>
+							<li class="" style="float:left;">
+								<a style="text-decoration:none;" href="#serviceHelper">
+									服务助手
+								</a>
+							</li>
+						</ul>
+
+						<div style="padding-top:10px" class="indexContent" id="personal">
+							<!-- 个人销售助手 -->
+							<div id="saleHelper">
+								<div style="font-language-override: 12px;line-height:24px;">
+									<select style="height:24px;font-size:12px;" title="time">
+										<option value="1">今日</option>
+										<option value="2">昨日</option>
+										<option value="3" selected="selected">近7日</option>
+										<option value="4">近30日</option>
+										<option value="5">本月</option>
+										<option value="6">上月</option>
+									</select>
+
+									<select title="employees" id="sale" style="background:#ccecff;margin-left:10px;width:80px;font-size:12px;height:24px;">
+									</select>
+									<!-- jjjjjjjj -->
+									<select style="background:#ccecff;margin-left:10px;width:80px;font-size:12px;height:24px;" title="url">
+
+										<option value="seaOfclients&i=0-2-2&type=1" kind="8" kname="customer">公海</option>
+
+										<option value="contacts&i=0-2-5&type=1" kind="9" kname="contact">客户</option>
+
+										<option value="opportunity&i=0-2-8&type=1" kind="10" kname="business">商机</option>
+
+										<option value="visit&i=0-2-9&type=1" kind="11" kname="visit">拜访</option>
+
+										<option value="accountSales&i=0-2-3&type=1" kind="12" kname="sales">线索</option>
+
+										<option value="contracts&i=0-3-0&type=1" kind="13" kname="contract">合同</option>
+
+										<option value="contracts&i=0-3-0&type=1" kind="15" kname="contract_money">合同欠款</option>
+
+										<option value="collectionRecord&i=0-5-1&type=1" kind="14" kname="payment">收款</option>
+									</select>
+									<button style="border:none;background:#ccecff;margin-left:10px;width:40px;height:24px;" class="details">
+								<span class="glyphicon glyphicon-list-alt" title="查看选中者客户公海的创建信息"></span>
+								</button>
+									<button style="background:#ccecff;width:40px;height:24px;border:none;" title="设置个人目标" contentAuthority="88" class="setgoals sale">
+									<span class="glyphicon glyphicon-wrench"></span>
+									</button>
+									<div style="display:none; float: right; margin-left:10px;position:relative; margin-right: 90px;">
+
+										<div class="goals" style="">
+
+											<div>
+												<label>公海</label>
+												<input title="customer">
+											</div>
+
+											<div>
+												<label>客户</label>
+												<input title="contact">
+											</div>
+
+											<div>
+												<label>商机</label>
+												<input title="business">
+											</div>
+
+											<div>
+												<label>拜访</label>
+												<input title="visit">
+											</div>
+
+											<div>
+												<label>线索</label>
+												<input title="sales">
+											</div>
+
+											<div>
+												<label>合同</label>
+												<input title="contract">
+											</div>
+
+											<div>
+												<label>欠款</label>
+												<input title="contract_money">
+											</div>
+
+											<div>
+												<label>收款</label>
+												<input title="payment">
+											</div>
+
+										</div>
+									</div>
+									<button style="background:#ccecff;width:40px;height:24px;border:none;" class="assistant">
+										<i class="fa fa-table" aria-hidden="true"></i>
+								</button>
+									<span style="float:right; margin-right:5px;font-size:12px;">
+									<label>目标</label>
+									<span style="color: #1577e4;" class="totalgoal">45</span>
+									</span>
+									<span style="font-size:12px;float:right; margin-left: 5px;">
+									<label>已完成</label>
+									<span style="color: #1dd600;" class="f_totalgoal">20</span>
+									</span>
+									<span style="font-size:12px;float:right; margin-left: 5px;">
+									<label>未完成</label>
+									<span style="color: #d60000;" class="no_finish">25</span>
+									</span>
+									<!-- <button style="float:right;border:none;background:#ccecff;margin-left:10px;height:24px;width:80px;">客户</button> -->
+								</div>
+
+								<div class="line_" id="line" style=" height:300px">
+
+								</div>
+
+							</div>
+
+							<!-- 个人服务助手 -->
+							<div id="serviceHelper" style="display:none;">
+								<div style="font-language-override: 12px;line-height:24px;">
+									<select style="height:24px;font-size:12px;" title="time">
+										<option value="1">今日</option>
+										<option value="2">昨日</option>
+										<option value="3" selected="selected">近7日</option>
+										<option value="4">近30日</option>
+										<option value="5">本月</option>
+										<option value="6">上月</option>
+									</select>
+
+									<select title="employees" id="service" style="background:#ccecff;margin-left:10px;width:80px;font-size:12px;height:24px;">
+									</select>
+									<select style="background:#ccecff;margin-left:10px;width:80px;font-size:12px;height:24px;" title="url">
+										<option value="alltask&i=0-2-1&type=1" kind="7" kname="task">任务</option>
+										<option value="entire&i=0-1-3&type=1" kind="2" kname="zd">整单</option>
+										<option value="account&i=0-1-4&type=1" kind="3" kname="jz">记账</option>
+										<option value="customer&i=0-1-5&type=1" kind="4" kname="zf">客服</option>
+										<option value="tax&i=0-1-6&type=1" kind="5" kname="bs">报税</option>
+										<option value="single&i=0-1-7&type=1" kind="6" kname="sd">送单</option>
+										<option value="getList&i=0-1-2&type=1" kind="1" kname="shd">收单</option>
+									</select>
+									<button style="border:none;background:#ccecff;margin-left:10px;width:40px;height:24px;" class="details">
+									<span class="glyphicon glyphicon-list-alt" title="查看选中者客户公海的创建信息"></span>
+								</button>
+									<button style="background:#ccecff;width:40px;height:24px;border:none;" contentAuthority="88" class="setgoals ser">
+										<span class="glyphicon glyphicon-wrench" title="设置个人目标"></span>
+									</button>
+									<div style="display:none; float: right; margin-left:10px;position:relative; margin-right: 90px;">
+										<div class="service goals _goals" style="">
+											<div>
+												<label>任务</label>
+												<input title="task">
+											</div>
+											<div>
+												<label>整单</label>
+												<input title="zd" />
+											</div>
+											<div>
+												<label>记账</label>
+												<input title="jz" />
+											</div>
+											<div>
+												<label>客服</label>
+												<input title="zf" />
+											</div>
+											<div>
+												<label>报税</label>
+												<input title="bs" />
+											</div>
+											<div style="height:px;">
+												<label>送单</label>
+												<input title="sd" />
+											</div>
+											<div style="height:px;">
+												<label>收单</label>
+												<input title="shd">
+											</div>
+										</div>
+									</div>
+
+									<span style="float:right; margin-right:5px;font-size:12px;">
+									<label>目标</label>
+									<span style="color: #1577e4;" class="totalgoal">45</span>
+									</span>
+									<span style="float:right;margin-right:5px;font-size:12px;">
+									<label>已完成</label>
+									<span style="color: #1dd600;" class="f_totalgoal">20</span>
+									</span>
+									<span style="float:right;margin-right:5px;font-size:12px;">
+									<label>未完成</label>
+									<span style="color: #d60000;" class="no_finish">25</span>
+									</span>
+
+									<!-- <button style="float:right;border:none;background:#ccecff;margin-left:10px;height:24px;width:80px;">客户</button> -->
+								</div>
+								<div class="line_" style="height:300px; ,''">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 公司助手 -->
+				<div class="" style="height:410px; padding-left: 2px; height: 100%; float: left; width: 50%;">
+					<div style="background:#fff; height:410px; height: 100%; padding:10px 20px 20px 20px; border-top:1px solid #e4ebf3;">
+						<ul class="helpers  _histogram" style="list-style-type:none;margin-left:0;border-bottom:1px solid #f5f5f5;height:30px;">
+							<li class="active" style="float:left;">
+								<a style="text-decoration:none;" href="#saleHelper1">
+									销售排名								</a>
+							</li>
+							<li class="" style="float:left;">
+								<a style="text-decoration:none;" href="#serviceHelper1">
+									服务排名
+								</a>
+							</li>
+						</ul>
+
+						<div style="padding-top:10px" class="indexContent" id="company">
+							<div id="saleHelper1">
+								<div>
+									<select style="height:24px;font-size:12px;" title="time">
+										<option value="1">今日</option>
+										<option value="2">昨日</option>
+										<option value="3" selected="selected">近7日</option>
+										<option value="4">近30日</option>
+										<option value="5">本月</option>
+										<option value="6">上月</option>
+									</select>
+									<select style="background:#ccecff;height:24px;width:80px;font-size:12px;margin-left:15px;position:relative;" title="url">
+
+										<option value="seaOfclients&i=0-2-2&type=1" kind="8">公海</option>
+
+										<option value="contacts&i=0-2-5&type=1" kind="9">客户</option>
+
+										<option value="opportunity&i=0-2-8&type=1" kind="10">商机</option>
+
+										<option value="visit&i=0-2-9&type=1" kind="11">拜访</option>
+
+										<option value="accountSales&i=0-2-3&type=1" kind="12">线索</option>
+
+										<option value="contracts&i=0-3-0&type=1" kind="13">合同</option>
+
+										<option value="!contracts&i=0-3-0&type=1" kind="15">欠款</option>
+
+										<option value="collectionRecord&i=0-5-1&type=1" kind="14">收款</option>
+									</select>
+
+									<button style="border:none;background:#ccecff;margin-left:10px;height:24px;width:40px;" class="details">
+										<span class="glyphicon glyphicon-list-alt" title="查看选中者客户公海的创建信息"></span>
+									</button>
+								</div>
+								<div class="histogram" style="width: 100%;height:300px;">
+
+								</div>
+							</div>
+
+							<div id="serviceHelper1" style="display: none;">
+								<div>
+									<select style="height:24px;font-size:12px;" title="time">
+										<option value="1">今日</option>
+										<option value="2">昨日</option>
+										<option value="3" selected="selected">近7日</option>
+										<option value="4">近30日</option>
+										<option value="5">本月</option>
+										<option value="6">上月</option>
+									</select>
+									<select style="background:#ccecff;height:24px;width:80px;font-size:12px;margin-left:15px;position:relative;" title="url">
+										<option value="alltask&i=0-2-1&type=1" kind="7">任务</option>
+										<option value="entire&i=0-1-3&type=1" kind="2">整单</option>
+										<option value="account&i=0-1-4&type=1" kind="3">记账</option>
+										<option value="customer&i=0-1-5&type=1" kind="4">客服</option>
+										<option value="tax&i=0-1-6&type=1" kind="5">报税</option>
+										<option value="single&i=0-1-7&type=1" kind="6">送单</option>
+										<option value="getList&i=0-1-2&type=1" kind="1">收单</option>
+									</select>
+									<button style="border:none;background:#ccecff;margin-left:10px;height:24px;width:40px;" class="details">
+									<span class="glyphicon glyphicon-list-alt" title="查看选中者任务的创建信息"></span>
+								</button>
+								</div>
+
+								<div class="histogram" style="width: 100%;height:300px;">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="label_popup" id="feedBack" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+		<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;
+        box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+			<div style="padding:15px;border-bottom:1px solid #ddd;">
+				<span style="display: inline-block;">发送公告</span>
+				<a href="javascript:;" class="close_label pos-rel" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+			</div>
+			<div style="padding: 15px;">
+				<input type="text" style="width:calc(100% - 60.2px);" style="margin: auto;" id="labelName" />
+				<button class="hold">发送</button>
+				<hr>
+			</div>
+		</div>
+	</div>
+	<div class="label_popup" id="feedBack1" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+		<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;">
+			<!--box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);-->
+			<div style="padding:15px;border-bottom:1px solid #ddd;">
+				<span style="display: inline-block;">编辑公告</span>
+				<a href="javascript:;" class="close_label pos-rel" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+			</div>
+			<div style="padding: 15px;">
+				<input type="text" style="width:calc(100% - 60.2px);" style="margin: auto;" id="labelName" />
+				<button class="hold">保存</button>
+				<hr>
+			</div>
+		</div>
+	</div>
+	<div class="notice custom_table" style="display:none;position:absolute;z-index:1024;width:70%;height: 300px; background: #fff;float:right;padding: 20px 20px;margin-top:-700px;margin: -700px 70px 0 ">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="widget-header widget-header-small" style="padding-left:0;text-align: center;">
+					<span style="font-size:16px;line-height: 45px;text-indent:10em;text-align: center;" class="title">公告列表</span>
+				</div>
+				<table>
+					<thead>
+						<tr class="thColor">
+							<th class="hidden-480">发布时间</th>
+							<th class="hidden-480">发布人</th>
+							<th class="hidden-480">公告内容</th>
+							<th class="hidden-480">操作</th>
+						</tr>
+					</thead>
+
+					<tbody id="_dataList">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<script src="/resource/adimin/assets/js/clipboard.min.js"></script>
+
+	{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		var mbData = {};  //目标date
+		//内容区域权限样式设置
+		cs.getNodes([87, 88]);
+        setHeight();
+
+		function setHeight() {
+			var dHeight = $(document.body).height();
+			$('#bottom').css('height', dHeight - 174 + 'px');
+			$('.line_').parents('.row').height();
+			$('.line_').css('height', ($('.line_').parents('.row').height() - 100) + 'px');
+			$('.histogram').css('height', ($('.line_').parents('.row').height() - 100) + 'px');
+		}
+
+		//展开 | 隐藏设置目标选项
+		function getInfo() {
+			//加载目标值
+			$(this).next().find("input").each(function() {
+				$(this).val(data[$(this).attr("title")]);
+			});
+		}
+		
+		$('[title="url"]').change(function(){
+			var text = $(this).find('option:selected').text();
+			$(this).next().find('span').attr('title',"查看选中者"+text+"的创建信息")
+		})
+
+		$('.in').click(function() {
+			$('.notice').hide();
+			$('.in').removeClass('modal-backdrop');
+			$('#showMore').removeClass('active').css('z-index', '');
+		});
+
+		//查询公告
+		noticeInfo();
+
+		function noticeInfo() {
+			var emps = allemp();
+			var data;
+			ykp.doAjax({
+				url: '/api/api_notice/list',
+				method: 'get',
+				data: {
+					limit: 3
+				},
+				success: function(res) {
+					data = res.data;
+					var li = '';
+					if(data.length > 0) {
+						var length = data.length < 3 ? data.length : 3;
+						for(var i = 0; i < length; i++) {
+							var ename;
+							for(var j in emps) {
+								if(data[i]['nm_notice.user'] == emps[j]['bmm_employees.id']) {
+									ename = emps[j]['bmm_employees.name'];
+								}
+							}
+							li += `<li  data-id="${data[i]['nm_notice.id']}"  title="${data[i]['nm_notice.content']}" style="height: 36px; padding-right:10px; width: 100%; cursor: pointer;overflow: hidden; font-size: 14px; color: #333; line-height: 36px; padding-left: 20px;"><span style="width:250px;float:left; margin-right:50px;"> ${data[i]['nm_notice.content']}</span> <span style="float:right; ">${cs.getNowTime(data[i]['nm_notice.create_at'])} </span></li>`;
+						}
+					} else {
+						li += `<div style="text-align:center;height:100px;line-height:80px">暂无公告</div>`
+					}
+					$('.noticeCon').html(li);
+
+					delnotice();
+					editnotice();
+				}
+			})
+		}
+
+		getuserasss();
+
+		function getuserasss() {
+			$('.assistant').click(function() {
+				$('.sendList').show();
+				$('.in').addClass('modal-backdrop');
+				$(this).addClass('active').css('z-index', '1041');
+				var val = $('#sale').val();
+				console.log(val);
+				//showMark("#template4");
+				ykp.doAjax({
+					url: "/api/api_home/get_user_all_assistant",
+					data: {
+						user: val
+					},
+					method: "post",
+					success: function(res) {
+						var html = "";
+						var data = res.data;
+						for(var i in data) {
+							html += `<tr }">
+							<td>${data[i]['month']}</td>
+							<td>${data[i]['name']}</td>
+										<td>${data[i]['task']}</td>
+										
+										<td>${data[i]['zd']}</td>
+										<td>${data[i]['jz']}</td>
+										<td>${data[i]['zf']}</td>
+										<td>${data[i]['bs']}</td>
+										<td>${data[i]['sd']}</td>
+										<td>${data[i]['shd']}</td>
+										<td>${data[i]['customer']}</td>
+										<td>${data[i]['contact']}</td>
+										<td>${data[i]['business']}</td>
+										<td>${data[i]['visit']}</td>
+										<td>${data[i]['sales']}</td>
+										<td>${data[i]['contract']}</td>
+										<td>${data[i]['contract_money']}</td>
+										<td>${data[i]['payment']}</td>
+							</tr>`;
+						}
+						$("#sendListList").html(html);
+						
+						$('.in').unbind('click').click(function() {
+							$('.sendList').hide();
+							$('.in').removeClass('modal-backdrop');
+							$('#singleList').removeClass('active').css('z-index', '');
+			
+							$(this).off('click');
+						});
+					}
+
+				})
+				
+			})
+		}
+
+		function delnotice() {
+			$('.delnotice').click(function() {
+				var id = $(this).parent().attr('data-id') || $(this).parents('tr').attr('data-id');
+				ykp.doAjax({
+					url: "/api/api_notice/del ",
+					method: 'post',
+					data: {
+						id: id
+					},
+					success: function(res) {
+						noticeInfo();
+						//						ykp.prompt('删除成功');
+						$('.notice').hide();
+						$('.in').removeClass('modal-backdrop');
+						$(this).removeClass('active').css('z-index', '');
+					}
+				})
+			})
+
+		}
+
+		function editnotice() {
+			$('.editnotice').click(function() {
+				var id = $(this).parent().attr('data-id') || $(this).parents('tr').attr('data-id');
+				$('#feedBack1').show();
+				$('#feedBack1 #labelName').val($(this).parent().attr('title') || $(this).parents('tr').attr('data-content'));
+				$('#feedBack1 .hold').click(function() {
+					var approve_reply = $('#feedBack1 #labelName').val().trim();
+					if(approve_reply == '') {
+						ykp.prompt('不能为空！');
+						return false;
+					}
+					addnotice(approve_reply, id); //执行添加
+					$(this).unbind('click', arguments.callee);
+					$('#feedBack1').find('input').val("");
+					$('.close_label').parents('.label_popup').fadeOut();
+				})
+				$('.close_label').click(function() {
+					$('.close_label').parents('.label_popup').fadeOut();
+				})
+
+				noticeInfo();
+			})
+
+		}
+
+		//添加公告
+		function addnotice(content, id) {
+			var data = {
+				content: content
+			}
+			if(id) {
+				data.id = id;
+			}
+			ykp.doAjax({
+				url: id ? '/api/api_notice/edit' : '/api/api_notice/add',
+				method: 'post',
+				data: data,
+				success: function(res) {
+					noticeInfo();
+					$('.notice').hide();
+					$('.in').removeClass('modal-backdrop');
+					$(this).removeClass('active').css('z-index', '');
+				}
+			})
+		}
+
+		titleTask();
+
+		function titleTask() {
+			$('.businessCon li').click(function() {
+				var nums = $(this).find('div').eq(1).text();
+				if(!nums || nums.trim() == '0') {
+					ykp.prompt('您没有需要处理的任务');
+					return;
+				}
+				var _url = $(this).attr('url');
+				var kind = $(this).attr('kind');
+				ykp.setCookie('titleTask', kind);
+				skPage(_url);
+				//window.location=_url;
+			})
+		}
+
+		getLeft(); //获取左上方数据；
+		function getLeft() {
+			ykp.doAjax({
+				url: '/api/api_home/get_left',
+				method: 'post',
+				success: function(res) {
+					var data = res.data;
+					var lis = $('.businessCon li');
+                    lis.eq(0).find('div').eq(1).text(data['new_task']);
+					lis.eq(1).find('div').eq(1).text(data['not_task']);
+					lis.eq(2).find('div').eq(1).text(data['xu_contract']);
+					lis.eq(3).find('div').eq(1).text(data['num_contract']);
+					lis.eq(4).find('div').eq(1).text(data['money_contract'] ?data['money_contract']:0);
+					lis.eq(5).find('div').eq(1).text(data['deal_plan']);
+					lis.eq(6).find('div').eq(1).text(data['not_plan']);
+					lis.eq(7).find('div').eq(1).text(data['ws_customer']);
+					lis.eq(8).find('div').eq(1).text(data['log_customer']);
+					lis.eq(9).find('div').eq(1).text(data['not_log']);
+				}
+			})
+		}
+
+		//设置目标
+		setgoals();
+		var left;
+
+		function setgoals() {
+			$('.setgoals').click(function() {
+				var id = $(this).parents('div').find('[title="employees"]').val();
+				var user = JSON.parse(ykp.getCookie('userinfo'));
+				$(this).next().toggle();
+				var inputs = $(this).next().find("input");
+				var user_id = id;
+                var type = $(this).hasClass('ser') ? 2 : 1;
+				left = $(this).position();
+				var width = $('.indexContent').css('width');
+				$(this).next().css('right', (parseInt(width) - 400) + 'px');
+				left = left.left;
+				if($(this).next().is(':hidden')) {
+                   //var mbData.user_id = user_id
+					var mbData = {
+						user_id: user_id
+					};
+					for(var i = 0; i < inputs.length; i++) {
+						var value = $(inputs[i]).val().trim();
+                        if($(inputs[i]).attr("title") != 'contract_money') {
+							if(value != '') {
+								mbData[$(inputs[i]).attr("title")] = value;
+							}
+						} else {
+							if(value != '') {
+								if(!isNaN(value) && value > 0) {
+									mbData[$(inputs[i]).attr("title")] = value;
+								}
+							}
+						}
+					}
+                    //保存目标
+					ykp.doAjax({
+						url: '/api/api_home/change_assistant',
+						data: mbData,
+						method: 'post',
+						success: function(res) {
+							ykp.prompt('目标编辑成功');
+						}
+					})
+					//保存目标值
+				} else {
+					
+					left = $(this).position('right');
+					findGoalById(user_id, type);
+				}
+			});
+		}
+		$(window).resize(function() {
+			var width = $('.indexContent').css('width');
+
+			$('.setgoals').next().css('right', (parseInt(width) - 400) + 'px');
+
+		})
+
+		//查某人当月所有目标---type：1为销售助手,2为服务助手
+		function findGoalById(id, type) {
+			var inputs = $('#saleHelper,#serviceHelper').find("input");
+			//通过id查所有目标并加载
+			ykp.doAjax({
+				url: '/api/api_home/info_next_assistant',
+				data: {
+					user_id: id
+				},
+				method: 'post',
+				success: function(res) {
+					var data = res.data;
+					mbData = data;
+					if(type == 1) {
+						$('[title="customer"]').val(data['customer']);
+						$('[title="contact"]').val(data['contact']);
+						$('[title="business"]').val(data['business']);
+						$('[title="visit"]').val(data['visit']);
+						$('[title="sales"]').val(data['sales']);
+						$('[title="contract"]').val(data['contract']);
+						$('[title="contract_money"]').val(data['contract_money']);
+						$('[title="payment"]').val(data['payment']);
+					} else {
+						$('[title="task"]').val(data['task']);
+						$('[title="zd"]').val(data['zd']);
+						$('[title="jz"]').val(data['jz']);
+						$('[title="zf"]').val(data['zf']);
+						$('[title="bs"]').val(data['bs']);
+						$('[title="sd"]').val(data['sd']);
+						$('[title="shd"]').val(data['shd']);
+					}
+				}
+			})
+		}
+
+		//得到所有员工
+		function allemp() {
+			var emps;
+			var data = {
+//				filter: 'bmm_employees.up_user = ' + ykp.getCookie('uid') + ' or bmm_employees.id = ' + ykp.getCookie('uid')
+			}
+			ykp.doAjax({
+				url: '/api/api_employees/get_up_user',
+				method: 'get',
+				data: data,
+				async: false,
+				success: function(res) {
+					emps = res.data;
+					var option = '';
+					for(var i in emps) {
+						option += `<option value="${emps[i]['id']}">
+						${emps[i]['name']}
+                		</option>`;
+					}
+					$("[title='employees']").html(option).val(ykp.getCookie('uid'));
+				}
+			})
+			return emps;
+		}
+
+		//查看明细表
+		getdetails()
+
+		function getdetails() {
+			$(".details").click(function() {
+				//跳转的页面
+				var _url = $(this).parent().find("[title='url']").val();
+				//负责人
+				var aid = $(this).parent().find('[title="employees"] option:selected').text().trim();
+				var aid_2 = $(this).parent().find('[title="employees"]').val();
+				//时间
+				var time = $(this).parent().find('[title="time"]').val();
+				if(_url.indexOf('!') != -1) {
+					_url.replace('!', '');
+				}
+				if(aid == undefined) {
+					aid = '';
+				}
+				if(aid_2 == undefined) {
+					aid_2 = '';
+				}
+				//ykp.setCookie('_url',_url, (1 / 24));
+                ykp.setCookie('aid', aid, (1 / 24));
+                ykp.setCookie('aid_2', aid_2, (1 / 24));
+                ykp.setCookie('time', time, (1 / 24));
+				//window.location='?url='+_url;
+				setTimeout(function () {
+                    skPage('?url=' + _url);
+                })
+
+			})
+		}
+		$(".businessCon li").mouseover(function() {
+			$(this).addClass("titleMouse");
+		})
+		$(".businessCon li").mouseout(function() {
+			$(this).removeClass("titleMouse");
+		})
+		//查看所有公告
+		showMore();
+
+		function showMore() {
+			$("#showMore").click(function() {
+				if($(this).hasClass('active')) {
+					$('.notice').hide();
+					$('.in').removeClass('modal-backdrop');
+					$(this).removeClass('active').css('z-index', '');
+					return;
+				}
+				$('.notice').show();
+				$('.in').addClass('modal-backdrop');
+				$(this).addClass('active').css('z-index', '1042');
+				$('.notice').addClass('active').css('z-index', '1042');
+				ykp.doAjax({
+					url: '/api/api_notice/list',
+					method: 'get',
+					success: function(res) {
+						data = res.data;
+						var emps = allemp();
+						// console.log(emps);
+						var tr = '';
+						for(var i in data) {
+							tr += `<tr class="thColor" data-id='${data[i]['nm_notice.id']}' data-content="${data[i]['nm_notice.content']}">
+								<td class="hidden-480">${cs.getNowTime(data[i]['nm_notice.create_at'],true)}</td>
+								<td class="hidden-480">${data[i]['bmm_employees.name']}</td>
+								<td class="hidden-480" title="${data[i]['nm_notice.content']}"><label style="width:450px;overflow: hidden;text-overflow: ellipsis;font-weight:normal;">${data[i]['nm_notice.content']}</label></td>
+								<td><label  class="pos-rel"><a style="margin-right: 6px;" title="删除" class="delnotice btRed"><i class="fa fa-trash-o"></i></a><a class="editnotice btBlue" title="编辑" style="margin-right: 10px;" ><i class="fa fa-pencil-square-o"></i></a></label></td>
+							</tr>`;
+						}
+						$('#_dataList').html(tr);
+						delnotice();
+						editnotice();
+					}
+				})
+			})
+		}
+
+		//公告栏显示隐藏
+		$('#addBtn').click(function() {
+			$('#feedBack').show();
+			$('#feedBack .hold').click(function() {
+				var approve_reply = $('#labelName').val().trim();
+				if(approve_reply == '') {
+					ykp.prompt('不能为空！');
+					return false;
+				}
+				addnotice(approve_reply); //执行添加
+				$(this).unbind('click', arguments.callee);
+				$('#feedBack').find('input').val("");
+				$('.close_label').parents('.label_popup').fadeOut();
+			})
+			$('.close_label').click(function() {
+				$('.close_label').parents('.label_popup').fadeOut();
+			})
+		})
+
+		//鼠标移动到table相应的th时,饼图切换至相应数据
+		$('.indexContent th').mouseover(function() {
+			if($(this).index() == 0) {
+				return;
+			}
+			$(this).css('cursor', 'pointer');
+			if($(this).hasClass('current')) {
+				return;
+			}
+			$('.indexContent .current').removeClass('current');
+			$(this).addClass('current');
+			var idss = $('.helpers .active').find('a').attr('href');
+			getPieChart(idss + ' .pie');
+		});
+
+		//工作助手切换
+		liOnChange();
+
+		function liOnChange() {
+			$('.helpers li').click(function(e) {
+				if($(this).hasClass('active')) {
+					return false;
+				}
+				$(this).addClass('active').siblings().removeClass('active');
+				var idss = $(this).find('a').attr('href');
+				$(idss).show().siblings().hide();
+				if($(this).index() == 1) {
+					var user2 = $(idss).find("[title='employees']").val();
+					var kname = $(idss).find("[title='url'] option:selected").attr('kname');
+					var postData2 = {
+						time: $('#serviceHelper1').find("[title='time']").val(),
+						type: $('#serviceHelper1').find("[title='url'] option:selected").attr('kind')
+					}
+					if(idss == '#serviceHelper1') {
+						doGetChart('/api/api_home/home_total_chart', postData2, kname, $(idss));
+						return;
+					}
+					postData2['user'] = user2;
+					postData2['time'] = $('#serviceHelper').find("[title='time']").val();
+					postData2['type'] = $('#serviceHelper').find("[title='url'] option:selected").attr('kind')
+					doGetChart('/api/api_home/home_chart', postData2, kname, $(idss));
+				}
+			});
+		}
+
+		//页面跳转
+		function skPage(urls) {
+			var url_ = urls.split('&')[0].split('=')[1];
+			$('#navBox #nav-list li').find('li[data-url="/admin/' + url_ + '"]').click();
+		}
+
+		//下拉框改变时请求数据
+		helperOnChange();
+
+		function helperOnChange() {
+			$("#serviceHelper select,#saleHelper select,#serviceHelper1 select,#saleHelper1 select").change(function() {
+				var parent = $(this).parent().parent();
+				var user = $(parent).find("[title='employees']").val();
+				var kname = $(parent).find("[title='url'] option:selected").attr('kname');
+				var posturl = '';
+				var postData = {
+					time: $(parent).find("[title='time']").val(),
+					type: $(parent).find("[title='url'] option:selected").attr('kind')
+				}
+				if(user) {
+					postData['user'] = user;
+					posturl = '/api/api_home/home_chart';
+				} else {
+					posturl = '/api/api_home/home_total_chart';
+				}
+				doGetChart(posturl, postData, kname, parent);
+			})
+		}
+
+		var user1 = $('#saleHelper').find("[title='employees']").val();
+		var postData1 = {
+			user: user1,
+			time: 3,
+			type: 8
+		}
+
+		var postData2 = {
+			time: 3,
+			type: 8
+		}
+
+		//默认加载的个人
+		doGetChart('/api/api_home/home_chart', postData1, 'customer', $('#saleHelper'));
+		//默认加载的公司
+		doGetChart('/api/api_home/home_total_chart', postData2, 'customer', $('#saleHelper1'));
+
+		function doGetChart(posturl, postData, kname, selector) {
+			ykp.doAjax({
+				url: posturl,
+				method: 'post',
+				data: postData,
+				success: function(res) {
+					if(postData.user) {
+						addlineChart(res, '#' + selector.attr('id'), kname, postData.time);
+						return;
+					}
+					addHistogramChart(res, '#' + selector.attr('id'), kname, postData.time);
+				}
+			})
+		}
+
+		//添加
+		function addlineChart(data, selector, kname, time) {
+			var dat = data.data;
+            var lastMonth = dat.lastWorkDay[1];
+			var lastWeekend = dat.lastWorkDay[2]; //上月非工作日
+			var thisMonth = dat.thisWorkDay[1];
+			var thisWeekend = dat.thisWorkDay[2]; //上月非工作日
+			var allDay = lastMonth;
+			var thisDays = dat.chart; //区间内的总日期
+			var thisWorkDays = []; //x轴日期数组*
+			var finishData = []; //每日完成数组
+			var lastTotal = dat.user.last[kname] == undefined ? 0 : dat.user.last[kname]; //该项上月总目标
+			var thisTotal = dat.user.this[kname] == undefined ? 0 : dat.user.this[kname]; //该项本月总目标
+			var lastp = Math.ceil(lastTotal / (dat.lastWorkDay[0] + dat.lastWorkDay[2].length)); //上月日均目标;
+			var thisp = Math.ceil(thisTotal / (dat.thisWorkDay[0] + dat.thisWorkDay[2].length)); //本月日均目标;
+			var lastData = [],
+				thisData = [],
+				totalData = [],
+				noFinishData = []; //待展示结果数组*
+			var lastnum = 0; //上、本月区间工作日
+			//var date;//周几
+			for(var i in lastWeekend) {
+				lastMonth.push(lastWeekend[i]);
+			}
+			for(var i in thisWeekend) {
+				thisMonth.push(thisWeekend[i]);
+			}
+
+			//如果是今天
+			if(time == 1) {
+				thisWorkDays.push(cs.getNowTime(new Date().setHours(0, 0, 0, 0) / 1000).substring(5, 10));
+				totalData.push(thisp);
+				finishData.push(thisDays.num);
+				noFinishData.push(totalData[0] - finishData[0]);
+				//date = new Date().getDay();
+			}
+			//如果是昨天
+			if(time == 2) {
+				var today = cs.getNowTime(new Date().setHours(0, 0, 0, 0) / 1000);
+				var yesterday = cs.getNowTime(new Date().setHours(0, 0, 0, 0) / 1000 - 86400);
+				thisWorkDays.push(yesterday.substring(5, 10))
+				if(today.substring(5, 7) == yesterday.substring(5, 7)) {
+					totalData.push(thisp);
+				} else {
+					totalData.push(lastp);
+				}
+				finishData.push(thisDays.num);
+				noFinishData.push(totalData[0] - finishData[0]);
+				//date = new Date(yesterday).getDay();
+			}
+
+			/*if (date=='0'||date=='6') {
+				ykp.prompt('所查询日期不是工作日');
+				thisWorkDays = [];
+				totalData = [];
+				finishData = [];
+				noFinishData = [];
+			}*/
+
+			if(time > 2) {
+				//得到展示日期
+				for(var i in thisDays) {
+					thisWorkDays.push(thisDays[i].time.substring(5));
+				}
+
+				for(var i in lastMonth) {
+					for(var j in thisDays) {
+						if(lastMonth[i] == thisDays[j].time) {
+							lastnum++; //上月区间有几天
+							//thisWorkDays.push(thisDays[j].time.substring(5));//区间工作日数组2
+							finishData.push(parseInt(thisDays[j].num)); //区间完成数数组3
+						}
+					}
+				}
+
+				for(var i in thisMonth) {
+					allDay.push(thisMonth[i]);
+				}
+				//得到区间工作日
+				for(var i in thisMonth) {
+					for(var j in thisDays) {
+						if(thisMonth[i] == thisDays[j].time) {
+							//thisWorkDays.push(thisDays[j].time.substring(5));//区间工作日数组2
+							finishData.push(parseInt(thisDays[j].num)); //区间完成数数组3
+						}
+					}
+				}
+
+				//添加上月区间日均目标列表
+				if(lastnum > 0) {
+					for(var i = 0; i < lastnum; i++) {
+						totalData.push(lastp);
+					}
+				}
+				//得到总的日均数组
+				for(var i = 0; i < finishData.length - lastnum; i++) {
+					totalData.push(thisp); //
+				}
+				//得到未完成数组
+				for(var i in totalData) {
+					var nof = totalData[i] - finishData[i];
+					if(nof < 0) {
+						nof = 0;
+					}
+					noFinishData.push(nof); //区间未完成数组
+				}
+			}
+			var tot = 0;
+			for(var i in totalData) {
+				tot += totalData[i];
+			}
+			$(selector + ' .no_finish').text(tot - dat.complete >= 0 ? tot - dat.complete : 0);
+            console.log(dat.complete);
+            $(selector + ' .f_totalgoal').text(dat.complete);
+			$(selector + ' .totalgoal').text(tot);
+			getLineChart(selector + ' .line_', thisWorkDays, noFinishData, finishData, totalData);
+			//console.log(noFinishData);
+			//console.log(finishData);
+			//console.log(totalData);
+
+		}
+
+		//判断data是否在arr这个数组中
+		function inHereArray(arr, data) {
+			for(var i = 0; i < arr.length; i++) {
+				if(arr[i] == data) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		//展示柱状图
+		function addHistogramChart(data, selector, kname, time) {
+			var x_user = [],
+				num = [];
+			var dat = data.data.chart;
+			var date;
+			var yesterday = cs.getNowTime(new Date().setHours(0, 0, 0, 0) / 1000 - 86400);
+			if(time == 1 || time == 2) {
+				date = time == 1 ? new Date().getDay() : new Date(yesterday).getDay();
+			}
+			for(var i in dat) {
+				x_user.push(dat[i]['name']);
+				num.push(dat[i]['num']);
+			}
+			if(date == '0' || date == '6') {
+				ykp.prompt('所查询日期不是工作日');
+				getHistogramChart(selector + ' .histogram', x_user, num);
+				return;
+			}
+			if(x_user.length == 0) {
+				ykp.prompt('暂无数据');
+				getHistogramChart(selector + ' .histogram', x_user, num);
+				return;
+			}
+			getHistogramChart(selector + ' .histogram', x_user, num);
+		}
+
+		//获取折线图
+		function getLineChart(line, xdata, data_1, data_2, data_3) {
+			var line = echarts.init($(line)[0]);
+			option = {
+				title: {
+					text: '',
+					subtext: ''
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					data: []
+				},
+				toolbox: {
+					show: true
+				},
+				xAxis: {
+					interval: 0,
+					type: 'category',
+					boundaryGap: false,
+					data: xdata,
+					axisLabel: {
+						interval: 0,
+						rotate: 45
+					},
+				},
+				yAxis: {
+					type: 'value',
+					axisLabel: {
+						formatter: '{value} '
+					}
+				},
+				grid: {
+					left: '1%',
+					right: '2%',
+					bottom: '6%',
+					top: '12%',
+					containLabel: true
+				},
+
+				series: [{
+						name: '未完成',
+						type: 'line',
+						data: data_1,
+						markPoint: {
+							/* data: [
+							     {type: 'max', name: '最大值'},
+							     {type: 'min', name: '最小值'}
+							 ]*/
+						},
+						/*markLine: {
+						    data: [
+						        {type: 'average', name: ''}
+						    ]
+						}*/
+					},
+					{
+						name: '已完成',
+						type: 'line',
+						data: data_2,
+						markPoint: {
+							data: [{
+								name: '周最低',
+								value: -2,
+								xAxis: 1,
+								yAxis: -1.5
+							}]
+						},
+						itemStyle: {
+							normal: {
+								color: '#33ff99',
+								lineStyle: {
+									color: '#33ff99'
+								}
+							}
+						},
+						/*markLine: {
+			                data: [
+			                    {type: 'average', name: ''},
+			                    [{
+			                        symbol: 'none',
+			                        x: '90%',
+			                        yAxis: 'max'
+			                    }, {
+			                        symbol: 'circle',
+			                        label: {
+			                            normal: {
+			                                position: 'start',
+			                                formatter: '',
+		                                 	
+			                            },
+			                        },
+			                        type: 'max',
+			                        name: ''
+			                    }]
+			                ]
+			            }*/
+					},
+					{
+						name: '目标',
+						type: 'line',
+						data: data_3,
+						markPoint: {
+							data: [{
+								name: '周最低',
+								value: -2,
+								xAxis: 1,
+								yAxis: -1.5
+							}]
+						},
+						itemStyle: {
+							normal: {
+								color: '#3366ff',
+								lineStyle: {
+									color: '#3366ff'
+								}
+							}
+						},
+						/*markLine: {
+						    data: [
+						        {type: 'average', name: ''},
+						        [{
+						            symbol: 'none',
+						            x: '90%',
+						            yAxis: 'max'
+						        }, {
+						            symbol: 'circle',
+						            label: {
+						                normal: {
+						                    position: 'start',
+						                    formatter: ''
+						                }
+						            },
+						            type: 'max',
+						            name: ''
+						        }]
+						    ]
+						}*/
+					}
+				]
+			};
+			line.setOption(option);
+			/*var option={
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b} : {c}'
+				},
+				xAxis: {
+					type: 'category',
+					splitLine: {
+						show: false
+					},
+					axisLabel:{
+						interval:0,
+					},
+					data: xdata
+				},
+				grid: {
+					left: '1%',
+					right: '2%',
+					bottom: '6%',
+					top:'12%',
+					containLabel: true
+				},
+				yAxis: {
+					type: 'log'
+				},
+				series: [{
+						name: '未完成',
+						type: 'line',
+						data: data_1
+					},
+					{
+						name: '已完成',
+						type: 'line',
+						data: data_2
+					},
+					{
+						name: '目标',
+						type: 'line',
+						data: data_3
+					}
+				]
+			};
+			line.setOption(option);*/
+			$(window).resize(function() {
+				var dHeight = $(document.body).height();
+				$('#bottom').css('height', dHeight - 174 + 'px');
+				$('.line_').parents('.row').height();
+				$('.line_').css('height', ($('.line_').parents('.row').height() - 100) + 'px');
+				$('.histogram').css('height', ($('.line_').parents('.row').height() - 100) + 'px');
+				window.onresize = line.resize()
+			})
+			/* window.onresize = function () {
+			    myChartContainer();
+			    line.resize();
+			};*/
+		}
+
+		//getHistogramChart('#saleHelper1 .histogram');
+		//获取柱状图
+		function getHistogramChart(histogram, xdata, ydata) {
+			if(xdata.length == 0 || ydata.length == 0){
+				$(histogram).html("<div style='text-align: center;height: 100%;line-height: 50;'>暂无数据</div>");
+				return false;
+			}
+				
+			var histogram = echarts.init($(histogram)[0]);
+
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				xAxis: {
+					data: xdata,
+					axisLabel: {
+						inside: true,
+						rotate: 0,
+						textStyle: {
+							color: '#000'
+						},
+						formatter: function(val) {
+							return val.split("").join("\n");
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						show: false
+					},
+					z: 10
+				},
+				yAxis: [{
+					type: 'value'
+				}],
+				grid: {
+					left: '1%',
+					right: '2%',
+					bottom: '2%',
+					top: '5%',
+					containLabel: true
+				},
+				dataZoom: [{
+					type: 'inside'
+				}],
+				series: [
+					{
+						type: 'bar',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#83bff6'
+										},
+										{
+											offset: 0.5,
+											color: '#188df0'
+										},
+										{
+											offset: 1,
+											color: '#188df0'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#2378f7'
+										},
+										{
+											offset: 0.7,
+											color: '#2378f7'
+										},
+										{
+											offset: 1,
+											color: '#83bff6'
+										}
+									]
+								)
+							}
+						},
+						data: ydata
+					}
+				]
+			};
+			histogram.setOption(option);
+			$(window).resize(function() {
+				var dHeight = $(document.body).height();
+				$('#bottom').css('height', dHeight - 174 + 'px');
+				$('#saleHelper1 .histogram').parents('.row').height();
+				$('#saleHelper1 .histogram').css('height', ($('#saleHelper1 .histogram').parents('.row').height() - 100) + 'px');
+				$('#saleHelper1 .histogram').css('height', ($('#saleHelper1 .histogram').parents('.row').height() - 100) + 'px');
+				window.onresize = histogram.resize();
+			})
+			var zoomSize = 6;
+			histogram.on('click', function(params) {
+				//console.log(xdata[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+				histogram.dispatchAction({
+					type: 'dataZoom',
+					startValue: xdata[Math.max(params.dataIndex - zoomSize / 2, 0)],
+					endValue: xdata[Math.min(params.dataIndex + zoomSize / 2, ydata.length - 1)]
+				});
+			});
+		}
+
+		//		getPieChart('#saleHelper .pie');
+		//获取饼图
+		/*function getPieChart(pie) {
+			var legendData = [];
+			var seriesData = [];
+			var seriesName = $('.indexContent .current').text();
+			var currentThIndex = $('.indexContent .current').index();
+			if(pie.indexOf('#saleHelper') != -1) {
+				legendData = ['已完成', '目标', '距离目标'];
+				seriesData = [{
+						value: $('#saleHelper .finished').find('td').eq(currentThIndex).text(),
+						name: '已完成'
+					},
+					{
+						value: $('#saleHelper .goal').find('td').eq(currentThIndex).text(),
+						name: '目标'
+					},
+					{
+						value: $('#saleHelper .rangeTarget').find('td').eq(currentThIndex).text(),
+						name: '距离目标'
+					}
+				];
+			}
+			if(pie.indexOf('#serviceHelper') != -1) {
+				legendData = ['已完成', '未完成'];
+				seriesData = [{
+						value: $('#serviceHelper .finished').find('td').eq(currentThIndex).text(),
+						name: '已完成'
+					},
+					{
+						value: $('#serviceHelper .unfinished').find('td').eq(currentThIndex).text(),
+						name: '未完成'
+					}
+				];
+			}
+			if(pie.indexOf('#financeHelper') != -1) {
+				legendData = ['团队工资', '自用'];
+				seriesData = [{
+					value: 15,
+					name: '团队工资'
+				}, {
+					value: 15,
+					name: '自用'
+				}];
+				seriesName = '财务支出';
+			}
+
+			//饼图
+			var pie = echarts.init($(pie)[0]);
+			var option = {
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+					orient: 'vertical',
+					right: 20,
+					data: legendData
+				},
+				series: [{
+					name: seriesName,
+					type: 'pie',
+					radius: '90%',
+					center: ['50%', '50%'],
+					data: seriesData,
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			};
+			pie.setOption(option);
+		}*/
+	})
+</script>

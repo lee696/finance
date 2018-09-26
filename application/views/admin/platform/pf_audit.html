@@ -1,0 +1,119 @@
+<div class="widget-main">
+	<div class="row">
+		<h3 class="header smaller lighter blue">项目查账</h3>
+		<div class="actions" id="topTool">
+			<div class="portlet">
+				<div class="search">
+					<i class="search-icon"></i>
+					<input type="text" class="search-input" placeholder="搜索...">
+				</div>
+			</div>
+			<button class="btn btn-info btn-sm">搜索</button>			
+			<button class="add  addBtn btn btn-info btn-sm" style="background-color: #009688 !important;">
+                    <i class="fa fa-plus"></i>
+                    添加
+                </button>
+                
+			<!--审批-->
+		</div>
+	</div>
+	<div class="platform-data custom_table">
+		<table id="dynamic-table">
+			<thead>
+				<tr class="thColor">
+					<th data-num="1">查账编号</th>
+					<th data-num="2">公司名称</th>
+					<th data-num="3">订单编号</th>
+					<th data-num="4">状态</th>
+					<th data-num="5">转账日期</th>
+					<th data-num="6">转账金额</th>
+					<th data-num="7">创建人</th>
+					<th data-num="8">创建时间</th>
+					<th data-num="9">备注</th>
+					<th data-num="10">财务确认人</th>
+					<th data-num="11">财务确认时间</th>
+					<th data-num="12">财务备注</th>
+				</tr>
+			</thead>
+			<tbody id="datalist">
+
+			</tbody>
+		</table>
+	</div>
+	<div align="center" style="margin-bottom:10px">
+		<div id="pagination"></div>
+	</div>
+
+	<div class="popup_new" style="display:none">
+		<div class="row">
+			<form class="item_form" role="form">
+				<div class="form_data">
+					<label> 公司名称 </label>
+					<select class="agreement">
+						<option> - - - 请选择 - - - </option>
+					</select>
+					<label> 创建时间 </label>
+					<div class="input-group" style="display: inline-flex; width: 180px;">
+						<input class="date-timepicker1 required" msg="预计成交日期不能为空" data-id="oppo_time" style="height: 30px; width: 150px;">
+						<span class="input-group-addon" style="width:30px;">
+							<i class="fa fa-clock-o bigger-110" style="position:relative;right:3px;"></i>
+						</span>
+					</div>
+				</div>
+				<div class="form_data">
+					<label> 订单编号 </label>
+					<input type="text">
+					<label> 状态 </label>
+					<select>
+						<option>
+							- - - 请选择 - - -
+						</option>
+					</select>
+				</div>
+				<div class="form_data">
+					<label> 转账日期 </label>
+					<div class="input-group" style="display: inline-flex; width: 180px;">
+						<input class="date-timepicker1 required" msg="预计成交日期不能为空" data-id="oppo_time" style="height: 30px; width: 150px;">
+						<span class="input-group-addon" style="width:30px;">
+							<i class="fa fa-clock-o bigger-110" style="position:relative;right:3px;"></i>
+						</span>
+					</div>
+					<label> 转账金额 </label>
+					<input type="text" />
+				</div>
+				<div class="form_data">
+					<label> 创建人 </label>
+					<input type="text" />
+					<label> 备注 </label>
+					<input type="text" />
+				</div>
+			</form>
+			<div class="popup_button">
+				<button class="sure_button">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        保存
+                    </button>
+			</div>
+		</div>
+	</div>
+	{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//分页
+		cs.setPagination('#pagination', 5, 50, 5, getPageList);
+
+		function getPageList(current) {
+			console.log(current);
+		}
+
+		//自定义table
+		cs.custorm_check('#dynamic-table', '#datalist', false);
+
+		$('.add').click(function() {
+			showMark('.popup_new');
+			cs.timeplug();
+		});
+	});
+</script>

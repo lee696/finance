@@ -1,0 +1,719 @@
+<style type="text/css">
+.content{
+	white-space: normal;
+	height: 148px;
+	background-color:#f2f9f9;
+	transition-property: background-color,height;
+	transition-timing-function: linear;
+	transition-duration:0.2s;   
+
+}
+
+.contractType  label{
+	width: 80px !important;
+}
+.contractType  span[field]{
+	min-width: 180px !important;
+	display: inline-block;
+}
+</style>
+
+
+<div class="widget-main">
+	<div class="row">
+		<div>
+			<!--  <h3 class="header smaller lighter blue">日志</h3> -->
+			<div class="actions" id="topTool" style="display: inline-block;width: 100%">
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<select style="width: 180px" pts=3 sear="tkm_plan.user_id" class="advandced-search select2-hidden-accssible" tabindex="-1" aria-hidden="true">
+						<option value="">创建人</option>
+					</select>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<select style="width: 180px" pts=3 sear="tkm_plan.read_id" class="advandced-search select2-hidden-accssible"  tabindex="-1" aria-hidden="true">
+						<option value=""> 审阅人</option>
+					</select>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<button id="search" title="搜索" class="btn btn-info btn-sm">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+				 <div class="col-sx-4" style=" float: left;margin-right: 5px;">
+	                        <button id="heightsearch" title="高级搜索" type="button" class="btn btn-info btn-sm" style="background-color:#00c0ef !important;">
+	                            <i class="fa fa-filter"></i>
+	                        </button>
+	             </div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<button id="flush" title="刷新" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+	                    <i class="fa fa-refresh"></i>
+	                </button>
+				</div>
+				<span contentAuthority="126" style="float: left;margin-left: 1px">
+							<button type="button" id="add" title="添加" class="btn btn-info btn-sm" style="background-color: #32CD32 !important;">
+		                        <i class="fa fa-plus"></i>
+
+		                    </button>
+				</span>
+				<div id="heightsearch1" class="col-sx-12" style="position: absolute;margin-top: 65px; background: #fff; z-index: 1041;overflow: auto; padding: 10px 0px; display: none;">
+					<div class="row" id="SearchCon">
+						
+					</div>
+	
+				</div>
+				<!--审批-->
+			</div>
+			<div style="margin-top: 0px;">
+
+				<div class="widget-box transparent" id="recent-box">
+					<div style="padding-left:0;">
+						<div class="widget-toolbar no-border">
+							<ul class="nav nav-tabs" id="recent-tab">
+								<li class="active">
+									<a data-toggle="tab" data-type="1" href="#task-tab">日计划</a>
+								</li>
+
+								<li>
+									<a data-toggle="tab" data-type="2" href="#member-tab">周计划</a>
+								</li>
+								<li>
+									<a data-toggle="tab" data-type="3" href="#month-tab">月计划</a>
+								</li>
+							</ul>
+
+						</div>
+						<!--<span contentAuthority="126" style="float: right;">-->
+							<!--<button type="button" id="add" title="添加" class="btn btn-info btn-sm" style="background-color: #009688 !important;">-->
+		                        <!--<i class="fa fa-plus"></i>-->
+
+		                    <!--</button>-->
+						<!--</span>-->
+					</div>
+					<div class="widget-body">
+						<div class="tab-content" style="margin-top:8px;">
+							<div id="task-tab" class="tab-pane active custom_table">
+								<table id="dynamic-table">
+									<thead>
+
+										<tr class="thColor">
+											<th >操作</th>
+											<th data-num="1">创建人</th>
+											<th data-num="2">工作总结</th>
+											<th data-num="3" class="hidden-480">工作计划</th>
+											<th data-num="4" class="hidden-480">心得体会</th>
+											<th data-num="5" class="hidden-480">创建时间</th>
+											<th data-num="6" class="hidden-480">审阅人</th>
+											<th data-num="7" class="hidden-480">审阅时间</th>
+											<th data-num="8" class="hidden-480">审阅批注</th>
+										</tr>
+									</thead>
+									<tbody id="dataList">
+									</tbody>
+								</table>
+
+							</div>
+							<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+								<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+								<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+								<div id="pageBar" class="pagination"></div>
+								<div align="right" style="float: right;  width: 10%;">
+									<select style="width: 100px;" id="changePageNum">
+										<option value="10">每页10条</option>
+										<option value="20">每页20条</option>
+										<option value="50">每页50条</option>
+										<option value="100">每页100条</option>
+										<option value="200">每页200条</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- /.widget-body -->
+
+					<div id="addPage" style="display: none">
+						<div class="row">
+							<div class="col-sx-12">
+								<div class="col-xs-12 col-sm-12">
+									<div class="widget-box">										
+											<div class="widget-main" id="addcontent">
+												<div class="btn-group btn-corner pull-center planChoice" style="display: block; height: 10px;">
+													<div class="planBtn" type="1" style="cursor:pointer;padding: 0; margin-bottom: 20px;">日计划</div>
+													<div class="planBtn" type="2" style="cursor: pointer;padding: 0; margin-bottom: 20px;">周计划</div>
+													<div class="planBtn" type="3" style="cursor: pointer;padding: 0; margin-bottom: 20px;">月计划</div>
+												</div>
+												<div class="row">
+													<div class="row add_plan">
+														<div>
+															<div style="margin:10px auto;">工作总结：</div>     
+															<textarea class="form-control curday" addfield="summary" id="curday" placeholder="请填写今日工作总结" style="height: 100px; max-width: 100%;max-height: 200px;"></textarea>
+														</div>
+														<div>
+															<div style="margin:10px auto;">工作计划：</div>
+															<textarea class="form-control tomday" addfield="plan" id="tomday" placeholder="请填写明日工作计划" style="height: 100px;max-height:200px; max-width: 100%;"></textarea>
+														</div>
+														<div>
+															<div style="margin:10px auto;">心得体会：</div>
+															<textarea class="form-control workData" addfield="heart" id="workData" placeholder="请填写工作心得体会" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+													</div>
+													<div class="row add_plan" style="display: none;">
+														<div>
+															<div style="margin-top:10px;">工作总结：</div>    
+															<textarea class="form-control curday" addfield="summary" id="curday" placeholder="请填写本周工作总结" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+														<hr/>
+														<div>
+															<div style="margin:10px auto;">工作计划：</div>
+															<textarea class="form-control tomday" addfield="plan" id="tomday" placeholder="请填写下周工作计划" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+														<div>
+															<div style="margin:10px auto;">心得体会：</div>
+															<textarea class="form-control workData" addfield="heart" id="workData" placeholder="请填写工作心得体会" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+													</div>
+													<div class="row add_plan" style="display: none;">
+														<div>
+															<div style="margin-top:10px;">工作总结：</div>    
+															<textarea class="form-control curday" addfield="summary" id="curday" placeholder="请填写本月工作总结" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+														<div>
+															<div style="margin:10px auto;">工作计划：</div>
+															<textarea class="form-control tomday" addfield="plan" id="tomday" placeholder="请填写下月工作计划" style="height: 100px; max-width: 100%;max-height:200px;"></textarea>
+														</div>
+														<div>
+															<div style="margin:10px auto;">心得体会：</div>
+															<textarea class="form-control workData" addfield="heart" id="workData" placeholder="请填写工作心得体会" cols="10" style="height: 100px; max-width:100%;max-height:200px;"></textarea>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sx-4 " style="margin-top: -10px;text-align: left;">
+												<div style="">
+													<label style="width: 50px;">审阅人</label>
+													<select  id="read_id" style="margin: 12px!important;width: 180px" class="advandced-search select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+														<option value="">  请选择审阅人  </option>
+													</select>
+												</div>
+												
+											</div>
+											<div style="text-align: center;margin-top: 20px;">
+		 											<button type="button" id="release" class="btn btn-info btn-sm">
+	                                                    发布
+	                                                </button>
+                                                </div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.widget-box -->
+			</div>
+			
+			<div class="row" id="template2" style="display:none;">
+				<div class="contractType" style="">
+					<div style="margin-top:15px;">
+						<label>创建人: </label>
+						<span field="tkm_plan.user_id"></span>
+						<label>工作总结： </label>
+						<span field="tkm_plan.summary"></span>
+					</div>
+					<div style="margin-top:15px;">
+						<label>工作计划： </label>
+						<span field="tkm_plan.plan"></span>
+						<label>心得体会： </label>
+						<span field="tkm_plan.heart"></span>
+					</div>
+					<div style="margin-top:15px;">
+						<label> 创建时间： </label>
+						<span field="tkm_plan.create_time"></span>
+						<label> 审阅人： </label>
+						<span field="tkm_plan.read_id"></span>
+					</div>
+					<div style="margin-top:15px;">
+						<label> 审阅时间: </label>
+						<span field="tkm_plan.read_time"></span>
+						<label> 审阅批注： </label>
+						<span field="tkm_plan.remark"></span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="label_popup" id="feedBack" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+				<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;
+			    box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+					<div style="padding:15px;border-bottom:1px solid #ddd;">
+						<span style="display: inline-block;">审阅批注</span>
+						<a href="javascript:;" class="close_label" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+					</div>
+					<div style="padding: 10px 50px;">
+						<input type="text" style="margin:auto;width:300px" id="labelName" />
+						<!--<hr>-->
+					</div>
+					<div style="padding:15px;text-align:right;">
+						<button class="close_label">关闭</button>
+						<button class="hold">保存</button>
+					</div>
+				</div>
+			</div>
+			<!-- /.col -->
+		</div>
+	</div>
+	{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script>
+	jQuery(function() {
+		cs.getNodes([126]);
+		var order ='tkm_plan.id desc';
+		var page_size = 10;
+		var type = 1; //初始化类型
+		var employees = {};//所有员工
+		var employees_2 = [];
+		var filter = "";
+ 		//获取所有员工
+        ykp.doAjax({
+        	async:false,
+            url:'/api/api_employees/f7',
+            method:'post',
+            data:{
+                select:'bmm_employees.id,bmm_employees.name'
+            },
+            success:function(res){
+                var data = res.data;
+                for(var i in data) {
+                	 if(data[i]['name']) {
+                	 	if(JSON.parse(ykp.getCookie('userinfo')).id != data[i]['id']) {
+                	 		employees_2.push(new Option(data[i]['name'],data[i]['id']));
+                	 	}
+	                    employees[data[i]['id']] =data[i]['name'] ;
+	                     $('.advandced-search').append(new Option(data[i]['name'],data[i]['id']));
+//	                      $('.advandced-search').select2();
+	                }
+                }
+            }
+        });
+
+        getSearch();
+		function getSearch() {
+			
+			var list = [
+				{name:"创建人",search:"tkm_plan.user_id",type:"select",url:"/api/api_employees/f7",key:"people"},
+				{name:"工作总结",search:"tkm_plan.summary",type:"text"},
+				{name:"工作计划",search:"tkm_plan.plan",type:"text"},
+				{name:"心得体会",search:"tkm_plan.heart",type:"text",},
+				{name:"创建时间",search:"tkm_plan.create_time",type:"time"},
+				{name:"审阅人",search:"tkm_plan.read_id",type:"select",url:"/api/api_employees/f7",key:"people"},
+				{name:"审阅时间",search:"tkm_plan.read_time",type:"time"},
+				{name:"审阅批注",search:"tkm_plan.remark",type:"text"}
+			];
+			
+			
+			cs.getSearch({
+				list:list,
+				el:"#heightsearch",
+				el1:"#heightsearch1"
+			},dohSearch);
+			function dohSearch() {
+				var data = {
+					url: '/api/api_plan/index_plan',
+					method: 'post',
+					data: {
+						limit:page_size,
+						order:order,
+						filter: filter
+					}
+				}
+                cs.hSearch('.search1', data, 'filter', false, function(res, _filter) {
+					filter = _filter;
+					$('.in').removeClass('modal-backdrop');
+					$("#heightsearch1").slideUp();
+					$("#heightsearch").removeClass('active').css('z-index', '');
+					if(res.data.items == "") {
+						setTimeout(function(){
+	                        ykp.prompt('暂无数据！');
+	                    },1000);
+						$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+						return false;
+					}
+					 addList(res);
+				},'tkm_plan.is_del = 0 and type ='+ type )
+			}					
+		}
+		
+		
+		search();
+		function search() {
+			var data = {
+				url: '/api/api_plan/index_plan',
+				method: 'post',
+				data: {
+					type: 1,
+					limit: page_size,
+					order:order,
+				},
+				type:'1' 
+			}
+			
+			cs.doSearch('#search', data, 'filter', false, function(res,_filter) {
+				filter = _filter;
+				if(res.data.items == "") {
+					setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+					$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+				} else {
+					 addList(res);
+				}
+			},'tkm_plan.is_del = 0');
+		}
+		
+		
+		$('#flush').click(function(){
+			$('[sear="tkm_plan.user_id"]').val('').trigger('change');
+			$('[sear="tkm_plan.read_id"]').val('').trigger('change');
+			ykp.setCookie("filter", "");
+			ykp.setCookie("where", "");
+			filter = '';
+			getList(1, 1);
+		})
+		
+		
+		getList(1, 1, 1);
+
+		//通用排序
+        cs.general_sort({
+            url: '/api/api_plan/index_plan',
+            method: 'post',
+            data: {
+                filter:'',
+                limit: page_size,
+                type:1
+            },
+            pageBar: {
+                id: '#pageBar'
+            },
+            initOrder:'khm_customer.id',
+            defaultOrder: order,
+            contentId: "#dataList",
+            params:[{
+                id: "#dynamic-table",
+                field:["","tkm_plan.user_id","tkm_plan.summary","tkm_plan.plan","tkm_plan.heart",
+                    "tkm_plan.create_time","tkm_plan.read_id","tkm_plan.read_time","tkm_plan.remark"
+                ]
+            }]
+        }, function(res, _sort_role) {
+            sort_role = _sort_role;
+            addList(res);
+        });
+
+		function getList(current, type, isInit = 0) {
+			if(isInit){
+				ykp.setCookie("filter", "");
+				ykp.setCookie("where", "");
+			}
+			ykp.list({
+				url: '/api/api_plan/index_plan',
+				method: 'post',
+				data: {
+					limit: page_size,
+					filter: 'type = ' + type + ' and is_del = 0',
+					order: order
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						 setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+						$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+						return false;
+					}
+					addList(res);
+				}
+			});
+		}
+
+		//自定义列表
+        cs.custorm_check('#dynamic-table', '#dataList', false);
+		function addList(res) {
+            var ths = $('.thColor th');
+            var styles = [];
+			var content = [];
+			var data = res.data.items;
+			var user =JSON.parse(ykp.getCookie('userinfo'));
+
+            for(var i = 0; i < ths.length; i++) {
+                styles.push(ths.eq(i).css('display'));
+            }
+            for(var i in data) {
+				content.push(
+					`<tr data-id="${data[i]['tkm_plan.id']}" read_id="${data[i]['tkm_plan.read_id']}" data-type="${data[i]['tkm_plan.type']}">
+						<td>
+						<label class="pos-rel">
+							<a href="#"> <span style="cursor: pointer" title="详情" class="btOrange _edit"><i class="fa fa-info"></i></span></a>
+							<a href="#" class="edit btBlue" contentAuthority="127" title="编辑" style="color:#fff !important;display:${user.id==data[i]['tkm_plan.user_id']?'':'none'};"><i class="fa fa-pencil-square-o"></i></a>
+							<a href="#" class="del btRed" contentAuthority="128" title="删除" style="color:#fff !important;display:${user.id==data[i]['tkm_plan.user_id']?'':'none'};"><i class="fa fa-trash-o"></i></a>
+							<a href="#" class="sy ${data[i]['tkm_plan.status'] == 2 ? 'btRed':'btGreen'}" data-status = "2" title="审阅" style="display: ${user.id != data[i]['tkm_plan.read_id'] ?'none': (data[i]['tkm_plan.read_time'] != 0 && data[i]['tkm_plan.status'] == 1 ? 'none' : '')};"><i class="fa fa-envelope-o"></i></a>
+						</label>
+						</td>
+                        <td data-num="1" style="display:${styles[1]}">
+                         <a href="#">${employees[data[i]['tkm_plan.user_id']] || ""}</a>
+                        </td>
+                        <td data-num="2" class="center contents"  title="${data[i]['tkm_plan.summary']}"style="display:${styles[2]};max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">
+                       		${data[i]['tkm_plan.summary']}
+						</td>
+                        <td data-num="3" class="center contents" title="${data[i]['tkm_plan.plan']}" style="display:${styles[3]};max-width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">${data[i]['tkm_plan.plan']}</td>
+
+                        <td data-num="4" class="center contents" title="${data[i]['tkm_plan.heart']}" style="display:${styles[4]};max-width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                            <span class="lbl">${data[i]['tkm_plan.heart']}</span>
+                        </td>
+                        <td data-num="5" class="center" style="display:${styles[5]}">
+                            <span class="lbl">${data[i]['tkm_plan.create_time'] != '0' ? cs.getNowTime(data[i]['tkm_plan.create_time'],true) : ''}</span>
+                        </td>
+                         <td data-num="6" class="center contents" title="${data[i]['tkm_plan.read_id']}" style="display:${styles[6]};max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">
+                            ${data[i]['readInfo']['name']}
+                        </td>
+                         <td data-num="7" class="center contents" title="${data[i]['tkm_plan.read_time']}" style="display:${styles[7]};max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">
+                            ${data[i]['tkm_plan.read_time'] != '0' ? cs.getNowTime(data[i]['tkm_plan.read_time'],true) : ''}
+                        </td>
+                        <td data-num="8" class="center" style="display:${styles[8]}">
+                            ${data[i]['tkm_plan.remark']}
+                        </td>`
+				);
+			}
+
+			$('#dataList').html(content.join(''));
+			$('#dataList').find('.contents').mouseover(function(){
+				$(this).addClass('.content');
+			})
+			cs.getNodes([127,128]);
+
+			//点击审阅
+			$('.sy').unbind('click').click(function(){
+				var id = $(this).parents('tr').attr('data-id');
+				$('#labelName').val('');
+				$('#feedBack').fadeIn().attr('data-id',id);
+			})
+			
+			
+			$('._edit').click(function(){
+				showMark('#template2');
+				$('#showBox .title').text('日志详情');
+				var id = $(this).parents('tr').attr('data-id');
+				ykp.doAjax({
+					url: '/api/api_plan/index_plan',
+					method: 'post',
+					data: {
+						filter:"tkm_plan.id = "+id
+					},
+					success: function(res) {
+						var data = res.data.items[0];
+						$('#templateCon .contractType').find('[field]').each(function(i, e) {
+							if($(this).attr('field') == 'tkm_plan.read_time' || $(this).attr('field') == 'tkm_plan.create_time') {
+								$(this).text(data[$(this).attr('field')] != '0' ? cs.getNowTime(data[$(this).attr('field')]) : '');
+							}else if($(this).attr('field') == 'tkm_plan.user_id'){
+								$(this).text(employees[data['tkm_plan.user_id']]);
+							}else if($(this).attr('field') == 'tkm_plan.read_id'){
+								$(this).text(data['readInfo']['name']);
+							}else{
+								$(this).text(data[$(this).attr('field')]);
+							}
+							$(this).css('min-width','180px');
+							
+						})
+					}
+				});
+//				field
+				
+			})
+
+			//关闭审阅
+			$('.close_label').unbind('click').click(function(){
+				$('#feedBack').fadeOut();
+			})
+			//保存审阅
+			$('.hold').unbind('click').click(function(){
+				var remark = $('#labelName').val().trim();
+				var id = $('#feedBack').attr('data-id');
+//				if (remark == '') {
+//					ykp.prompt('批注内容不能为空！');
+//					$('#labelName').val('');
+//					return;
+//				}
+				ykp.doAjax({
+					url: '/api/api_plan/add_remark',
+					method: 'post',
+					data: {
+						id: id,
+						remark:remark
+					},
+					success: function(res) {
+						ykp.prompt('审阅成功!');
+						$('#feedBack').fadeOut();
+						getList(1,type);
+					}
+				})
+			})
+
+			$('.del').click(function() {
+				var id = $(this).parents('tr').attr('data-id');
+                layui.use('layer', function() {
+                    var layer = layui.layer;
+                    layer.confirm('确认删除吗？', function (index) {
+                        ykp.doAjax({
+                            url: '/api/api_plan/del_plan',
+                            method: 'post',
+                            data: {
+                                id: id
+                            },
+                            success: function (res) {
+                                ykp.prompt('删除成功!');
+                                getList(1, type);
+                                layer.closeAll();
+                            }
+                        })
+                    })
+                })
+			})
+
+			$('.edit').click(function() {
+				var data = [];
+				var read_id = $(this).parents('tr').attr('read_id');
+				$(this).parents('td').siblings().each(function(i) {
+					if(i != 4 && i != 0) {
+						data.push($(this).text().trim());
+					}
+				})
+				var id = $(this).parents('tr').attr('data-id');
+				var type = $(this).parents('tr').attr('data-type');
+				showMark('#addPage');
+				$('#templateCon .planChoice').hide();
+				$('#templateCon #remark').parent().show();
+				$('#showBox .title').text('编辑总结');
+				$('#templateCon .advandced-search').select2({allowClear:true});
+				/*for(var i in employees_2){
+					$('#templateCon .advandced-search').append(employees_2[i]);
+				}*/
+				$('#templateCon .advandced-search').val(read_id).trigger('change');
+				$('#templateBox .btn-group .planBtn').eq(type-1).addClass('btnActive').siblings().removeClass('btnActive');
+				$('#templateCon .add_plan').eq(type-1).show().not(0).siblings().hide();
+				$('#templateCon .select2-container').eq(1).remove();
+				var curDay = $(' #templateCon .add_plan').eq(type-1).find('.curday').val(data[0]);
+				var tomday = $(' #templateCon .add_plan').eq(type-1).find('.tomday').val(data[1]);
+				var workData =$(' #templateCon .add_plan').eq(type-1).find('.workData').val(data[2]);
+
+				$('#templateBox .btn-group .planBtn').click(function() {
+					var index = $(this).index();
+					$(this).addClass('btnActive').siblings().removeClass('btnActive');
+					$('#templateCon .add_plan').eq(index).show().not(0).siblings().hide();
+					submit(read_id,true,id);
+				})
+				submit(read_id,true,id);
+			})
+		}
+
+		$('#changePageNum').change(function() {
+			page_size = $(this).val();
+			ykp.setCookie('page_size', page_size);
+			getList(1, type);
+		})
+
+		$('#recent-tab li').find('a').click(function() {
+			var nowType = $(this).attr('data-type');
+			type = nowType;
+			getList(1, type)
+            getSearch();
+		})
+
+		$('#add').click(function() {
+			showMark('#addPage');
+			var _index = $('#recent-tab').find('.active').index();
+			$('#templateCon .advandced-search').select2({allowClear:true});
+
+           // console.log(employees_2);
+           /* for(var i in employees_2){
+				$('#templateCon .advandced-search').append(employees_2[i]);
+			}*/
+			var userinfo = JSON.parse(ykp.getCookie('userinfo'));
+			if(userinfo.up_user != '0'){
+				$('#templateCon .advandced-search').val(userinfo.up_user).trigger('change');
+			}
+			$('#templateCon .select2-container').eq(1).remove();
+
+			$('#showBox .title').text('添加总结');
+			$('#templateCon .add_plan').eq(_index).show().not(0).siblings().hide();
+			$('#templateCon .planChoice').find('.planBtn').eq(_index).siblings().remove();
+//			$('#templateBox .btn-group .planBtn').click(function() {
+//				var index = $(this).index();
+//				$(this).addClass('btnActive').siblings().removeClass('btnActive');
+//				$('#templateCon .add_plan').eq(index).show().not(0).siblings().hide();
+//			})
+			submit();
+		})
+		function submit(read_id,status,id) {
+			$('#templateBox #release').click(function() {
+				var Type = parseInt($('#templateBox .planBtn').attr('type'));
+				var curDay = '';
+				var tomday = '';
+				var workData ='';
+				if(Type==1){
+					curDay = $(' #templateBox #curday').eq(0).val().trim();
+					tomday = $(' #templateBox #tomday').eq(0).val().trim();
+					workData =$(' #templateBox #workData').eq(0).val().trim();
+				}else if(Type==2){
+                    curDay = $(' #templateBox #curday').eq(1).val().trim();
+                    tomday = $(' #templateBox #tomday').eq(1).val().trim();
+                    workData =$(' #templateBox #workData').eq(1).val().trim();
+				}else if(Type==3){
+                    curDay = $(' #templateBox #curday').eq(2).val().trim();
+                    tomday = $(' #templateBox #tomday').eq(2).val().trim();
+                    workData =$(' #templateBox #workData').eq(2).val().trim();
+                }
+                read_id =$(' #templateBox #read_id').val().trim();
+                if(!curDay) {
+					ykp.prompt('请填工作总结');
+					return false;
+				} else if(!tomday) {
+					ykp.prompt('请填写工作计划');
+					return false;
+				} else if(!workData) {
+					ykp.prompt('请填写工作心得');
+					return false;
+				}else if(!read_id) {
+                    ykp.prompt('请选择审阅人');
+                    return false;
+                }
+				var data = {
+					type:Type,
+					summary:curDay,
+					plan:tomday,
+					heart:workData,
+					read_id:read_id
+				}
+				if(status) {
+					data.id = id
+				}else{
+					data.read_id = $('#templateCon .advandced-search').val();
+				}
+                console.log(data);
+                ykp.doAjax({
+                    url:'/api/api_plan/add_plan',
+                    method:'post',
+                    data:data,
+                    success:function(res) {
+                        ykp.prompt('编写成功!');
+                        cs.close();
+                        getList(1,Type);
+                    }
+                })
+
+			})
+		}
+	})
+</script>

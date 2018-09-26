@@ -1,0 +1,1541 @@
+<style>
+	#templateCon label {
+		width: 93px;}
+	#templateCon [field] {
+		display: inline-block;
+		min-width: 150px;
+	}
+	#heightsearch1 input {
+		width: 180px;
+	}
+</style>
+<div class=" widget-main">
+	<div class="row">
+		<div class="col-lg-12">
+			<!-- <h3 class="header smaller lighter blue">线索</h3> -->
+			<div class="row" style="margin-top: 20px;" id="topTool">
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<input type="text" pts="0" sear="khm_customer.name" placeholder="企业名称" />
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<select style="margin: 12px !important;width: 180px" sear="khm_customer_clue.user_id" pts="3" class="custom advandced-search select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+						<option value="">负责人</option>
+					</select>
+					<!-- <input type="text" pts="1"   placeholder="负责人"  sear="staff"> -->
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<button type="button" id="search" title="搜索" class="btn btn-info btn-sm">
+                        <i class="fa fa-search"></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<button id="heightsearch" title="高级搜索" type="button" class="btn btn-info btn-sm" style="background-color: #00c0ef !important;">
+	                    <i class="fa fa-filter"></i>
+	                </button>
+				</div>
+				<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+					<button id="flush" title="刷新" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+	                    <i class="fa fa-refresh"></i>
+	                </button>
+				</div>
+				<div class="col-sx-4" contentAuthority="117" style=" float: left;margin-right: 5px;">
+					<button type="button" id="addItem" title="添加" style="background:#32CD32 !important;border-color: #32CD32!important;" class="btn addBtn btn-info btn-sm position-relative">
+                        <i class="fa fa-plus" ></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" id="expbt" style="display: none; float: left; margin-right: 5px;">
+		             <button type="button"  title="导出" style="outline: none;background-color: #1E9FFF !important; border-color: #1E9FFF;" class="exportfile moveToClue btn addBtn btn-info btn-sm position-relative">
+		                 <i class="fa fa-sign-out"></i>
+		             </button>
+		        </div>
+				<div  class="col-sx-4" style=" float: left;margin-right: 5px; margin-bottom:5px;">
+					<div id="filterBtns" style="display:inline-block;width:260px;height: 36px">
+						<a href="javascript:void(0);" class="myFilter" style="width:33.3%;line-height:32px;background: #E6E6E6;" data-kind="0"> 查看全部</a>
+						<a href="javascript:void(0);" class="myFilter" style="width:33.3%;line-height:32px" data-kind="1"> 我负责的</a>
+						<a href="javascript:void(0);" class="myFilter" style="width:33.3%;line-height:32px" data-kind="3"> 我的下属</a>
+					</div>
+				</div>
+				<div id="heightsearch1" class="col-sx-12" style="margin-top:30px;position: absolute; background: #fff; z-index: 1041; padding: 20px; display: none;">
+
+					<div class="row">
+
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>企业名称</label>
+							<select>
+								<option> = </option>
+							</select>
+							<input type="text" gjs=0 sear="khm_customer.name" />
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>负责人</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select style="margin: 12px !important;width: 180px" sear="khm_customer_clue.user_id" gjs=3 class="custom advandced-search select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>分组</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select style="margin: 12px !important;width: 180px" sear="khm_customer_clue.cate_id  " gjs=3 class="cart_id advandced-search select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>标签</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select style="margin: 12px !important;width: 180px" sear="khm_customer.label_id" gjs=2 class="label_list advandced-search select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<!--<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>来源</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select sear="khm_customer.source" gjs=0 data-type="gj" style="width:180px;">
+								<option value="">  请选择 </option>
+								<option value="'转介绍'">转介绍</option>
+								<option value="'电话咨询'">电话咨询</option>
+								<option value="'线上注册'">线上注册</option>
+								<option value="'客户上门'">客户上门</option>
+								<option value="'陌生拜访'">陌生拜访</option>
+								<option value="'公司资源'">公司资源</option>
+								<option value="'个人资源'">个人资源</option>
+								<option value="'广告宣传'">广告宣传</option>
+								<option value="'电话营销' ">电话营销</option>
+							</select>
+							&lt;!&ndash; <input type="text" gjs=0 sear="khm_customer.source"> &ndash;&gt;
+						</div>-->
+
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>销售阶段</label>
+							<select>
+								<option> = </option>
+							</select>
+							<select gjs=0 sear="khm_customer_clue.rank" data-type="gj" style="width:180px;">
+								<option value=""> 请选择 </option>
+								<option value="1">新入库</option>
+								<option value="2">初步沟通</option>
+								<option value="3">判断分析</option>
+								<option value="4">上门面谈</option>
+								<option value="5">合同签订</option>
+							</select>
+						</div>
+
+						<!--<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+
+							<label>最后跟进时间</label>
+							<select>
+								<option> = </option>
+								<option> > </option>
+								<option> &lt; </option>
+							</select>
+							<div class="input-group"  style="display: inline-flex; width: 180px;">
+							<span class="input-group-addon">
+							<i class="fa fa-calendar bigger-110"></i>
+							</span>
+							<input class="form-control" type="text"  data-status="rangtime" gjs=0 sear="last_time" name="date-range-picker" id="id-date-range-picker-1" />
+						</div>
+						</div>-->
+						<div class="col-sx-4" style=" float: left; margin-bottom:5px;">
+							<label>下次跟进时间</label>
+							<select>
+								<option> = </option>
+								<option> > </option>
+								<option> &lt; </option>
+							</select>
+							<div class="input-group"  style="display: inline-flex; width: 180px;">
+							<span class="input-group-addon">
+							<i class="fa fa-calendar bigger-110"></i>
+							</span>
+							<input class="form-control" type="text"  data-status="rangtime" gjs=0 sear="khm_customer_clue.next_time" name="date-range-picker" id="id-date-range-picker-1" />
+						</div>
+						</div>
+						<div class="col-sx-4" style="clear:both;padding-top:10px;text-align:center;">
+							<button type="button" id="search1" class="search1 btn btn-info btn-sm" style="width:180px;">
+	                        查询
+	                    </button>
+							<button type="button" id="rest" class=" btn btn-info btn-sm" style="width:180px;">
+								重置
+							</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="custom_table">
+				<table id="dynamic-table">
+					<thead>
+						<tr class="thColor">
+							<th class="hidden-480 center">操作</th>
+							<th data-num="1">企业名称</th>
+							<th data-num="2">成立日期</th>
+							<th data-num="3">联系人</th>
+							<th data-num="4" class="hidden-480">销售阶段</th>
+							<th data-num="5">客户分组</th>
+							<th data-num="6" class="hidden-480">客户标签</th>
+							<th data-num="7" class="hidden-480">负责人</th>
+							<th data-num="8" class="hidden-480">协作人</th>
+							<th data-num="9" class="hidden-480">跟进次数</th>
+							<th data-num="10" class="hidden-480">最后跟进时间</th>
+							<th data-num="11" class="hidden-480">未跟进天数</th>
+							<th data-num="12" class="hidden-480">下次跟进时间</th>
+							<th data-num="13" class="hidden-480">逾期</th>
+						</tr>
+					</thead>
+
+					<tbody id="dynamic-table_data">
+
+					</tbody>
+				</table>
+			</div>
+			<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+				<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+				<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+				<div id="pageBar" class="pagination"></div>
+				<div align="right" style="float: right;  width: 10%;">
+					<select style="width: 100px;" id="changePageNum">
+						<option value="10">每页10条</option>
+						<option value="20">每页20条</option>
+						<option value="50">每页50条</option>
+						<option value="100">每页100条</option>
+						<option value="200">每页200条</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="template1" style="display: none;">
+			<div style="margin-top:15px">
+				<label>客户：</label>
+				<span field="khm_customer.name"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label>客户分组： </label>
+				<span field="khm_customer_clue.cate_id"></span>
+				<label style="margin-left:15px;">客戶标签：</label>
+				<span field="label_name"></span>
+			</div>
+			<div style="margin-top:15px;position: relative;padding-left: 99px;">
+				<label style="position: absolute;top:0px;left: 0;">联系人： </label>
+				<span style="width: 446px" field="linkman"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label>销售阶段：</label>
+				<span field="khm_customer_clue.rank"></span>
+				<label style="margin-left:15px;">负责人：</label>
+				<span field="user_name"></span>
+			</div>
+			<div style="margin-top:15px;position: relative;padding-left: 99px;">
+				<label style="position: absolute;top:0px;left: 0;">协作人： </label>
+				<span style="width: 446px" field="khm_customer_clue.team_id"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label> 成立日期：</label>
+				<span field="khm_customer.stablish_time"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label> 跟进次数：</label>
+				<span field="visit_num"></span>
+				<label style="margin-left:15px;">最后跟进时间：</label>
+				<span field="last_time"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label> 未跟进天数：</label>
+				<span field="">暂无字段</span>
+				<label style="margin-left:15px;">下次跟进时间：</label>
+				<span field="khm_customer_clue.next_time"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label>  逾期：</label>
+				<span field="yuqi"></span>
+				<label style="margin-left:15px;"> 创建人：</label>
+				<span field="khm_customer_clue.user_id"></span>
+			</div>
+			<div style="margin-top:15px">
+				<label>创建时间：</label>
+				<span field="create_time"></span>
+				
+			</div>
+		</div>
+
+		<div class="row" id="template" style="display:none;">
+			<div>
+				<div class="widget-box">
+					<!--<div style="margin-top:15px">
+						<label>公海类型：</label>
+						<select addfield="customer_type" class="select2-hidden-accessible" id="type" style="width: 180px;">
+							<option value="">全部类型</option>
+						</select>
+						&lt;!&ndash;<input type="text" addfield="customer_id">&ndash;&gt;
+					</div>-->
+					<div style="margin-top: 15px">
+
+						<label>客户：</label>
+						<select addfield="customer_id" id="people" style="width: 180px;">
+							<option value="">请选择</option>
+						</select>
+						<!--<input type="text" addfield="customer_id">-->
+
+					</div>
+					<div style="margin-top:15px">
+						<label>客户分组： </label>
+						<select style="width: 180px;" addfield="cate_id" class="cusType select2-hidden-accessible" tabindex="-1" id="label_cat" aria-hidden="true">
+							<option value="">请选择客户分组</option>
+						</select>
+						<button id="addCusCate" style="line-height:normal;height:30px;top:0;" class="btn btn-info btn-sm">添加</button>
+						<button id="delCusCate" class="btn  btn-sm" style="line-height:normal;height:30px;top:0; background: #FF5722 !important;">删除</button>
+					</div>
+					<!--<div style="margin-top:15px">
+						<label>标签：</label>
+						&lt;!&ndash;<input type="text" addfield="phone">&ndash;&gt;
+						<select addfield="label_id" id="label_group" style="width:calc(100% - 65px);">
+						</select>
+					</div>-->
+					<div style="margin-top:15px">
+
+						<label>负责人：</label>
+						<select addfield="user_id" id="employees_group" style="width: 180px;">
+
+						</select>
+						<label>销售阶段：</label>
+						<select addfield="rank" style="width: 180px;">
+							<option value=""> 请选择 </option>
+							<option value="1" selected >新入库</option>
+							<option value="2">初步沟通</option>
+							<option value="3">判断分析</option>
+							<option value="4">上门面谈</option>
+							<option value="5">合同</option>
+						</select>
+						<!-- <label style="margin-left:15px;">客户来源：</label>
+							<select type="text" addfield="source" style="width: 180px;">
+								<option value=""> 请选择 </option>
+                                <option value="转介绍">转介绍</option>
+                                <option>电话咨询</option>
+                                <option>线上注册</option>
+                                <option>客户上门</option>
+                                <option>陌生拜访</option>
+                                <option>公司资源</option>
+                                <option>个人资源</option>
+                                <option>广告宣传</option>
+                                <option>电话营销</option>
+							</select> -->
+					</div>
+					<div style="margin-top:15px;">
+						<label>下次跟进时间：</label>
+						<div class="input-group" style="display: inline-flex; width: 180px;">
+							<input class="date-timepicker1 required" addfield="next_time" style="height: 30px; width: 150px;padding-left:5px;">
+							<span class="input-group-addon" style="width:30px;height:30px;">
+                   			 <i class="fa fa-clock-o bigger-110" style="position:relative;right:3px;"></i>
+                			</span>
+						</div>
+					</div>
+					 <div style="margin-top:15px;">
+						<label>协作人：</label>
+						 <select multiple="" addfield="team_id" class="teamperson select2 select2-hidden-accessible" data-placeholder="请选择" style="width: 437px;" tabindex="-1" aria-hidden="true"></select>
+					</div>
+					<div style="text-align:center;margin-top:15px;">
+						<span class="msg" style="margin-left:calc(50% - 49px);float:left;line-height:34px;display:none;color:red;"></span>
+						<button class="sure_button add">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            保存
+                        </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="cus_cate" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+			<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd; box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+				<div style="padding:15px;border-bottom:1px solid #ddd;">
+					<span style="display: inline-block;">添加客户分组</span>
+					<a href="javascript:;" class="close_label" style="float:right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+				</div>
+				<div>
+				</div>
+				<div style="padding: 10px 50px;">
+					<label> 分组名称： </label>
+					<input class="required" style="height:28px;padding:5px;" id="catename">
+					<!-- <input width="200px" style="margin: auto;" id="efile" /> -->
+					<!--<hr>-->
+				</div>
+				<div style="padding:15px;text-align:right;">
+					<button class="btn btn-info  submitCate" style="padding: 6px; border-radius: 0px;">保存</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="template2" style="display:none;">
+			<div>
+				<div class="widget-box">
+
+					<div style="margin-top:15px;">
+						<label>客户：</label>
+						<span style="display: inline-block;" class="customer_name"></span>
+					</div>
+
+					<div style="margin-top:15px">
+						<label>客户分组： </label>
+						<select style="width: 180px" addfield="cate_id" class="cusType select2-hidden-accessible" tabindex="-1" id="label_cat" aria-hidden="true">
+							<option value="">请选择客户分组</option>
+						</select>
+						<button id="addCusCate" class="btn btn-info btn-sm" style="line-height:normal;height:30px;top:0;">添加</button>
+						<button id="delCusCate" class="btn  btn-sm" style="line-height:normal;height:30px;top:0; background: #FF5722 !important;">删除</button>
+					</div>
+					<div style="margin-top:15px">
+						<label>标签：</label>
+						<!--<input type="text" addfield="phone">-->
+						<select addfield="label_id" id="label_group" style="width:calc(100% - 65px);">
+						</select>
+					</div>
+					<div style="margin-top:15px;">
+						<label>负责人：</label>
+						<select addfield="user_id" id="employees_group" style="width: 180px;">
+						</select>
+						<label>销售阶段：</label>
+						<select addfield="rank" id="rank" style="width: 180px;">
+							<option value=""> 请选择 - - -</option>
+							<option value="1">新入库</option>
+							<option value="2">初步沟通</option>
+							<option value="3">判断分析</option>
+							<option value="4">上门面谈</option>
+							<option value="5">合同</option>
+						</select>
+					</div>
+
+					<!-- <div style="margin-top:15px;">
+						<label>客户来源：</label>
+						<select type="text" addfield="source" style="width: 180px">
+							<option value="">请选择</option>
+                            <option value="转介绍">转介绍</option>
+                            <option>电话咨询</option>
+                            <option>线上注册</option>
+                            <option>客户上门</option>
+                            <option>陌生拜访</option>
+                            <option>公司资源</option>
+                            <option>个人资源</option>
+                            <option>广告宣传</option>
+                            <option>电话营销</option>
+						</select>
+						<label style="margin-left:15px;display:none;" class="introducer" >介绍人：</label>
+						<input type="text" addfield="introducer" class="introducer" style="display:none;">
+					</div> -->
+					<div style="text-align:center;margin-top:15px;">
+						<span class="msg" style="margin-left:calc(50% - 49px);float:left;line-height:34px;display:none;color:red;"></span>
+						<button class="sure_button add">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            保存
+                        </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="label_popup" id="feedBack" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+			<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;
+	            box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+				<div style="padding:15px;border-bottom:1px solid #ddd;">
+					<span style="display: inline-block;">请选择要删除的分组</span>
+					<a href="javascript:;" class="close_label" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+				</div>
+				<div style="padding: 10px 50px;">
+					<div style="margin-top:15px">
+						<label>客户分组： </label>
+						<select style="width: 180px" multiple="" addfield="cate_id" class="cusType select2-hidden-accessible" tabindex="-1" id="label_cat" aria-hidden="true">
+							<option value="">请选择客户分组</option>
+						</select>
+					</div>
+				</div>
+				<div style="padding:15px;text-align:right;">
+					<button class="close_label">关闭</button>
+					<button class="hold">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% include 'admin/mark.html' %} {% include 'admin/customerDetail.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script src="/resource/adimin/components/select2/dist/js/select2.js"></script>
+<script>
+	jQuery(function($) {
+		cs.getNodes([117]);
+		var page_size = 10; //分页
+		var employees = {}; //所有员工
+        var employees11 = {}; //所有员工
+		var groups = {}; //所有客户分组
+		var labels = {}; //所有标签
+        if(cs.getNodes([299], true)) {
+            $("#expbt").show();
+        }
+		cs.dataRang();
+		var order = 'khm_customer_clue.id desc';
+		//获取所有标签
+		var filter = "";
+		ykp.doAjax({
+			async: false,
+			url: '/api/api_label/f7',
+			method: 'post',
+			data: {
+				filter: 'cwm_label.is_del = 0'
+			},
+			success: function(res) {
+				var data = res.data;
+				for(var i in data) {
+					labels[data[i]['cwm_label.id']] = {
+						title: data[i]['cwm_label.title'],
+						parent: data[i]['cwm_label.cat_id']
+					};
+				}
+			}
+		});
+        //导出功能
+        cs.exportFile({
+            url:"/api/api_customer/export_clue",
+            title:"线索列表"
+        });
+
+        $('#filterBtns a').mouseover(function() {
+            $(this).addClass('over');
+        })
+
+        $('#filterBtns a').mouseout(function() {
+            $(this).removeClass('over');
+        })
+
+        $('.myFilter').click(function() {
+            if(!$(this).hasClass('clc')) {
+                $(this).addClass('clc').siblings().removeClass('clc');
+            }
+            var user = JSON.parse(ykp.getCookie('userinfo'));
+            var userId = JSON.parse(ykp.getCookie('uid'));
+            var data = {
+                "type": 2,
+                "page_size": page_size,
+                'page': 1
+            };
+            var filter_ = $(this).attr('data-kind');
+            if(filter_ == '0') {
+                getList(1);
+                return;
+            }
+            //我负责的
+            if(filter_ == '1') {
+                data['filter'] = "khm_customer_clue.is_del = 0 and (user_id IN ("+userId+") OR FIND_IN_SET("+userId+", team_id))";
+            }
+           /* //我关注的
+            if(filter_ == '2') {
+                data['relation'] = 'helloworld';
+            }*/
+            //我的下属
+            if(filter_ == '3') {
+                data.xiashu = true;
+                data['filter'] = "user_id !="+userId;
+            }
+            //filter = data['where'];
+            getList_2(data);
+        })
+
+
+        //通用排序
+		cs.general_sort({
+			url: '/api/api_customer/index_clue',
+			method: 'post',
+			data: {
+				filter:'',
+				limit: page_size,
+				type:1
+			},
+			pageBar: {
+				id: '#pageBar'
+			},
+			initOrder:'khm_customer.id',
+			defaultOrder: order,
+			contentId: "#dataList",
+			params:[{
+				id: "#dynamic-table",
+				field:["","khm_customer.name","khm_customer.stablish_time","",
+					"khm_customer_clue.rank","khm_customer_clue.cate_id","","khm_customer_clue.user_id","","","khm_customer_clue.last_time","","khm_customer_clue.next_time"
+				]
+			}]
+		}, function(res, _sort_role) {
+			sort_role = _sort_role;
+			addList(res);
+		});
+		//获取所有客户标签分组
+		getGroup();
+		function getGroup(){
+			ykp.doAjax({
+				async: false,
+				url: '/api/api_customer/clue_type_list',
+				method: 'get',
+				data: {},
+				success: function(res) {
+					var data = res.data;
+					for(var i in data) {
+						groups[data[i]['id']] = data[i]['name'];
+					}
+				}
+			});
+		}
+
+		//获取所有员工
+		ykp.doAjax({
+			async: false,
+			url: '/api/api_employees/f7',
+			method: 'post',
+			data: {
+				filter: 'bmm_employees.is_del <> 1 and EXISTS(SELECT id FROM khm_customer_clue WHERE user_id = bmm_employees.id)',
+				select: 'bmm_employees.id,bmm_employees.name'
+			},
+			success: function(res) {
+				var data = res.data;
+				$('.advandced-search').select2({
+					allowClear: true
+				});
+				for(var i in data) {
+					 if(data[i]['name']) {
+					employees[data[i]['id']] = data[i]['name'];
+					$('.custom').append(new Option(data[i]['name'], data[i]['id']));
+				}
+					}
+			}
+		});
+
+        ykp.doAjax({
+            async: false,
+            url: '/api/api_employees/f7',
+            method: 'post',
+            data: {
+                select: 'bmm_employees.id,bmm_employees.name'
+            },
+            success: function(res) {
+                var data = res.data;
+                for(var i in data) {
+                    if(data[i]['name']) {
+                        employees11[data[i]['id']] = data[i]['name'];
+                    }
+                }
+            }
+        });
+		//获取分组
+		ykp.doAjax({
+			async: false,
+			url: '/api/api_customer/clue_type_list',
+			method: 'get',
+			data: {
+				limit:999
+			},
+			success: function(res) {
+				var data = res.data;
+				$('.cart_id').select2({
+					allowClear: true
+				});
+				for(var i in data) {
+					$('.cart_id').append(new Option(data[i]['name'], data[i]['id']));
+				}
+			}
+		});
+		//获取标签
+		ykp.doAjax({
+			async: false,
+			url: '/api/api_customer/index_clue_lable',
+			method: 'post',
+			data: {},
+			success: function(res) {
+				var data = res.data;
+				$('.label_list').select2({
+					allowClear: true
+				});
+				for(var i in data) {
+					$('.label_list').append(new Option(data[i]['title'], data[i]['id']));
+				}
+			}
+		});
+
+		var aid_2 = ykp.getCookie("aid_2");
+		var time = ykp.getCookie("time");
+
+		//接收首页跳转
+		if(time != '' && time != undefined) {
+			var timestamp = ''; //条件
+			var today = new Date().setHours(0, 0, 0, 0) / 1000; //今天零点的时间戳
+			var day_1 = cs.getNowTime(Date.parse(new Date()) / 1000).substr(-2) - 1; //距离本月1号有多少天
+			var lastmonthday_1 = cs.getNowTime(Date.parse(new Date()) / 1000);
+			var newday = lastmonthday_1.substring(0, 4) + '-' + (lastmonthday_1.substring(5, 7) - 1) + '-01';
+			if(lastmonthday_1.substring(5, 7) == 1) {
+				newday = (lastmonthday_1.substring(0, 4) - 1) + '-12-01';
+			}
+			var newdaytime = Date.parse(new Date(newday)) / 1000; //上个月1号的时间戳
+			switch(time) {
+				case '1':
+					timestamp = `khm_customer_clue.create_time>${today}`;
+					break;
+				case '2':
+					timestamp = `khm_customer_clue.create_time<${today} and khm_customer_clue.create_at>${today-86400}`
+					break;
+				case '3':
+					timestamp = `khm_customer_clue.create_time>${today-86400*6}`;
+					break;
+				case '4':
+					timestamp = `khm_customer_clue.create_time>${today-86400*29}`;
+					break;
+				case '5':
+					timestamp = `khm_customer_clue.create_time>${today-86400*day_1}`;
+					break;
+				case '6':
+					timestamp = `khm_customer_clue.create_time<${today-86400*day_1} and khm_customer_clue.create_at>${newdaytime}`;
+					break;
+			}
+			var filter = `khm_customer_clue.is_del = 0 and khm_customer_clue.user_id=${aid_2} and ${timestamp}`;
+			if(aid_2 == '' || aid_2 == undefined) {
+				filter = `${timestamp}`
+			}
+			ykp.list({
+				url: '/api/api_customer/index_clue',
+				method: 'post',
+				data: {
+					limit: page_size,
+					filter: filter
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						setTimeout(function() {
+							ykp.prompt('暂无数据！');
+						}, 1000);
+						$('#dynamic-table_data').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+						return false;
+					} else {
+                        addList(res);
+					}
+				}
+			})
+			ykp.setCookie("aid", "", (1 / 24));
+			ykp.setCookie("aid_2", "", (1 / 24));
+			ykp.setCookie("time", "", (1 / 24));
+		} else {
+            var titleTask = ykp.getCookie('titleTask');
+            if(titleTask != '' && titleTask != undefined) {
+                var today = new Date().setHours(0, 0, 0, 0) / 1000; //今天零点的时间戳
+                var curTime = Date.parse(new Date()) / 1000;
+                var data = {
+                    limit: page_size,
+                    filter: `khm_customer_clue.is_del = 0`
+                }
+                if(titleTask == 8){
+                    data.filter += ` and khm_customer_clue.next_time > ${ curTime }`;
+				}else{
+                    data.filter += ` and khm_customer_clue.next_time < ${ curTime } and khm_customer_clue.next_time > 0 and
+                    not exists(select khm_contact_log.id from khm_contact_log where khm_customer_clue.customer_id = khm_contact_log.customer_id and
+                     khm_contact_log.contact_type=4 and khm_contact_log.is_del=0)`;
+                }
+                getList_2(data);
+                ykp.setCookie('titleTask', '');
+            } else {
+                //页面初始化
+                ykp.setCookie("filter", "");
+                ykp.setCookie("where", "");
+                getList(1);
+            }
+		}
+
+		$('#flush').click(function() {
+			filter = '';
+			$('[sear="customer_name"]').val('');
+			$('[sear="khm_customer_clue.user_id"]').val('').trigger('change');
+			ykp.setCookie("filter", "");
+			ykp.setCookie("where", "");
+
+			getList();
+		})
+
+		$('#changePageNum').change(function() {
+            page_size = $(this).val();
+			ykp.setCookie('page_size', page_size);
+			getList(1);
+		})
+		if(!ace.vars['old_ie']) {
+			$('.date-timepicker1').datetimepicker({
+				// format: 'YYYY-MM-DD', //use this option to display seconds
+				icons: {
+					time: 'fa fa-clock-o',
+					date: 'fa fa-calendar',
+					up: 'fa fa-chevron-up',
+					down: 'fa fa-chevron-down',
+					previous: 'fa fa-chevron-left',
+					next: 'fa fa-chevron-right',
+					today: 'fa fa-arrows ',
+					clear: 'fa fa-trash',
+					close: 'fa fa-times'
+				}
+			}).next().on(ace.click_event, function() {
+				$(this).prev().focus();
+			});
+		}
+
+		cs.showHeightSearch('#heightsearch', '#heightsearch1');
+
+		function search() {
+			var data = {
+				url: '/api/api_customer/index_clue',
+				methods: 'post',
+				data: {
+
+				}
+			}
+
+			cs.doSearch('#search', data, 'filter', false, function(res,_filter) {
+				filter = _filter;
+				if(res.data.items == "") {
+					setTimeout(function() {
+						ykp.prompt('暂无数据！');
+					}, 1000);
+					$('#dynamic-table_data').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+					return false;
+				} else {
+					addList(res);
+				}
+			})
+		}
+
+		//获取所有公海类型
+		function getType() {
+			ykp.doAjax({
+				url: '/api/api_customer_type/f7',
+				method: 'post',
+				data: {
+					select: 'khm_customer_type.id,khm_customer_type.name'
+				},
+				success: function(res) {
+					var data = res.data;
+					var option = ''; //<option value="">  请选择公海类型  </option><option value="0">  全部类型  </option>
+					for(var i in data) {
+						//customer_type[data[i]['id']] =data[i]['name'];
+						option += `<option value="${data[i]['id']}">${data[i]['name']}</option>`;
+					}
+					$('#templateCon #type').select2({
+						allowClear: true
+					});
+					$('#templateCon #type').html(option);
+				}
+			})
+		}
+
+		function getCustomer(type) {
+			$('#templateCon [addfield="customer_id"]').find('option').not(':first').remove();
+			var people = [];
+			var data = {
+				type: type
+			};
+			if(type == 0) {
+				data = {};
+			}
+			//加载客户
+			ykp.doAjax({
+				url: '/api/api_customer/get_customer',
+				method: 'post',
+				data: data,
+				success: function(res) {
+					var data = res.data;
+					$('#templateBox #people').select2({
+						allowClear: true
+					})
+					people.push('<option value=""> 请选择 </option>');
+					for(var i in data) {
+						people.push('<option value="' + data[i]['khm_customer.id'] + '">' + data[i]['khm_customer.name'] + '</option>')
+					}
+					$('#templateBox #people').html(people.join(''));
+				}
+			})
+		}
+
+		dohSearch();
+
+		function dohSearch() {
+			var data = {
+				url: '/api/api_customer/index_clue',
+				methods: 'post',
+				data: {
+					limit: page_size
+				}
+			}
+
+			cs.hSearch('#search1', data, 'filter', false, function(res,_filter) {
+				filter = _filter;
+				$('.in').removeClass('modal-backdrop');
+				$("#heightsearch1").slideUp();
+				$("#heightsearch").removeClass('active').css('z-index', '0');
+				if(res.data.items == "") {
+					setTimeout(function() {
+						ykp.prompt('暂无数据！');
+					}, 1000);
+					$('#dynamic-table_data').html('<tr><td colspan="9"><div class="table-actions clearfix"></div> <div style="text-align: center" class="page">暂无数据</div></td></tr>');
+					return false;
+				}
+				addList(res);
+			})
+		}
+
+		function getList(current) {
+            search();
+			ykp.list({
+				url: '/api/api_customer/index_clue',
+				method: 'post',
+				data: {
+					page: current,
+					limit: page_size,
+					order: order,
+					filter:filter
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						setTimeout(function() {
+							ykp.prompt('暂无数据！');
+						}, 1000);
+						$('#dynamic-table_data').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+						return false;
+					} else {
+						addList(res);
+					}
+				}
+			})
+		}
+        function getList_2(data) {
+            ykp.list({
+                url: '/api/api_customer/index_clue',
+                method: 'post',
+                data: data,
+                pageBar: {
+                    id: '#pageBar',
+                    order: order
+                },
+                loadList: function(res) {
+                    if(res.data.items == "") {
+                        setTimeout(function() {
+                            ykp.prompt('暂无数据！');
+                        }, 1000);
+                        $('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d" class="page">暂无数据</div></td></tr>');
+                        return false;
+                    } else {
+                        addList(res);
+                    }
+                }
+            })
+        }
+
+		function addList(res) {
+			var sales = [];
+			var data = res.data.items;
+			var rank = ['', '新入库', '初步沟通', '判断分析', '上门面谈', '合同签订'];
+			var datahtml = "<p align='left'>aaaa123aaaaaa<br/>13213</p>";
+			var styles = [];
+
+			$('#dynamic-table th').each(function(i, e) {
+				styles.push($(this).css('display'));
+			});
+
+			var labels = []; //标签
+			var labels_name = []; //标签名
+			var labelArr = {};
+            var _labelArr = [];
+            for(var i in data) {
+                labels_name = [];
+				labels = data[i]['label_name'];
+                let _emId = data[i]['khm_customer_clue.team_id'].split(',');
+                let sname = [];
+                if(_emId != ""){
+                     for(var v=0;v<_emId.length;v++){
+                         sname.push(employees11[_emId[v]])
+
+                		}
+				}
+				for(var k in labels) {
+					labels_name.push(labels[k]['title']);
+				}
+
+				labelArr[i] = labels_name;
+                /* '<a contentAuthority="118"> <span style="cursor: pointer" id="recordEdit" class="editInfo btBlue" title="编辑"><i class="fa fa-pencil-square-o"></i></span></a>'*/
+				sales.push('<tr data-id="' + data[i]['khm_customer_clue.id'] + '">',
+					'<td class="center">',
+					'<label class="pos-rel">',
+					'<a> <span style="cursor: pointer" id="" class="info btOrange" title="详情"><i class="fa fa-info"></i></span></a> ',
+					'<a  class="btRed del" href="javascript:;"  style="color:#fff !important;" title="删除"><i class="fa fa-trash"></i></a>',
+					'</label>',
+					'</td>',
+					'<td data-num="1" style="display:' + styles[1] + ';" data-id="' + data[i]['khm_customer.id'] + '" data-cid="' + data[i]['khm_customer.id'] + '">',
+					'<a href="#" class="pos-rel customerDetail">' + data[i]['khm_customer.name']+'</a>',
+					'<label class="pos-rel"> <i class="iconBnt fa fa-info-circle" style="color:'+(data[i]['Remark'].length > 0 ? 'red' : "")+'" data-rel="tooltip" data-placement="right" data-html="true" title="' + cs.getRemark(data[i]['Remark']) + '" ></i></label></td>',
+					'<td data-num="2"  style="display:' + styles[2] + ';" >'+cs.getNowTime(data[i]['khm_customer.stablish_time'],true)+'</td>',
+                    '<td data-num="3"  style="display:' + styles[3] + ';" >'+data[i]['linkman']+'</td>',
+					'<td data-num="4"  style="display:' + styles[4] + ';" >'+rank[data[i]['khm_customer_clue.rank']] +'</td>',
+                    '<td data-num="5"  style="display:' + styles[5] + ';" >' + (data[i]['khm_customer_clue.cate_id'] != '0' ? groups[data[i]['khm_customer_clue.cate_id']] : '') + '</td>',
+					'<td data-num="6"  style="display:' + styles[6] + ';" >' + labelArr[i].join(',') + '</td>',
+                    '<td data-num="7" style="display:' + styles[7] + ';" >'+ (data[i]['user_name'] ? data[i]['user_name']:"") +'</td>',
+                    '<td data-num="8" style="display:' + styles[8] + ';" >'+sname.join(",")+'</td>',
+                    '<td data-num="9" style="display:' + styles[9] + ';" >'+(data[i]['visit_num']>0 ? data[i]['visit_num'] : '')+'</td>',
+					'<td data-num="10" style="display:' + styles[10] + ';" >'+ cs.getNowTime(data[i]['last_time'],true) + '</td>',
+					'<td data-num="11" style="display:' + styles[11] + ';" >'+(data[i]['last_time']>0 ? Math.floor((Date.now()/1000 - data[i]['last_time'])/86400) : '') +'</td>',
+                    '<td data-num="12" style="display:' + styles[12] + ';" >'+cs.getNowTime(data[i]['khm_customer_clue.next_time'],true)+'</td>',
+                    '<td data-num="13" style="display:' + styles[13] + ';" >'+(((data[i]["khm_customer_clue.next_time"] >= Date.now()/1000) || (data[i]["khm_customer_clue.next_time"] == 0)) ? "否" : "是") +'</td>',
+					'</tr>');
+				labels = [];
+				labels_name = [];
+			}
+            $('#dynamic-table_data').html(sales.join(''));
+			$("[data-rel='tooltip']").tooltip();
+			custom.showReamrk();
+			custom.get_custom_info();
+
+			cs.getNodes([118]);
+
+			editRecord(data);
+
+			recordInfo();
+		}
+
+		//线索详情
+		function recordInfo() {
+			$('.info').click(function() {
+				var id = $(this).parents('tr').attr('data-id');
+				showMark('#template1');
+				$('#showBox .title').text('详情');
+				ykp.doAjax({
+					url: '/api/api_customer/index_clue',
+					method: 'post',
+					data: {
+						filter: 'khm_customer_clue.id = ' + id
+					},
+					success: function(res) {
+                        console.log(res);
+                        var data = res.data.items[0];
+						var rank = ['', '新入库', '初步沟通', '判断分析', '上门面谈', '合同签订'];
+
+						var _labels = [];
+						var _labels_name = [];
+						$('#templateCon [field]').each(function(i, e) {
+							if(data['khm_customer.source'] == '转介绍') {
+								$('#templateCon .introduce').show();
+							}
+							if($(this).attr('field') == 'khm_customer_clue.rank') {
+								$(this).text(rank[data[$(this).attr('field')]]);
+								return true;
+							}
+							if($(this).attr('field') == 'khm_customer_clue.user_id') {
+								$(this).text(employees[data[$(this).attr('field')]]);
+								return true;
+							}
+							if($(this).attr('field') == 'khm_customer_clue.cate_id') {
+								$(this).text(groups[data['khm_customer_clue.cate_id']]);
+								return true;
+							}
+							if($(this).attr('field') == 'label_name') {
+								_labels = data['label_name'];
+                                for(var k =0;k<_labels.length;k++) {
+                                    _labels_name.push(_labels[k] !="" ? _labels[k].title :'');
+								}
+                                $(this).text(_labels_name.join(','));
+								return true;
+							}
+                            if($(this).attr('field') == 'khm_customer_clue.team_id') {
+							    var teamstr = data['khm_customer_clue.team_id'].split(',');
+							    var xname = [];
+                                teamstr.forEach(function (e,i) {
+                                    xname.push(employees11[e]);
+                                })
+                                $(this).text(xname);
+                                return true;
+                            }
+                            if($(this).attr('field') == 'khm_customer.stablish_time') {
+                                $(this).text(cs.getNowTime(data["khm_customer.stablish_time"],true));
+                                return true;
+                            }
+                            if($(this).attr('field') == 'khm_customer_clue.next_time') {
+                                $(this).text(cs.getNowTime(data["khm_customer_clue.next_time"],true));
+                                return true;
+                            }
+                            if($(this).attr('field') == 'last_time') {
+                                $(this).text(cs.getNowTime(data["last_time"],true));
+                                return true;
+                            }
+                            if($(this).attr('field') == 'create_time') {
+                                $(this).text(cs.getNowTime(data["create_time"],true));
+                                return true;
+                            }
+                            if($(this).attr('field') =='yuqi'){
+                                $(this).html(data["khm_customer_clue.next_time"] >= Date.now() / 1000 ? "否" : "是");
+                                return true;
+							}
+							$(this).text(data[$(this).attr('field')] ? data[$(this).attr('field')] :"");
+						});
+					}
+				});
+			});
+
+
+            $('.del').click(function() {
+                var node = ykp.getCookie('nodes').split(',');
+//				node.forEach(function(item,index){
+//					if(item == 286){
+//					}
+//				})
+               /* if(node.indexOf("286") == -1){
+                    ykp.prompt('你没有权限');
+                    return false;
+                }*/
+                var id = $(this).parents('tr').attr('data-id');
+                var customer_id = $(this).parents('tr').find("[data-num=1]").attr('data-cid');
+                layui.use('layer',function() {
+                    layui.layer.confirm('确认放弃线索吗?', function(index){
+                        ykp.doAjax({
+                            url:'/api/api_customer/del_clue',
+                            methods:"post",
+                            data:{
+                                id:id,
+                                customer_id:customer_id
+                            },
+                            success:function(res) {
+                                ykp.prompt('删除成功');
+                                getList(1);
+                                layer.closeAll();
+                            }
+                        })
+                    });
+                })
+            })
+
+        }
+
+		//编辑功能
+		function editRecord(data) {
+			$('.editInfo').click(function() {
+				var name = $(this).parents('tr').find('td').eq(1).text().trim();
+				var id = $(this).parents('tr').attr('data-id');
+				var index = $(this).parents('tr').index();
+				var clue_data = data[index];
+				showMark('#template2');
+				$('#showBox .title').text('编辑线索');
+
+				$('#templateCon .customer_name').text(name);
+				// getInfo();
+
+				//添加分组
+				addCate();
+
+				getInfo(clue_data);
+				loadCusCate(clue_data['khm_customer_clue.cate_id']);
+				deleGroup();
+				$('#templateCon #rank').find('option[value=' + clue_data['khm_customer_clue.rank'] + ']').attr('selected', true);
+
+				//编辑保存
+				$('#templateBox .add').click(function() {
+					var postdata = {
+						id: id,
+						customer_id: clue_data['khm_customer_clue.customer_id']
+					};
+
+					$('#templateBox').find('[addfield]').each(function(i) {
+						if($(this).attr('addfield') != 'label_id') {
+							postdata[$(this).attr('addfield')] = $(this).val();
+						}
+					})
+
+					//标签
+					var data = $('#templateCon [addfield="label_id"]').select2('data');
+					var _data = [];
+					for(var i in data) {
+						_data.push(data[i]['id']);
+					}
+					postdata['label_id'] = _data.join(',');
+
+					ykp.doAjax({
+						url: '/api/api_customer/add_clue',
+						method: 'post',
+						data: postdata,
+						success: function(res) {
+							getList(1);
+							ykp.prompt('编辑成功');
+							cs.close();
+						}
+					})
+				})
+			})
+		}
+
+		//添加分组
+		function addCate() {
+			$('#templateCon #addCusCate').unbind('click').click(function() {
+				$('#cus_cate #catename').val('');
+				$('#cus_cate').fadeIn();
+
+				//保存分组信息
+				$('#cus_cate .submitCate').unbind('click').click(function() {
+					if(!$('#cus_cate #catename').val().trim()) {
+						ykp.prompt('分组名称不能为空');
+						return;
+					}
+					var postdata = {
+						name: $('#cus_cate #catename').val().trim()
+					};
+
+					ykp.doAjax({
+						url: '/api/api_customer/add_clue_type',
+						method: 'post',
+						data: postdata,
+						success: function(res) {
+							$('#cus_cate').fadeOut();
+							ykp.prompt('客户分组添加成功');
+							loadCusCate();
+						}
+					});
+
+				});
+
+				//关闭添加分组
+				$('#cus_cate .close_label').unbind('click').click(function() {
+					$('#cus_cate').fadeOut();
+				});
+			});
+		}
+
+		//自定义列表
+		cs.custorm_check('#dynamic-table', '#dynamic-table_data', true);
+
+		//添加功能
+		addRecord();
+		
+		function deleGroup(){
+			$('#templateCon #delCusCate').click(function() {
+					$('#feedBack').fadeIn()
+					$('#feedBack #label_cat').select2({
+						allowClear: true
+					});
+					ykp.doAjax({
+						url: '/api/api_customer/clue_type_list',
+						method: 'get',
+						data: {},
+						success: function(res) {
+                            var data = res.data;
+							var cate_html = [];
+							for(var i in data) {
+								cate_html.push('<option value="' + data[i]['id'] + '">' + data[i]['name'] + '</option>');
+							}
+							$('#feedBack #label_cat').append(cate_html.join(''));
+						}
+					});
+					
+					$('#feedBack .hold').click(function() {
+						var objs = $('#feedBack #label_cat').select2('data');
+						var ids = [];
+						if(objs[0].id == "") {
+							ykp.prompt('请选择！');
+							return false;
+						}
+						for(var j in objs) {
+							if(objs[j].id) {
+								ids.push(objs[j].id);
+							}
+						}
+						
+						ykp.doAjax({
+							url:"/api/api_customer/clue_type_del",
+							method:"post",
+							data:{
+								id:ids.join(',')
+							},
+							success:function(res) {
+								ykp.prompt('删除成功');
+								loadCusCate();
+								$('.close_label').parents('.label_popup').fadeOut();
+							}
+						})
+					})
+					cs.closePop();
+				})
+		}
+		
+		function addRecord() {
+			$('#addItem').click(function() {
+				$('#showBox .title').text('添加线索');
+				showMark('#template');
+				getInfo();
+				getType();
+                cs.get_cus1('#templateBox #people');
+                timeplug();
+                function timeplug() {
+                    if(!ace.vars['old_ie']) {
+                        $('#templateCon .date-timepicker1').datetimepicker({
+                            // format: 'YYYY-MM-DD HH:mm',//use this option to display seconds
+                            icons: {
+                                time: 'fa fa-clock-o',
+                                date: 'fa fa-calendar',
+                                up: 'fa fa-chevron-up',
+                                down: 'fa fa-chevron-down',
+                                previous: 'fa fa-chevron-left',
+                                next: 'fa fa-chevron-right',
+                                today: 'fa fa-arrows ',
+                                clear: 'fa fa-trash',
+                                close: 'fa fa-times'
+                            }
+                        }).next().on(ace.click_event, function() {
+                            $(this).prev().focus();
+                        });
+                    }
+                }
+				//加载客户分组
+				loadCusCate();
+				deleGroup();
+				
+				//添加分组
+				addCate();
+
+				$('#editTitile').html('添加记录');
+				$('#templateBox .add').click(function() {
+					var postdata = {};
+					$('#templateBox').find('[addfield]').each(function(i) {
+						if($(this).attr('addfield') != 'label_id') {
+						    if($(this).attr('addfield') == "next_time"){
+						        let time = new Date($(this).val());
+                                postdata[$(this).attr('addfield')] = time.getTime($(this).val()) / 1000;
+                            }else if($(this).attr('addfield') == "team_id"){
+                                var data = $('#templateCon .teamperson ').select2('data');
+                                var salesman = [];
+                                if(data.length == 0) {
+                                    ykp.prompt('请选择协作人');
+                                    return false;
+                                } else {
+                                    for(var i in data) {
+                                        salesman.push(data[i]['id']);
+                                    }
+                                    postdata[$(this).attr('addfield')] = salesman.join(',')
+                                }
+							}else{
+                                postdata[$(this).attr('addfield')] = $(this).val();
+							}
+						}
+					})
+
+					var data = $('#templateCon [addfield="label_id"]').select2('data');
+					var _data = [];
+					for(var i in data) {
+						_data.push(data[i]['id']);
+					}
+					postdata['label_id'] = _data.join(',');
+
+					ykp.doAjax({
+						url: '/api/api_customer/add_clue',
+						method: 'post',
+						data: postdata,
+						success: function(res) {
+							getList(1);
+							cs.close();
+						}
+					})
+				})
+			});
+
+
+			$('#recordEdit').click(function() {
+				showMark('#template');
+				$('#editTitile').html('编辑记录');
+			});
+		}
+
+		//获取客户，客户分组，负责人等信息
+		function getInfo(data) {
+			var khArr = [];
+			var bmArr = [];
+
+			//加载负责人
+			var emp = [];
+			emp.push('<option value=""> 请选择 </option>');
+			for(var i in employees11) {
+				emp.push('<option value="' + i + '">' + employees11[i] + '</option>');
+				}
+			$('#templateCon #employees_group').html(emp.join(''));
+			if(data) {
+				$('#templateCon #employees_group').find('option[value=' + data['khm_customer_clue.user_id'] + ']').attr('selected', true)
+			}
+
+			// //加载客户标签分组
+			// var grp = [];
+			// grp.push('<option value=""> 请选择 </option>');
+			// for(var i in groups) {
+			// 	grp.push('<option value="' + groups[i]['cwm_label_cat.id'] + '">' + groups[i]['cwm_label_cat.title'] + '</option>');
+			// }
+			// $('#templateCon #label_cat').html(grp.join(''));
+			// $('#templateBox #label_group').select2({allowClear:true,multiple:true});
+			// if(data) {
+			// 	$('#templateCon #label_cat').find('option[value=' + data['khm_customer_clue.cate_id'] + ']').attr('selected', true);
+			// 	// $('#templateCon #label_cat').trigger('change');
+			// 	selectLabel(data['khm_customer_clue.cate_id'],data['khm_customer_clue.label_id']);
+			// }
+			// // getLabel(); //切换客户标签分组，获取相应标签
+
+			$('#templateCon #type').change(function() {
+				var type = $(this).val();
+				getCustomer(type);
+			})
+
+            //获取所有员工
+            ykp.doAjax({
+                async: false,
+                url: '/api/api_employees/f7',
+                method: 'post',
+                data: {
+                    //filter: 'bmm_employees.is_del <> 1 and EXISTS(SELECT id FROM khm_customer_clue WHERE user_id = bmm_employees.id)',
+                    select: 'bmm_employees.id,bmm_employees.name'
+                },
+                success: function(res) {
+                    var data = res.data;
+                    $('#templateCon .teamperson').select2({
+                        allowClear: true
+                    });
+                    for(var i in data) {
+                        if(data[i]['name']) {
+                            $('.teamperson ').append(new Option(data[i]['name'], data[i]['id']));
+                        }
+                    }
+                }
+            });
+
+			//加载所有标签
+			$('#templateCon [addfield="label_id"]').select2({
+				allowClear: true,
+				multiple: true
+			});
+			ykp.doAjax({
+				url: '/api/api_label/f7',
+				method: 'post',
+				data: {
+					select: 'cwm_label.id,cwm_label.title',
+					filter: 'cwm_label.is_del = 0'
+				},
+				success: function(res) {
+					var _data = res.data;
+					var label_html = [];
+					for(var i in _data) {
+						label_html.push('<option value="' + _data[i]['cwm_label.id'] + '">' + _data[i]['cwm_label.title'] + '</option>');
+					}
+					$('#templateCon [addfield="label_id"]').html(label_html.join(''));
+
+					if(data) {
+						$('#templateCon [addfield="label_id"]').val(data['khm_customer_clue.label_id'].split(',')).trigger('change');
+					}
+				}
+			});
+		}
+
+		//加载客户分组
+		function loadCusCate(cate_id) {
+			$('#templateCon [addfield="cate_id"]').select2({
+                allowClear: true
+            });
+
+			ykp.doAjax({
+				url: '/api/api_customer/clue_type_list',
+				method: 'get',
+				data: {},
+				success: function(res) {
+                    var data = res.data;
+					var cate_html = [];
+					for(var i in data) {
+						cate_html.push('<option value="' + data[i]['id'] + '">' + data[i]['name'] + '</option>');
+					}
+					$('#templateCon [addfield="cate_id"]').html('<option value="">请选择客户分组</option>');
+					
+					$('#templateCon [addfield="cate_id"]').append(cate_html.join(''));
+
+					if(cate_id) {
+						$('#templateCon [addfield="cate_id"]').val(cate_id).trigger('change');
+					}
+				}
+			});
+
+			getGroup();
+		}
+
+		function selectLabel(cate_id, label_id) {
+			ykp.doAjax({
+				url: '/api/api_label/index',
+				method: 'get',
+				data: {
+					cat_id: cate_id
+				},
+				success: function(res) {
+					if(res.data.items.length == 0) {
+						ykp.prompt('没有标签!');
+						$('.labelBtn').html('没有标签');
+						return false;
+					}
+					var _labels = [];
+					var data = res.data.items;
+					// $('#templateBox #label_group').select2({allowClear:true,multiple:true});
+					for(var i in data) {
+						_labels.push('<option value="' + data[i]['cwm_label.id'] + '">' + data[i]['cwm_label.title'] + '</option>');
+					}
+					$('#templateBox #label_group').html(_labels.join(''));
+					$("#templateBox #label_group").val(cate_id.split(',')).trigger('change');
+				}
+			})
+		}
+
+		//获取客户标签分组相应 的所有标签
+		function getLabel(label_id) {
+			$('#templateCon #label_cat').change(function() {
+				var id = $(this).val();
+				if(!id) {
+					$('#templateBox #label_group').find('option').not(':first').remove();
+					return;
+				}
+				//刷新标签
+				ykp.doAjax({
+					url: '/api/api_label/index',
+					method: 'get',
+					data: {
+						cat_id: id
+					},
+					success: function(res) {
+						$('#templateBox #label_group').find('option').not(':first').remove();
+						// $('#templateBox #label_group').select2({allowClear:true,multiple:true});
+						if(res.data.items.length == 0) {
+							ykp.prompt('没有标签!');
+							$('.labelBtn').html('没有标签');
+							return false;
+						}
+						var _labels = [];
+						var data = res.data.items;
+						for(var i in data) {
+							_labels.push('<option value="' + data[i]['cwm_label.id'] + '">' + data[i]['cwm_label.title'] + '</option>');
+						}
+						$('#templateBox #label_group').html(_labels.join(''));
+						$("#templateBox #label_group").find("option[value='" + label_id + "']").attr("selected", true);
+					}
+				})
+			})
+
+		}
+
+		//全选
+		checkAll();
+	});
+
+	function checkAll(status) {
+		$("tbody input[name='check']").each(function(i, n) {
+			n.checked = status;
+		});
+	}
+</script>

@@ -1,0 +1,534 @@
+<style type="text/css">
+	a{
+		position:relative;
+	}
+	#templateCon td,th{
+		text-align: center;
+		height:30px;
+	}
+	
+</style>
+<div class="widget-main">
+	<div class="row">
+		<!-- <h3 class="header smaller lighter blue">收单审批</h3> -->
+		<div class="actions" id="topTool">
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<div class="search">
+					<input type="text" class="search-input"  sear="spm_approves.approve_code" maxlength="15" placeholder="审批编码">
+				</div>
+			</div>
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<div class="search">
+					<input type="text" class="search-input" sear="spm_approves.customer_name" maxlength="15" placeholder="企业名称" autofocus />
+				</div>
+			</div>
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<div class="search">
+					<input type="text" class="search-input" sear="spm_approves.customer_num" maxlength="15" placeholder="企业编码">
+				</div>
+			</div>
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<button id="search"  class="btn btn-info btn-sm" >
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<button id="flush" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32!important;">
+                    <i class="fa fa-refresh"></i>
+                </button>
+			</div>
+			<div class="col-sx-4" contentAuthority="188" style=" float: left;margin-right: 5px;">
+				<button id="plSp" class="btn btn-info btn-sm">
+					批量审批
+				</button>
+			</div>
+			<div class="col-sx-4" style=" float: left;margin-right: 5px;">
+				<div id="filterBtns" style="display:inline-block;width:290px;">
+					<a href="#" class="" style="background: #E6E6E6;" data-status="all">全部</a>
+					<a href="#" class="" data-status="1"> 待审批</a>
+					<a href="#" class="" data-status="2"> 已通过</a>
+					<a href="#" class="" data-status="3"> 未通过</a>
+				</div>
+			</div>
+		</div>
+		<div class="auditing-data custom_table">
+			<table id="dynamic-table">
+				<thead>
+					<tr class="thColor">
+						<th class="center">
+							<label class="pos-rel">
+	                                            <input type="checkbox" class="ace" onclick="checkAll(this.checked)"/>
+	                                            <span class="lbl"></span>
+	                                        </label>
+						</th> 
+						<th>操作</th>
+						<th data-num="9">企业名称</th>
+						<th data-num="10">企业编码</th>
+						<th data-num="11">服务月份</th>
+						<th data-num="15">交接清单</th>
+						<th data-num="13">负责人</th>
+						<th data-num="1">审批号码</th>
+						<th data-num="3">提交员工</th>
+						<th data-num="4">提交时间</th>
+						<th data-num="5">审批员工</th>
+						<th data-num="6">审批结果</th>
+						<th data-num="7">审批时间</th>
+						<th data-num="8">审批回复</th>
+					</tr>
+				</thead>
+				<tbody id="datalist">
+
+				</tbody>
+			</table>
+		</div>
+		<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+			<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num">
+			</div>
+
+			<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+			<div id="pageBar" class="pagination"></div>
+			<div align="right" style="float: right;  width: 10%;">
+				<select style="width: 100px;" id="changePageNum">
+					<option value="10">每页10条</option>
+					<option value="20">每页20条</option>
+					<option value="50">每页50条</option>
+					<option value="100">每页100条</option>
+					<option value="200">每页200条</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="auditGetList-popup" style="display:none;">
+        <div class="evidence" style="margin-top:15px;">
+            <h5 style="text-align:center;">凭证交接</h5>
+            <table style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th>凭证月份</th>
+                        <th>凭证名称</th>
+                        <th>数量(本)</th>
+                    </tr>
+                </thead>
+                <tbody id="evidenceBody">                
+                </tbody>
+            </table>
+        </div>
+        <div class="bill" style="margin-top:15px;">
+            <h5 style="text-align:center;">票据交接</h5>
+            <table style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th>票据类别</th>
+                        <th>数量(张)</th>
+                        <th>金额(元)</th>
+                    </tr>
+                </thead>
+                <tbody id="ticketBody">
+                </tbody>
+            </table>
+        </div>
+        <div class="certificate" style="margin-top:15px;">
+            <h5 style="text-align:center;">证件交接</h5>
+            <table style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th>证件名称</th>
+                        <th>数量(个)</th>
+                    </tr>
+                </thead>
+                <tbody id="cardBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+	<div class="label_popup" id="feedBack" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+			<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;
+		    box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+				<div style="padding:15px;border-bottom:1px solid #ddd;">
+					<span style="display: inline-block;">请填写驳回原因</span>
+					<a href="javascript:;" class="close_label" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+				</div>
+				<div style="padding: 10px 50px;">
+					<input type="text" width="200px" style="margin: auto;" id="labelName" />
+					<!--<hr>-->
+				</div>
+				<div style="padding:15px;text-align:right;">
+					<button class="close_label">关闭</button>
+					<button class="hold">保存</button>
+				</div>
+			</div>
+		</div>
+		{% include 'admin/customerDetail.html' %} {% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script type="text/javascript">
+	$(function() {
+		if(cs.approve_authority({name:'收单',nodes:[188]})){
+            $('[contentAuthority="188"]').show();
+        }
+
+		var order ='spm_approves.approve_result asc,spm_approves.id desc';
+		var pagesize = 10;
+		clickBtn();
+		//点击顶部  按钮时调用
+		function clickBtn() {
+			$('#topTool').on('click', 'a', function(item) {
+				if (!$(this).hasClass('clc')) {
+					$(this).addClass('clc').siblings().removeClass('clc');
+				}
+				var status = $(this).attr('data-status');
+				$(this).addClass('active').siblings().removeClass('active');
+				var keyWords = [];
+				$('.search-input').each(function(i,e){
+					if($(this).val().trim()){
+						keyWords.push($(this).attr('sear') + ' like \'%' + $(this).val().trim() + '%\'');
+					}
+				});
+				if($('#search').attr('searStatsus')) {
+					getList('', status, keyWords); //已搜索点击状态
+				} else {
+					getList('', status); //未搜索点击状态
+				}
+				return false;
+			})
+		}
+		
+
+		
+		
+		$('#plSp').click(function() {
+			var status = '',
+				n = 0,
+				Statu = false,
+				coldata = []
+			$('#datalist').find('input[type="checkbox"]:checked').each(function(i) {
+				n++;
+				status = $(this).parents('tr').attr('data-status') == 1 ? 2 : 1;
+				
+				if($(this).parents('tr').attr('data-status') == 3) {
+					ykp.prompt('审批失败状态不能批量审批!');
+					Statu = false;
+					return false;
+				} else {
+					coldata.push({
+						id: $(this).parents('tr').attr('data-id'),
+						approve_result: status
+					});
+					Statu = true;
+				}
+			})
+			if(n == 0) {
+				ykp.prompt('请选择再审批！');
+				return false;
+			} else {
+				if(Statu) {
+					ykp.doAjax({
+						url: "/api/api_approves/batch_edit",
+						method: 'post',
+						data: {
+							data: JSON.stringify(coldata),
+							type:'20'
+						},
+						success: function(res) {
+							ykp.prompt('审批成功');
+							getList();
+						}
+					})
+				}
+			}
+		})
+
+		doSearch();
+
+		function doSearch() {
+			$('#search').click(function() {
+				$(this).attr('searStatsus', true);
+				var n = 0; //选中的数量
+				var w = ''; //选中的状态
+				$('#topTool a').each(function() {
+					if($(this).hasClass('active')) {
+						n += 1;
+						w = $(this).attr('data-status');
+					}
+				})
+				var keyWords = [];
+				$('.search-input').each(function(i,e){
+					if($(this).val().trim()){
+						keyWords.push($(this).attr('sear') + ' like \'%' + $(this).val().trim() + '%\'');
+					}
+				});
+				if(keyWords.length <= 0 ){
+					ykp.prompt('请输入至少一个搜索条件');
+					return;
+				}
+				if(n == 0) {
+					getList('', '', keyWords);
+				} else {
+					if(w != 'all') {
+						getList('', w, keyWords);
+					} else {
+						getList('', '', keyWords);
+					}
+				}
+			})
+		}
+		
+		$('#changePageNum').change(function() {
+			pagesize = $(this).val();
+			var n = 0; //选中的数量
+				var w = ''; //选中的状态
+				$('#topTool a').each(function() {
+					if($(this).hasClass('active')) {
+						n += 1;
+						w = $(this).attr('data-status');
+					}
+				})
+				var keyWords = [];
+				$('.search-input').each(function(i,e){
+					if($(this).val().trim()){
+						keyWords.push($(this).attr('sear') + ' like \'%' + $(this).val().trim() + '%\'');
+					}
+				});
+				if(n == 0) {
+					getList('', '', keyWords);
+				} else {
+					if(w != 'all') {
+						getList('', w, keyWords);
+					} else {
+						getList('', '', keyWords);
+					}
+				}
+//			getCustomerList(1);
+		})
+
+		$('#flush').click(function(){
+			getList();
+		})
+
+		$('#filterBtns a').mouseover(function(){
+			$(this).addClass('over');
+		})
+		$('#filterBtns a').mouseout(function(){
+			$(this).removeClass('over');
+		})
+		
+		getList();
+
+		function getList(current, clickstatus, keyWords) {
+			if(!cs.getSpStatus('收单')) {
+				ykp.prompt('暂时没有开启审批功能');
+				return false;
+			}
+			current = current ? current : 1;
+			var data = {
+				page_size: pagesize,
+				current: current,
+				type: 20,
+				order:order
+			}
+
+			//判断是否有过滤   
+			if(clickstatus && !isNaN(clickstatus)) {
+				data.approve_result = clickstatus;
+			}
+			if(keyWords) {
+				data.search = keyWords;
+			}
+
+			cs.spList(data, function(res) {
+				var data = res.data.items;
+				if(data.length == 0) {
+					setTimeout(function(){
+						ykp.prompt('暂无数据！');
+					},1000);
+					$('#datalist').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center;color:#7d7d7d !important;" class="page">暂无数据</div></td></tr>');
+				} else {
+					//审批权限为true可以审批,为false不可审批
+					var spApp = cs.approve_authority({name:'收单',nodes:[189]});
+					var cxApp = cs.approve_authority({name:'收单',nodes:[256]});
+
+					var staff = [];
+					var staff_name = [];
+					var _data = [];
+					var styles = [];
+					$('#dynamic-table th').each(function(i,e){
+						styles.push($(this).css('display'));
+					});
+
+					var status = ['','待审核', '审核通过', '审核失败']; //审核状态
+					var statusColor = ['','#dfba49', '#45b6af', '#f3565d'];
+					var content = '';
+					for(var i in data) {
+						_data.push(data[i]['submitted_data']['list']);//交接清单数据
+
+						staff = data[i]['submitted_data']['service_info']['staff_info'];
+						for(var k in staff){
+							staff_name.push(staff[k]['name']);
+						}
+
+						content += `<tr data-id="${data[i]['spm_approves.id']}" data-status="${data[i]['spm_approves.approve_result']}">
+										 <td class="center">
+			                                <label class="pos-rel">
+			                                    <input type="checkbox" name="check" class="ace"/>
+			                                    <span class="lbl"></span>
+			                                </label>
+		                            	 </td>
+								 		<td>
+										<label class="pos-rel">
+		                        <a href="#" class="sp btnGreen" data-status = "1" style="display: ${cxApp ? (data[i]['spm_approves.approve_result'] == 2 ? 'inline-block' : 'none') : 'none'};color:#fff !important" contentAuthority="256"><i class="red2"></i>撤销</a>
+		                        <a href="#" class="sp redBlue" data-status = "2" style="display: ${spApp ? (data[i]['spm_approves.approve_result'] == 1 ?'inline-block' : 'none') : 'none'};color:#fff !important" contentAuthority="189"><i class="red2"></i>通过</a>
+		                        <a href="#" class="sp btnGreen" data-status = "3" style="display: ${spApp ? (data[i]['spm_approves.approve_result'] == 1 ?'inline-block' : 'none') : 'none'};color:#fff !important" contentAuthority="189"><i 
+		                        	class="red2"></i>驳回</a>
+		                        	</label>
+		                    			</td>
+		                    <td data-num="9" style="display:${styles[2]}" data-cid="${data[i]['spm_approves.customer_num']}">
+		                    	<a class="customerDetail pos-rel" href="#">${data[i].submitted_data['service_info']['khm_customer.name']}</a>
+		                    	<label class="pos-rel">
+						 				<i class="iconBnt fa fa-info-circle" data-rel="tooltip" data-placement="right" data-html="true" title="${cs.getRemark(data[i]['Remark'])}" ></i>
+					 				 </label>
+		                    </td>
+		                    <td data-num="10" style="display:${styles[3]}">${data[i].submitted_data['service_info']['khm_customer.id']}</td>
+		                    <td data-num="11" style="display:${styles[4]}">${data[i].submitted_data['service_info']['jzm_service_info.time']}</td>
+		                    <td data-num="15" style="display:${styles[5]}"> <a handover-id="${data[i].submitted_data['service_info']['jzm_service_info.id']}" style="text-decoretion:none;" class="handover">查看</a> </td>
+		                    <td data-num="13" style="display:${styles[6]}">${staff_name.join(',')}</td>
+		                    <td data-num="1" style="display:${styles[7]}">${data[i]['spm_approves.approve_code']}</td>
+		                    <td data-num="3" style="display:${styles[8]}">${data[i]['spm_approves.submit_employee_name']}</td>
+		                    <td data-num="4" style="display:${styles[9]}">${cs.getNowTime(data[i]['spm_approves.submit_time'])}</td>
+		                    <td data-num="5" style="display:${styles[10]}">${data[i]['spm_approves.approve_employee_name']}</td>
+		                    <td data-num="6" style="display:${styles[11]}"><label class="label" style=" background:${statusColor[data[i]['spm_approves.approve_result']]} ">${status[data[i]['spm_approves.approve_result']]}</label></td>
+		                    <td data-num="7" style="display:${styles[12]}">${data[i]['spm_approves.approve_time'] != 0 ? cs.getNowTime(data[i]['spm_approves.approve_time']) : ''}</td>
+		                    <td data-num="8" style="display:${styles[13]}">${data[i]['spm_approves.approve_reply']}</td>
+		                   
+		                </tr>`;
+
+		                staff_name = [];
+					}
+
+					$('#datalist').html(content);
+					
+					$("[data-rel='tooltip']").tooltip();
+					custom.showReamrk();
+					custom.get_custom_info();
+
+					//交接清单查看
+					handover(_data);
+
+					$("#datalist tr").find('.sp').click(function() {
+						var status = $(this).attr('data-status');
+						var id = $(this).parents('tr').attr('data-id');
+						if(status != '0') {
+							changeStatus(status,id);
+						}
+					})
+				}
+			},'收单')
+
+			//交接清单查看
+			function handover(data){
+				$('.handover').click(function(){
+					var index = $(this).parents('tr').index();
+					var month = $(this).parent().prev().text().trim();
+
+					showMark('.auditGetList-popup');
+					$('#showBox .title').text('交接清单');
+					
+					var _data = data[index];
+					//console.log(_data);
+					for(var i in _data){
+						if(_data[i]['jzm_acquiring_details.cate'] == 1){
+							$('#templateCon #evidenceBody').append(
+								`<tr>
+			                        <td>${month}</td>
+			                        <td>${_data[i]['jzm_acquiring_details.name']}</td>
+			                        <td>${_data[i]['jzm_acquiring_details.num']}</td>
+			                    </tr>`
+							)
+						}
+						if(_data[i]['jzm_acquiring_details.cate'] == 2){
+							$('#templateCon #ticketBody').append(
+								`<tr>
+			                        <td>${_data[i]['jzm_acquiring_details.name']}</td>
+			                        <td>${_data[i]['jzm_acquiring_details.num']}</td>
+			                        <td>${_data[i]['jzm_acquiring_details.money']}</td>
+			                    </tr>`
+							)
+						}
+						if(_data[i]['jzm_acquiring_details.cate'] == 3){
+							$('#templateCon #cardBody').append(
+								`<tr>
+			                        <td>${_data[i]['jzm_acquiring_details.name']}</td>
+			                        <td>${_data[i]['jzm_acquiring_details.num']}</td>
+			                    </tr>`
+							)
+						}
+					}
+
+					$('#templateCon tbody').each(function(i,e){
+						if($(this).find('tr').length == 0){
+							$(this).html('<tr><td colspan="10" style="color:#7d7d7d !important;text-align:center !important;">暂无数据</td></tr>');
+						}
+					});
+				});
+			}
+
+			function changeStatus(status,id) {
+				var data = {
+					url:'/api/api_approves/edit_status',
+					methods:'post',
+					data:{
+						id:id,
+						approve_result:status
+					}
+				}
+				if(status == 3) {
+					$('#feedBack').show();
+					$('#feedBack .hold').click(function() {
+						var approve_reply = $('#feedBack').find('input').val();
+						if(approve_reply == '') {
+							ykp.prompt('不能为空！');
+							return false;
+						}
+						data.data.approve_reply = approve_reply.trim();
+						data.data.approve_reply = approve_reply;
+						setStatus(data);
+						$('.close_label').parents('.label_popup').fadeOut();
+					})
+					cs.closePop();
+				} else if(status == 1){
+	                bootbox.confirm('确认撤销审批？', function(flag){
+	                    if(flag){
+	                        setStatus(data);
+	                    }
+	                })
+           		 } else {
+					setStatus(data);
+				}
+				
+			}
+		}
+
+		//自定义table
+		cs.custorm_check('#dynamic-table', '#datalist', true);
+		
+		function setStatus(data) {
+			ykp.doAjax({
+				url:data.url,
+				methods:data.methods,
+				data:data.data,
+				success:function(res) {
+					ykp.prompt('审批成功!');
+					getList();
+				}
+			})
+		}
+
+	});
+
+	function checkAll(status) {
+		$("tbody input[name='check']").each(function(i, n) {
+			n.checked = status;
+		});
+	}
+</script>

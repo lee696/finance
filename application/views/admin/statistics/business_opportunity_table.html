@@ -1,0 +1,151 @@
+<div class="widget-main">
+	<div class="row">
+		<!-- <h3 class="header smaller lighter blue">客户报表</h3> -->
+		<div class="row">
+			<div class="col-xs-12">
+				<select class="search_select hidden" style="float:left;height:34px;margin-right:10px;">
+					<option>自定义</option>
+					<option>本周</option>
+					<option>上周</option>
+					<option>本月</option>
+					<option>上月</option>
+					<option>本季</option>
+					<option>上季</option>
+					<option>今年</option>
+					<option>去年</option>
+					<option>近7天</option>
+					<option>近30天</option>
+				</select>
+				<div class="col-xs-4 col-sm-3" id="timeBox" style="display: block;padding-left:0;">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-calendar bigger-110"></i>
+						</span>
+						<input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1">
+					</div>
+				</div>
+				<div class="col-sx-4" style=" float: left; margin-right: 15px;">
+					<button type="button" id="countSearch" class="btn btn-info btn-sm" style=" height:34px;">
+                        	查询
+                    </button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-2 leftTool">
+					<div class="form-group">
+						<label class="">本日商机： </label>
+						<label class="all_count_day">0 </label>
+					</div>
+					<div class="form-group">
+						<label class="">本月商机： </label>
+						<label class="all_count_month">0 </label>
+					</div>
+					<div class="form-group">
+						<label class="">本年商机： </label>
+						<label class="all_count_year">0 </label>
+					</div>
+					<div>
+						<div class="sumBtn" style="">商机总数</div>
+					</div>
+			</div>
+			<div class="col-xs-10" style="display:inline-block;">
+				<div id="main" style="height: 300px;"></div>
+			</div>
+			
+			<div class="col-xs-12" style="display: none;">
+				<div id="main1" style="height: 300px;"></div>
+			</div>
+			
+			<div class="col-xs-12" style="margin-top: 100px;">
+				<div id="main2" style="height: 500px;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% include 'admin/mark.html' %}
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script>
+	jQuery(function() {
+        //	时间范围
+        $('input[name=date-range-picker]').daterangepicker({
+            'applyClass': 'btn-sm btn-success',
+            'cancelClass': 'btn-sm btn-default',
+            startDate: moment().subtract(12, 'month'),
+            locale: {
+                format: 'YYYY-MM',
+                applyLabel: '确认',
+                cancelLabel: '取消',
+                customRangeLabel:'自定义日期',
+            },
+            ranges: {
+                '最近': [moment().startOf('month'), moment().endOf('month')],
+                '近一个月': [moment().subtract(1, 'month'), moment().endOf('month')],
+                '近半年': [moment().subtract(6, 'month'), moment().endOf('month')],
+                '近一年': [moment().subtract(12, 'month'), moment().endOf('month')]
+            }
+        });
+
+        $('#countSearch').click(function() {
+            loadData();
+        });
+
+        loadData();
+
+
+        function loadData() {
+            ykp.doAjax({
+                url: '/api/api_accounting_form/get_business_opportunity_table',
+                method: 'get',
+                data: {
+                    type:5,
+                    date: $('input[name=date-range-picker]').val()
+                },
+                success: function(res) {
+                    if(res.data.all_count){
+                        $(".all_count_day").html(res.data.all_count.day_count);
+                        $(".all_count_month").html(res.data.all_count.month_count);
+                        $(".all_count_year").html(res.data.all_count.year_count);
+                    }
+
+                    var Ddata = {
+                        el:'main',
+                        title: {
+                            text: res.data.month_title,
+                            x: 'center'
+                        },
+                        lData:['商机记录数'],
+                        name:'商机记录数',
+                        xData:res.data.month_key,
+                        sData:res.data.month_data
+                    }
+                    cs.drowBline(Ddata);
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    var data1 = {
+                        el: 'main2',
+                        title: {
+                            text: res.data.series.title,
+                            x: 'center'
+                        },
+                        legend: {
+                            show: true,
+                            data: res.data.series.fields
+                        },
+                        series: {
+                            name: res.data.series.title,
+                            data: res.data.series.legend_data
+                        }
+                    }
+                    cs.drowPieCharts(data1);
+
+
+                }
+            })
+
+
+        }
+	})
+</script>

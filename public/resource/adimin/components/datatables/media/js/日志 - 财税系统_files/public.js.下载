@@ -1,0 +1,32 @@
+/*
+ * 描述TODO
+ * @author:涂爱波 Version 1.0.0 2017-8-19
+ */
+
+
+/**
+ *
+ * @param {type} template   模板id
+ */
+function showMark(template) {
+//        显示遮罩添加节点
+        //模板内容
+        var html = $(template).html();
+        //把内容
+        if ($('#templateCon').html(html)) {
+            $('.in').addClass('modal-backdrop ');
+            $('#templateBox').removeClass('ishide');
+        }
+}
+
+$('#close').click(function () {
+    $('.in').removeClass('modal-backdrop');
+    $('#templateBox').addClass('ishide');
+})
+$('.in').click(function () {
+    $(this).removeClass('modal-backdrop');
+    $('#templateBox').addClass('ishide');
+})
+
+
+

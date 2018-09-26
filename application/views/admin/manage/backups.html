@@ -1,0 +1,241 @@
+<div class=" widget-main">
+	<div class="row">
+		<div class="col-lg-12">
+			<!-- <h3 class="header smaller lighter blue">备份管理</h3> -->
+			<div class="row" style="margin-top: 20px;">
+				 <button id="flush" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <span  style="float: right;" >  <!--contentAuthority="244"-->
+                	<button id="heightsearch" type="button" class="btn btn-info btn-sm" style="margin-left:10px; background-color: #00c0ef !important;">
+	                    备份
+	                </button>
+                </span>
+				
+
+			</div>
+
+			<div class="row">
+				<!--<div style="font-size:14px;margin-top: 20px">自动备份(每七天自动进行备份)</div>-->
+				<div class="custom_table">
+					<table id="dynamic-table" style="margin-bottom:0px;">
+						<thead>
+							<tr class="thColor">
+								<th class="hidden-480 center">操作</th>
+								<th class="hidden-480 center">文件名称</th>
+								<th class="hidden-480 center">文件大小</th>
+								<th class="hidden-480 center">创建人</th>
+								<th class="center thColor">备份时间</th>
+								<th class="center thColor">备注</th>
+							</tr>
+						</thead>
+						<tbody id="dataList">
+
+						</tbody>
+
+					</table>
+					<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+						<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+						<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+						<div id="pageBar" class="pagination"></div>
+						<div align="right" style="float: right;  width: 10%;">
+							<select style="width: 100px;" id="changePageNum">
+								<option value="10">每页10条</option>
+								<option value="20">每页20条</option>
+								<option value="50">每页50条</option>
+								<option value="100">每页100条</option>
+								<option value="200">每页200条</option>
+							</select>
+						</div>
+					</div>
+					<div style="padding-left:10px;color:#777;">提示说明：<br> 1. 系统每天凌晨3点会自动备份数据库！如无必要，请勿频繁手动操作备份数据库！<br>
+					2. 数据库数据的备份还原操作，请由专业人员操作。
+					</div>
+				</div>
+
+
+				<div class="label_popup" id="feedBack" style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;">
+					<div style="width:400px;margin:39px auto;z-index:1060;background:#fff;position:relative;border:1px solid #ddd;
+		            box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);">
+						<div style="padding:15px;border-bottom:1px solid #ddd;">
+							<span style="display: inline-block;">编辑备注</span>
+							<a href="javascript:;" class="close_label" style="float: right;"><i class="fa fa-times" aria-hidden="true"></i></a>
+						</div>
+						<div style="padding: 10px 50px;">
+							<input type="text" width="200px" style="margin: auto;" id="labelName" />
+							<!--<hr>-->
+						</div>
+						<div style="padding:15px;text-align:right;">
+							<button class="close_label">关闭</button>
+							<button class="hold">保存</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{% include 'admin/mark.html' %}
+</div>
+<div class=" widget-main">
+	<script src="/resource/adimin/assets/js/src/public.js"></script>
+	<script>
+		jQuery(function($) {
+			cs.getNodes([244]);
+			if(ykp.getCookie('nodes').split(',').indexOf("80") == -1) {
+				location.href = '/admin/error';
+			}
+			var page_size = 10; //每页显示的条目数
+
+			getbackup();
+			function getbackup() {
+				
+				var content = '';
+//				ykp.list({
+//					url: '/api/api_system/get_backup_db_list',
+//					method: 'get',
+//					data: {
+//						"limit": page_size,
+//						"order":'sm_db_backup.id desc',
+//					},
+//					pageBar: {
+//						id: '#pageBar'
+//					},
+//					loadList: function(res) {
+//						if(res.data.items == "") {
+//							setTimeout(function(){
+//	                        ykp.prompt('暂无数据！');
+//	                    },1000);
+//							$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="color:#7d7d7d !important;text-align:center !important;" class="page">暂无数据</div></td></tr>');
+//							return false;
+//						}
+//						addList(res);
+//					}
+//				})
+				
+				ykp.doAjax({
+					url:"/api/api_system/get_backup_db_list2",
+					method:"get",
+					data:{
+						"order":'sm_db_backup.id desc',
+					},
+					success:function(res) {
+						if(res.data == "") {
+							setTimeout(function(){
+	                        ykp.prompt('暂无数据！');
+	                    },1000);
+							$('#dataList').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="color:#7d7d7d !important;text-align:center !important;" class="page">暂无数据</div></td></tr>');
+							return false;
+						}
+						addList(res);
+					}
+					
+				})
+			}
+
+		$('#flush').click(function(){
+			getbackup();
+		})
+
+			function addList(res) {
+				var content = '';
+				//console.log(res.data);
+				var data = res.data;
+				
+				for(var i in data) {
+					content += `<tr data-id="${data[i]['sm_db_backup.id']}">
+							<td class="center">
+								<label class="pos-rel">
+                                    <a href="#" class="edit"> <span class="lbl btnBlue">编辑</span></a>
+                                </label>
+                            </td>
+							<td class="center">
+								${data[i]['sm_db_backup.filename']}
+							</td>
+							<td class="center">
+								${data[i]['sm_db_backup.filesize']}MB
+							</td>
+							<td class="center">
+								${data[i]['bmm_employees.name']}
+							</td>
+							<td class="center">
+								${data[i]['sm_db_backup.create_at']}
+							</td>
+							<td class="center">
+								${data[i]['sm_db_backup.remark']}
+							</td>
+						</tr>`
+				}
+				$('#dataList').html(content);
+
+				cs.getNodes([233]);
+
+				$('.edit').unbind('click').click(function() {
+					var id = $(this).parents('tr').attr('data-id');
+					var bz = $(this).parents('td').siblings().eq(4).text().trim();
+					$('#feedBack').show();
+					$('#feedBack').find('input').val(bz);
+					$('#feedBack .hold').unbind('click').click(function() {
+						var bzCon = $('#feedBack').find('input').val();
+						if(bzCon == '') {
+							ykp.prompt('不能为空！');
+							return false;
+						}
+						ykp.doAjax({
+							url: '/api/api_system/backup_db_edit',
+							method: 'post',
+							data: {
+								id:id,
+								remark: bzCon
+							},
+							success: function(res) {
+								ykp.prompt('编辑成功！');
+								$('.close_label').parents('.label_popup').fadeOut();
+								getbackup();
+							}
+						})
+
+					})
+					cs.closePop();
+				})
+			}
+			
+			$('#heightsearch').click(function() {
+				ykp.alert('确定要备份数据库？备份过程中会占用大量系统资源，请在空闲时间操作！',[{
+					button:'取消',					
+				},{
+					button:'确定',
+					callback:function(){
+						ykp.doAjax({
+							url:"/api/api_system/backup_db",
+							method:'get',
+							msg:'备份需要一定的时间，请等候！',
+							showBlock:true,
+							success:function(res) {
+								ykp.prompt('备份成功！',{startTime:1200,endTime:100});
+								setTimeout(function() {
+									getbackup();
+								},2000)
+							}
+						});
+					}
+				}]);				
+			});
+
+
+			pageinfo();
+			$('#changePageNum').change(function() {
+				page_size = $(this).val();
+				getbackup();
+			})
+
+			function pageinfo() {
+				$('#add').click(function() {
+					showMark('#template1');
+					$('#templateCon #cnumber').val('12313133');
+
+				})
+			}
+		});
+	</script>

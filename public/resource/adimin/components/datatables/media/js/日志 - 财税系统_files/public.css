@@ -1,0 +1,299 @@
+
+
+/**------颜色----**/
+.thColor{
+    background:  #ccecff !important;
+}
+.footerwhite{
+    background:  #fff !important;
+}
+
+.message-footer {
+    background:  #fff !important;
+    border-color: transparent !important;
+}
+
+
+
+/**------头部----**/
+.main-content-inner {
+    background: #fff !important;
+    box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+#navbar {
+    width: calc(100% - 200px) !important;
+    /*margin-left: 189px !important;*/
+    float: right;
+    background-color: #fff !important;
+    /*display: none !important;*/
+}
+
+.main-container:before{
+    width: 0px !important;
+}
+.ace-nav > li.light-blue > a {
+    background-color: transparent !important;
+    color: #ccc !important;
+}
+
+
+.logo {
+    width: 100%;
+    height:100px;
+    background-color: transparent;
+    color: #fff;
+    /*position: relative;*/
+    margin-top: -40px !important;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/**------左侧----**/
+#sidebar{
+    font-family: 微软雅黑 !important;
+    padding-top:60px;
+}
+.btnActive {
+    color: #00ffff !important;
+}
+#sidebar .sidebar-shortcuts-large {
+    background-color: transparent !important;
+}
+#sidebar .nav-list > li.active:after {
+    display: none !important;
+}
+#sidebar .nav-list > li.active a {
+    background-color: #244653 !important;
+}
+#sidebar .nav-list {
+    background: #283140 !important;
+}
+#sidebar .nav-list > li {
+    border-color: transparent !important;
+}
+#sidebar .nav-list > li > a {
+    background-color: #2c3f53 !important;
+    color: #4ebefd !important;
+}
+#sidebar .nav-list > li.active > a {
+    color: #00ffff !important;
+}
+#sidebar .nav-list > li.active>a:after {
+    border: none !important;
+}
+#sidebar .sidebar-toggle {
+    background-color: transparent !important;
+}
+#sidebar .sidebar-toggle {
+
+    border-bottom-color: transparent !important;
+}
+
+
+.no-skin .sidebar-shortcuts {
+    background-color: transparent !important;
+}
+
+.btn {
+    border-color: transparent !important;
+    color: #999999 !important;
+}
+#btn {
+    color: #00ffff !important;
+}
+#btn span{
+    color: #00ffff !important;
+}
+/*二级菜单*/
+.nav-list > li > .submenu {
+    border-color: transparent !important;
+    background-color: transparent !important;
+}
+.nav-list > li > .submenu:before {
+    border: 1px solid #545454 !important;
+    border-width: 0 0 0 1px !important;
+}
+.nav-list > li:hover .menu-text {
+    color: #00ffff !important;
+
+}
+#sidebar .nav-list > li .submenu > li > a {
+    background-color: #283140 !important;
+    border-style: none !important;
+    color: #4ebefd  !important;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#sidebar .nav-list > li .submenu > li > a:hover {
+    color: #00ffff !important;
+}
+
+#sidebar .nav-list > li .submenu > li > a:hover:after {
+    content: "";
+    z-index:-1;
+    width: 100%;
+    background: #244652;
+    height: 28px;
+    left: 28px;
+    top: 4px;
+    position: absolute;
+    display: block;
+    border-radius: 14px 0 0 14px;
+}
+
+.nav-list > li > .submenu > li:before {
+    content: "";
+    z-index:-1;
+    width: 16px !important;
+    height: 16px;
+    border: none !important;
+    background: url("/resource/adimin/assets/images/circle.png") no-repeat;
+    top: 10px !important;
+    left: 11px !important;
+    background-size: 90%;
+}
+.nav-list > li > .submenu > li:hover:before {
+    content: "";
+    width: 16px !important;
+    height: 16px;
+    border: none !important;
+    background: url("/resource/adimin/assets/images/circle_hover.png") no-repeat;
+    top: 10px !important;
+    left: 11px !important;
+    background-size: 90%;
+}
+.sidebar {
+    /*background: #181d26 !important;*/
+    background-color: #283140 !important;
+
+}
+/*.no-skin .nav-list > li > .submenu:before, .no-skin .nav-list > li > .submenu > li:before {*/
+/*border-color: transparent !important;*/
+/*}*/
+
+
+
+/*index end*/
+
+.c_dynamic_tr {
+    background-color: #2A91D8 !important;
+    color: #000;
+    /*background-image:none !important;*/
+    /*color: #707070;*/
+    font-weight: normal;
+    background: #F2F2F2;
+    /*background-image: -webkit-linear-gradient(top, #F8F8F8 0%, #ECECEC 100%);*/
+    /*background-image: -o-linear-gradient(top, #F8F8F8 0%, #ECECEC 100%);*/
+    /*background-image: linear-gradient(to bottom, #F8F8F8 0%, #ECECEC 100%);*/
+    /*background-repeat: repeat-x;*/
+    background-image: none !important;
+}
+.audit_td{
+
+}
+
+.auditSuc_td{
+
+}
+#disabled_td{
+    background: red !important;
+}
+.received_td{
+
+}
+.unpaid_td{
+
+}
+
+.bottonLine{
+    position: relative;
+    width: 41px;
+    height:2px;
+    background: #00ffff;
+    transition: .3s ease;
+}
+
+
+
+.infobox {
+    border: 1px solid !important;
+}
+.submitBtn {
+    width: 150px;
+    height:34px;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#isOk {
+    color: green !important;
+    position: relative;
+}
+
+
+#tip {
+    position: absolute;
+    display: none;
+}
+.operation:hover #tip{
+    display: block;
+}
+#tip:before{
+    left: -12px;
+    border-width: 12px 6px;
+    border-right-color: #9585BF;
+    background: red !important;
+    float: left;
+}
+#isOk:before{
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    left: -10px;
+    top: 5px;
+    border-radius: 5px;
+    background: green;
+    ;
+}
+
+.searchBox {
+    margin-top: 15px !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background: transparent !important;
+}
+
+#templateBox {
+    overflow-y: auto;
+    position: fixed;
+    width: auto;
+    height: 100%;
+    min-width: 500px;
+    max-width: 900px;
+    right: 0px;
+    z-index: 1041;
+    top: 50px;
+    bottom: 55px;
+    border-left: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(221, 221, 221);
+    background: rgb(243, 243, 243);
+    padding: 15px 15px 30px;
+}
+.ishide{
+    display: none;
+}
+tbody .label-success a{
+    display: none;
+}
+tbody .label-success:hover a{
+    display: block;
+}
+
+

@@ -1,0 +1,406 @@
+<style type="text/css">
+	#templateCon label {
+		width: 70px;
+		text-align: right
+	}
+</style>
+<div class="widget-main">
+	<div class="row">
+		<div>
+			<!--     <h3 class="header smaller lighter blue">账户管理</h3> -->
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-sx-4" style=" float: left; margin-right:5px;" contentAuthority="223">
+					<button type="button" id="add" title="添加" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;border-color: #32CD32 !important;">
+                        <i class="fa fa-plus"></i>
+                    </button>
+				</div>
+				<div class="col-sx-4" style=" float: left; margin-right:5px;">
+                	<button id="flush" type="button" class="btn btn-info btn-sm" style="background-color: #32CD32	 !important;">
+	                   	<i class="fa fa-refresh"></i>
+	                </button>
+				</div>
+			</div>
+		</div>
+		<div class="custom_table">
+			<table id="dynamic-table" style="margin-bottom:0px;">
+				<thead>
+					<tr class="thColor">
+						<th class="hidden-480 center">操作</th>
+						<th class="center">账户编号</th>
+						<th class="center">账户名称</th>
+						<th class="center">账号</th>
+						<th class="center">账户类型</th>
+						<th class="center">开户银行</th>
+						<th class="center">备注</th>
+					</tr>
+				</thead>
+
+				<tbody class="dataList">
+
+				</tbody>
+			</table>
+
+		</div>
+		<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+			<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+			<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+			<div id="pageBar" class="pagination"></div>
+			<div align="right" style="float: right;  width: 10%;">
+				<select style="width: 100px;" id="changePageNum">
+					<option value="10">每页10条</option>
+					<option value="20">每页20条</option>
+					<option value="50">每页50条</option>
+					<option value="100">每页100条</option>
+					<option value="200">每页200条</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" id="template1" style="display:none;">	
+	<div style="margin-top:15px;">
+		<label> 账户名称： </label>
+		<input type="text" class="edit0 editCon">
+		<label> 账号： </label>
+		<input type="text" id="form-field-icon-1" class="edit2 editCon"  validate="int" msg="请输入正确的账号名称">
+		
+	</div>
+	<div style="margin-top:15px;">
+		<label> 账户类型： </label>
+		<select class="edit3 editCon" style="width: 180px;">
+			<option value=""> --- 请选择 --- </option>
+			<option value="1"> 现金 </option>
+			<option value="2"> 支付宝 </option>
+			<option value="3"> 微信 </option>
+			<option value="4"> 银行卡 </option>
+		</select>
+		<label class="bank" style="display:none;"> 开户银行： </label>
+		<input type="text" id="form-field-icon-1" style="display: none;" class="bank edit1 editCon"  msg="请输入开户银行">
+		<!--<select class="bank edit1 editCon" style="width: 180px;display:none;">
+			<option value="0"> --- 请选择 --- </option>
+		</select>-->
+	</div>
+	<div style="margin-top:15px;">
+		<label style="float:left;margin-right:4px;"> 备注： </label>
+		<textarea class="edit4 editCon" style="resize:none;padding:5px;width: calc(100% - 74px);float:auto;"></textarea>
+	</div>
+	<div style="text-align:center;margin-top:15px;">
+		<button class="sure_button add">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                保存
+            </button>
+	</div>
+</div>
+{% include 'admin/mark.html' %}
+</div>
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script>
+	jQuery(function($) {
+		cs.getNodes([223]);
+		var order = 'xtm_kh_bank.id desc';
+		var currentId = ''; //当前选中的银行
+		addData();
+		var curent = 0;
+        var page_size = 10;
+        var sort_role = "";
+        //获取所有银行
+		var bank = {};
+		ykp.doAjax({
+			url: '/api/api_bank/get_all_bank',
+			method: 'post',
+			async:false,
+			data: {},
+			success: function(res1) {
+                var data = res1.data;
+                for (var i in data) {
+                    bank[data[i]['xtm_bank.value']] = data[i]['xtm_bank.name'];
+                }
+            }
+		})
+		
+		//通用排序
+		cs.general_sort({
+			url: '/api/api_bank/index',
+			method: 'post',
+			data: {
+				filter:"xtm_kh_bank.is_del = 0",
+				limit: page_size
+			},
+			pageBar: {
+				id: '.pageBar'
+			},
+			contentId:"#datalist",  //默认排序
+			initOrder:"xtm_kh_bank.bank_no",   //初始化sort
+			defaultOrder:order,
+			params:[{
+				id:"#dynamic-table",
+				field:["","","xtm_kh_bank.bank_name","xtm_kh_bank.bank_no","xtm_kh_bank.type","xtm_kh_bank.bank"]
+			}]
+		}, function(res, _sort_role) {
+			sort_role = _sort_role;
+			addList(res);
+		});
+
+		getList(1);
+		function getList(current) {
+            ykp.list({
+				url: '/api/api_bank/index',
+				method: 'post',
+				data: {
+					filter: 'xtm_kh_bank.is_del = 0',
+					page: current,
+					limit: page_size,
+					order: order
+				},
+				pageBar: {
+					id: '#pageBar'
+				},
+				loadList: function(res) {
+					if(res.data.items == "") {
+						setTimeout(function(){
+                        ykp.prompt('暂无数据！');
+                    },1000);
+						$('.dataList').html('<tr><td colspan="30" style="color:#7d7d7d !important;text-align:center !important;">暂无数据</td></tr>');
+			           return false;
+					}else {
+						addList(res,current);
+					}
+				}
+			})
+		}
+
+		$('#flush').click(function(){
+			getList();
+		})
+
+        function addList(res,current){
+        	var data = res.data.items;
+        	curent = res.data.curPage;
+                var type = ['','现金','支付宝','微信','银行卡'];
+                var list = [];
+                var num = 0;
+                for(var i in data){
+                	num++;
+                    list.push(
+                    	`<tr data-id="${data[i]['xtm_kh_bank.id']}">
+							<td>
+                                <label class="pos-rel">
+                                	<a href="#" class="edit btBlue" contentAuthority="224" title="编辑"><i class="fa fa-pencil-square-o"></i></a>
+                                	<a href="#" class="del btRed" contentAuthority="225" title="删除"><i class="fa fa-trash-o"></i></a>
+                                     
+                                </label>
+                            </td>
+                            <td>
+                                ${(page_size*(curent-1)) +num}
+                            </td>
+                            <td>
+                                <span>${data[i]['xtm_kh_bank.bank_name']}</span>
+                            </td>
+                            <td>
+                                <span>${data[i]['xtm_kh_bank.bank_no']}</span>
+                            </td>
+                            <td>
+                                <span>${type[data[i]['xtm_kh_bank.type']]}</span>
+                            </td>
+                            <td>
+                                <span>${data[i]['xtm_kh_bank.bank'] != '0' ? data[i]['xtm_kh_bank.bank'] : ''}</span>
+                            </td>
+                           <td>
+                                <span>${data[i]['xtm_kh_bank.remark']}</span>
+                            </td>
+                        </tr>`
+				);
+			}
+
+			$('.dataList').html(list.join(''));
+
+			cs.getNodes([224,225]);
+	//		删除
+//			$('.dataList .del').click(function() {
+//				var id = $(this).parents('tr').attr('data-id');
+//				bootbox.confirm('确认删除该账户？',function(flag){
+//					if(flag){
+//						ykp.doAjax({
+//							url: '/api/api_bank/del',
+//							method: 'post',
+//							data: {
+//								id: id
+//							},
+//							success: function(res) {
+//								ykp.prompt('删除成功!');
+//								getList(1);
+//							}
+//						})
+//					}
+//				});
+//				
+//			})
+
+			$('.dataList .del').click(function() {
+				var id = $(this).parents('tr').attr('data-id');
+				layui.use('layer', function() {
+					var layer = layui.layer;
+					layer.confirm('确认删除该账户？', function(flag) {
+								if(flag){
+						ykp.doAjax({
+							url: '/api/api_bank/del',
+							method: 'post',
+							data: {
+								id: id
+							},
+							success: function(res) {
+								ykp.prompt('删除成功!');
+								getList(1);
+							}
+						})
+					}
+						layer.closeAll();
+					});
+				})
+			})
+
+
+
+
+
+			//编辑
+			$('.dataList .edit').click(function() {
+				var id = $(this).parents('tr').attr('data-id');
+				ykp.doAjax({
+					url: '/api/api_bank/index',
+					method: 'post',
+					data: {
+						filter: 'xtm_kh_bank.is_del = 0 and xtm_kh_bank.id = ' + id,
+						page: 1,
+						limit: page_size
+					},
+					success: function(res) {
+						showMark('#template1');
+						$('#showBox .title').text('编辑账户');
+
+						//账户类型切换至银行卡 开户银行显示，否则隐藏
+						changeAccountType(res.data.items[0]['xtm_bank.id']);
+
+						$('#templateCon .edit0').val(res.data.items[0]['xtm_kh_bank.bank_name']);
+						$('#templateCon .edit2').val(res.data.items[0]['xtm_kh_bank.bank_no']);
+						$('#templateCon .edit3').val(res.data.items[0]['xtm_kh_bank.type']);
+						$('#templateCon .edit4').val(res.data.items[0]['xtm_kh_bank.remark']);
+						
+						if(res.data.items[0]['xtm_kh_bank.type'] == 4) {
+							$('#templateCon .edit1').val(res.data.items[0]['xtm_kh_bank.bank']);
+							$('#templateCon .edit1').show();
+							$('#templateCon .bank').show()
+						}
+						currentId = res.data.items[0]['xtm_bank.value'];
+						//form-field-icon-1
+						ykp.doAjax({
+							url: '/api/api_bank/get_all_bank',
+							method: 'post',
+							data: {},
+							success: function(res1) {
+								var data = res1.data;
+								for(var i in data) {
+									if(data[i]['xtm_bank.value'] == currentId) {
+										$('#templateCon .edit1').append(new Option(data[i]['xtm_bank.name'], data[i]['xtm_bank.value'], true, true));
+									} else {
+										$('#templateCon .edit1').append(new Option(data[i]['xtm_bank.name'], data[i]['xtm_bank.value']));
+									}
+								}
+
+								$('#templateCon .add').click(function() {
+									ykp.doAjax({
+										url: '/api/api_bank/edit',
+										method: 'post',
+										data: {
+											bank_name: $('#templateCon .edit0').val(),
+											bank: $('#templateCon .edit1').val(),
+											bank_no: $('#templateCon .edit2').val(),
+											type:$('#templateCon .edit3').val(),
+											remark: $('#templateCon .edit4').val(),
+											id: id
+										},
+										success: function(res) {
+											getList(1);
+											ykp.prompt('编辑成功!');
+											cs.close();
+										}
+									})
+								})
+							}
+						})
+
+					}
+				})
+			})
+		}
+
+		$('#changePageNum').change(function() {
+			page_size = $(this).val();
+			getList(1);
+		})
+
+		//获取所有银行
+		function getBanks(){
+			ykp.doAjax({
+				url: '/api/api_bank/get_all_bank',
+				method: 'post',
+				data: {},
+				success: function(res) {
+					var data = res.data;
+					for(var i in data){
+						$('#templateCon .edit1').append(new Option(data[i]['xtm_bank.name'], data[i]['xtm_bank.value']));
+					}
+				}
+			})
+		}
+		
+		//账户类型切换至银行卡 开户银行显示，否则隐藏
+		function changeAccountType(bank_id){
+			if(bank_id){
+				$('#templateCon .edit1').val(bank_id);
+				$('#templateCon .bank').show();
+			}
+			$('#templateCon .edit3').unbind('change').change(function(){
+				if($(this).val() == '4'){
+					$('#templateCon .bank').show();
+					getBanks();
+				}
+				if($(this).val() != '4'){
+					$('#templateCon .bank').hide();
+					$('#templateCon .edit1').find('option').not(':first').remove();
+				}
+			});
+		}
+
+		//添加
+		function addData() {
+			$('#add').click(function() {
+				showMark('#template1');
+				$('#showBox .title').text('添加账户');
+				
+				changeAccountType();
+
+				$('#templateCon .add').click(function() {
+					ykp.doAjax({
+						url: '/api/api_bank/add',
+						method: 'post',
+						data: {
+							bank_name: $('#templateCon .edit0').val(),
+							bank: $('#templateCon .edit1').val(),
+							bank_no: $('#templateCon .edit2').val(),
+							type: $('#templateCon .edit3').val(),
+							remark: $('#templateCon .edit4').val()
+						},
+						success: function(res) {
+							getList(1);
+							ykp.prompt('添加成功!');
+							cs.close();
+						}
+					})
+				})
+			})
+		}
+
+	});
+</script>

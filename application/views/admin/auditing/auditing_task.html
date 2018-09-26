@@ -1,0 +1,168 @@
+<div class="widget-main">
+	<div class="row">
+		<!-- <h3 class="header smaller lighter blue">任务审批</h3> -->
+		<div class="actions" id="topTool">
+			<div style="float:left;margin-right:10px;">
+				<div class="portlet">
+					<div class="search">
+						<i class="search-icon"></i>
+						<input type="text" class="search-input" placeholder="搜索...">
+					</div>
+				</div>
+				<button class="btn btn-info btn-sm" style="height: 34px;">搜索</button>
+				<a href="#" class="see-all"><i class="fa fa-eye"></i></i> 查看全部</a>
+				<a href="#" class="approval-pending"><i class="fa fa-hourglass-2"></i> 待审批</a>
+				<a href="#" class="passed"><i class="fa fa-check"></i> 已通过</a>
+				<a href="#" class="not-pass"><i class="fa fa-minus-circle"></i> 未通过</a>
+				<button id="plSp" class="btn btn-info btn-sm" style="height: 34px;">批量审批</button>
+			</div>
+		</div>
+		<div class="auditing-data custom_table">
+			<table id="dynamic-table">
+				<thead>
+					<tr class="thColor">
+						<th class="center">
+							<label class="pos-rel">
+	                        <input type="checkbox" class="ace" onclick="checkAll(this.checked)"/>
+	                        <span class="lbl"></span>
+	                        </label>
+						</th>
+						<th>操作</th>
+						<th data-num="1">审批号</th>
+						<th data-num="2">审批项目</th>
+						<th data-num="3">提交员工</th>
+						<th data-num="4">提交时间</th>
+						<th data-num="5">审批员工</th>
+						<th data-num="6">审批结果</th>
+						<th data-num="7">审批时间</th>
+						<th data-num="8">审批回复</th>
+					</tr>
+				</thead>
+				<tbody id="datalist">
+
+				</tbody>
+			</table>
+		</div>
+		<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+			<div align="left" style="padding-left: 15px; float: left; width: 10%;" id="num"></div>
+			<!--<div id="pagination" style="float: left; width: 80%; height: 25px;"></div>-->
+			<div id="pageBar" class="pagination"></div>
+			<div align="right" style="float: right;  width: 10%;">
+				<select style="width: 100px;" id="changePageNum">
+					<option value="10">每页10条</option>
+					<option value="20">每页20条</option>
+					<option value="50">每页50条</option>
+					<option value="100">每页100条</option>
+					<option value="200">每页200条</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/resource/adimin/assets/js/src/public.js"></script>
+<script>
+	$(function() {
+		//自定义table
+		cs.custorm_check('#dynamic-table', '#datalist', false);
+		
+		var page = 1;
+        var approve_result= '';
+
+		getList();
+
+		function getList() {
+			var data = {
+				type: 8,
+				approve_result: approve_result
+			}
+
+			cs.spList(data, function(res) {
+				var data = res.data.items;
+				if (data == '') {
+					setTimeout(function(){
+						ykp.prompt('暂无数据！');
+					},1000);
+					$('#datalist').html('<tr><td colspan="30"><div class="table-actions clearfix"></div> <div style="text-align: center" class="page">暂无数据</div></td></tr>');
+					return;
+				}
+				var results = ['待审核', '已通过', '未通过'];
+				var styles = ['label-waitaudit', 'label-passed', 'label-nopass']
+				var list = [];
+				var times = {};
+				for(var i in data) {
+					times.submit_time = cs.getNowTime(data[i]['submit_time']);
+					times.approve_time = cs.getNowTime(data[i]['approve_time']);
+					list.push(
+						`<tr getlist-id="${data[i]['id']}">
+                        	<td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" name="check" class="ace"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td>
+		                       <a href="#" class="btnGreen" data-status = "1" style="display: ${data[i]['spm_approves.approve_result'] == 2 ? 'inline-block' : 'none'};"><i class="red2"></i>撤销</a>
+		                        <a href="#" class="redBlue" data-status = "2" style="display: ${data[i]['spm_approves.approve_result'] == 1 ?'inline-block' : 'none'};"><i class="red2"></i>通过</a>
+		                        <a href="#" class="btnGreen" data-status = "3" style="display: ${data[i]['spm_approves.approve_result'] == 1 ?'inline-block' : 'none'};"><i class="red2"></i>驳回</a>
+		                    </td>
+                            <td data-num="1">${data[i]['approve_code']}</td>
+                            <td data-num="2">仓位</td>
+                            <td data-num="3">${data[i]['submit_employee_name']}</td>
+                            <td data-num="4">${times.submit_time}</td>
+                            <td data-num="5">${data[i]['approve_employee_name']}</td>
+                            <td data-num="6"><label class="${styles[--data[i]['approve_result']]}">${results[data[i]['approve_result']]}</label></td>
+                            <td data-num="7">${times.approve_time}</td>
+                            <td data-num="8">${data[i]['approve_reply']}</td>
+                        </tr>`
+					);
+				}
+
+				$('#datalist').html(list.join(''));
+
+				$('#plSp').click(function() {
+					var status = '',
+						n = 0,
+						Statu = false,
+						coldata = []
+					$('#datalist').find('input[type="checkbox"]:checked').each(function(i) {
+						n++;
+						status = $(this).parents('tr').attr('data-status') == 1 ? 2 : 1;
+
+						if($(this).parents('tr').attr('data-status') == 3) {
+							ykp.prompt('审批失败状态不能批量审批!');
+							Statu = false;
+							return false;
+						} else {
+							coldata.push({
+								id: $(this).parents('tr').attr('data-id'),
+								approve_result: status
+							});
+							Statu = true;
+						}
+					})
+					if(n == 0) {
+						ykp.prompt('请选择再审批！');
+						return false;
+					} else {
+						if(Statu) {
+							ykp.doAjax({
+								url: "/api/api_approves/batch_edit",
+								method: 'post',
+								data: {
+									data: JSON.stringify(coldata),
+									type: 8
+								},
+								success: function(res) {
+									ykp.prompt('审批成功');
+									getList();
+								}
+							})
+						}
+					}
+				})
+
+				// auditDetail();
+			});
+		}
+	});
+</script>

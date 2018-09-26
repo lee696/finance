@@ -1,0 +1,110 @@
+#templateBox #team td,#templateBox #gathering td{
+        border:1px solid #ddd;
+}
+#templateBox table{
+    /*border:1px solid #ddd;*/
+    border-collapse: collapse;
+    /*table-layout:fixed;*/
+}
+#templateBox .success{
+    background: #5cb85c;
+    text-align: center;
+}
+#templateBox .fail{
+    background: #f0ad4e;
+    text-align: center;
+    table-layout: fixed;
+}
+#templateBox #service td,
+#templateBox #gathering td{
+    border: 1px solid #ddd;
+    height: 53px;
+    text-align: center;
+    /*white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;*/
+}
+#templateBox #service>div{
+    overflow: auto;
+}
+#templateBox #service .graph{
+    width:53px;
+}
+#templateBox #service label,
+#templateBox #gathering label{
+    text-align: center;
+    width: 42px;
+}
+#templateBox #service .month{
+    padding: 5px 25px !important;
+}
+#templateBox thead{
+    background: #ccecff;
+}
+#templateBox #service thead td{
+    font-size: 16px;
+}
+#templateBox #changerecord p{
+    margin-bottom: 0;
+    padding:10px 10px;
+}
+#templateBox #changerecord .odd{
+    background: #dce4f5;
+}
+#templateBox #changerecord .even{
+    background: #e3e6ed;
+}
+.label_popup .hold{
+    color:#fff;
+    background-color:#428bca;
+    border-color:#357ebd;
+    padding:6px 13px;
+    border-width:1px;
+    opacity:0.8;
+}
+.label_popup .hold:hover{
+    opacity: 1;
+}
+.label_popup button.close_label{
+    color:#333;
+    background-color:#fff;
+    border-color:#ccc;
+    padding:6px 13px;
+    border-width:1px;
+}
+.label_popup .close_label:hover{
+    border-color: #357ebd;
+}
+#showBox .tab_kind .active{
+    background: #ddd;
+}
+#showBox .unite-label{
+    width:10% !important;
+}
+#showBox td[data-title]{
+    width:40% !important;
+}
+
+#showBox table tr:hover{
+    background-color: rgba(187, 216, 234, 0.4);
+    cursor: pointer;
+}
+
+/*客户详情弹出层 ul 下li样式*/
+.layui-tab-title li{
+    border-bottom: 1px #d5e3ef solid;
+         transition: none !important; 
+     -webkit-transition: none !important; 
+}
+.layui-tab-title .layui-this{
+    border-top: 2px solid #5fa6d3;
+    border-left: 1px solid #d5e3ef;
+    border-right: 1px solid #d5e3ef;
+    border-bottom: none;
+}
+.layui-tab-title .layui-this:after{
+    content: none !important;
+}
+.layui-tab-title{
+    border: none !important;
+}
